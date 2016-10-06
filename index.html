@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+
+  
+  
+  
+  
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+</head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="Hexo" rel="home">Hexo</a>
+      </h1>
+      
+        <script type="text/javascript" src="http://api.hitokoto.us/rand?encode=js&charset=utf-8"></script>
+        <h2 class="site-description"><script>hitokoto();</script></h2>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main">
+  
+    <article id="post-express-route" class="post-express-route post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/10/06/express-route/">express-route</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/06/express-route/" data-id="cityil8s00000i0of9mnd5ga1" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <pre><code>var express = require(&apos;express&apos;);
+var app = express();
+</code></pre><h1 id="一、Basic-Route"><a href="#一、Basic-Route" class="headerlink" title="一、Basic Route"></a>一、Basic Route</h1><pre><code>app.get(&apos;/&apos;, function(req, res){
+    //do something...
+});
+</code></pre><p>也可以使用字符串模式或正则表达式区配path。</p>
+<h1 id="二、Route-Parameters"><a href="#二、Route-Parameters" class="headerlink" title="二、Route Parameters"></a>二、Route Parameters</h1><p>使用:key的格式传入自定义参数，参数将被移植到req.param对象中。</p>
+<h1 id="三、Middleware"><a href="#三、Middleware" class="headerlink" title="三、Middleware"></a>三、Middleware</h1><ol>
+<li>与koa的中间件类似，用next()调用下一个中间件</li>
+<li><p>设置多个处理器的语法如下：</p>
+<pre><code>var cb0 = function (req, res, next) {
+  console.log(&apos;CB0&apos;);
+  next();
+}
+
+var cb1 = function (req, res, next) {
+  console.log(&apos;CB1&apos;);
+  next();
+}
+
+app.get(&apos;/example/d&apos;, [cb0, cb1], function (req, res, next) {
+  console.log(&apos;the response will be sent by the next function ...&apos;);
+  next();
+}, function (req, res) {
+  res.send(&apos;Hello from D!&apos;);
+});
+</code></pre></li>
+</ol>
+<h1 id="四、express-Router-创建router实例"><a href="#四、express-Router-创建router实例" class="headerlink" title="四、express.Router()创建router实例"></a>四、express.Router()创建router实例</h1><p>看一段代码就明白了</p>
+<pre><code>var express = require(&apos;express&apos;);
+var router = express.Router();
+
+// middleware that is specific to this router
+router.use(function timeLog(req, res, next) {
+  console.log(&apos;Time: &apos;, Date.now());
+  next();
+});
+// define the home page route
+router.get(&apos;/&apos;, function(req, res) {
+  res.send(&apos;Birds home page&apos;);
+});
+// define the about route
+router.get(&apos;/about&apos;, function(req, res) {
+  res.send(&apos;About birds&apos;);
+});
+
+module.exports = router;
+</code></pre><p>就是把几个中间件集成在一个router对象里，然后导出就可以啦~~</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/10/06/express-route/">
+    <time datetime="2016-10-06T15:13:39.000Z" class="entry-date">
+        2016-10-06
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express-route-middleware/">express route middleware</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
+  
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  
+    
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/06/express-route/">express-route</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/express-route-middleware/">express route middleware</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/express-route-middleware/" style="font-size: 10px;">express route middleware</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2016 Empire
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
