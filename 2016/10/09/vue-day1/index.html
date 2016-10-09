@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="一、vue.js概述这是一个MVVM框架的实例，vue扮演者ViewModel的角色，DOM监听数据变化，数据绑定到DOM上。
+二、vue实例创建var MyComponent = Vue.extend({
+  // 扩展选项
+})
+
+// 所有的 `MyComponent` 实例都将以预定义的扩展" />
+  
 
   
   
@@ -11,17 +18,39 @@
   
   
   
-  <title>长琴的小窝</title>
+  <title>vue-day1 | 长琴的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="长琴的小窝">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="一、vue.js概述这是一个MVVM框架的实例，vue扮演者ViewModel的角色，DOM监听数据变化，数据绑定到DOM上。
+二、vue实例创建var MyComponent = Vue.extend({
+  // 扩展选项
+})
+
+// 所有的 `MyComponent` 实例都将以预定义的扩展选项被创建
+var myComponentInstance = new MyComponent()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-day1">
+<meta property="og:url" content="http://yoursite.com/2016/10/09/vue-day1/index.html">
 <meta property="og:site_name" content="长琴的小窝">
-<meta property="og:description">
+<meta property="og:description" content="一、vue.js概述这是一个MVVM框架的实例，vue扮演者ViewModel的角色，DOM监听数据变化，数据绑定到DOM上。
+二、vue实例创建var MyComponent = Vue.extend({
+  // 扩展选项
+})
+
+// 所有的 `MyComponent` 实例都将以预定义的扩展选项被创建
+var myComponentInstance = new MyComponent()">
+<meta property="og:image" content="http://yoursite.com/../img/vue1.png">
+<meta property="og:image" content="http://yoursite.com/../img/vue2.png">
+<meta property="og:updated_time" content="2016-10-09T15:52:59.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="长琴的小窝">
-<meta name="twitter:description">
+<meta name="twitter:title" content="vue-day1">
+<meta name="twitter:description" content="一、vue.js概述这是一个MVVM框架的实例，vue扮演者ViewModel的角色，DOM监听数据变化，数据绑定到DOM上。
+二、vue实例创建var MyComponent = Vue.extend({
+  // 扩展选项
+})
+
+// 所有的 `MyComponent` 实例都将以预定义的扩展选项被创建
+var myComponentInstance = new MyComponent()">
+<meta name="twitter:image" content="http://yoursite.com/../img/vue1.png">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -61,17 +90,15 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
-  
-    <article id="post-vue-day1" class="post-vue-day1 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-vue-day1" class="post-vue-day1 post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
         
         
   
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/09/vue-day1/">vue-day1</a>
+    <h1 class="entry-title article-title">
+      vue-day1
     </h1>
   
 
@@ -140,105 +167,20 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
 </article>
 
 
-
-
-
-
-  
-    <article id="post-express_route" class="post-express_route post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title">
-      <a class="article-title" href="/2016/10/06/express_route/">express路由</a>
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/06/express_route/" data-id="ciu2t7l300000b8ofrta455rw" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <pre><code>var express = require(&apos;express&apos;);
-var app = express();
-</code></pre><h1 id="一、Basic-Route"><a href="#一、Basic-Route" class="headerlink" title="一、Basic Route"></a>一、Basic Route</h1><pre><code>app.get(&apos;/&apos;, function(req, res){
-    //do something...
-});
-</code></pre><p>也可以使用字符串模式或正则表达式区配path。</p>
-<h1 id="二、Route-Parameters"><a href="#二、Route-Parameters" class="headerlink" title="二、Route Parameters"></a>二、Route Parameters</h1><p>使用:key的格式传入自定义参数，参数将被移植到req.param对象中。</p>
-<h1 id="三、Middleware"><a href="#三、Middleware" class="headerlink" title="三、Middleware"></a>三、Middleware</h1><ol>
-<li>与koa的中间件类似，用next()调用下一个中间件</li>
-<li><p>设置多个处理器的语法如下：</p>
-<pre><code>var cb0 = function (req, res, next) {
-  console.log(&apos;CB0&apos;);
-  next();
-}
-
-var cb1 = function (req, res, next) {
-  console.log(&apos;CB1&apos;);
-  next();
-}
-
-app.get(&apos;/example/d&apos;, [cb0, cb1], function (req, res, next) {
-  console.log(&apos;the response will be sent by the next function ...&apos;);
-  next();
-}, function (req, res) {
-  res.send(&apos;Hello from D!&apos;);
-});
-</code></pre></li>
-</ol>
-<h1 id="四、express-Router-创建router实例"><a href="#四、express-Router-创建router实例" class="headerlink" title="四、express.Router()创建router实例"></a>四、express.Router()创建router实例</h1><p>看一段代码就明白了</p>
-<pre><code>var express = require(&apos;express&apos;);
-var router = express.Router();
-
-// middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log(&apos;Time: &apos;, Date.now());
-  next();
-});
-// define the home page route
-router.get(&apos;/&apos;, function(req, res) {
-  res.send(&apos;Birds home page&apos;);
-});
-// define the about route
-router.get(&apos;/about&apos;, function(req, res) {
-  res.send(&apos;About birds&apos;);
-});
-
-module.exports = router;
-</code></pre><p>就是把几个中间件集成在一个router对象里，然后导出就可以啦~~</p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2016/10/06/express_route/">
-    <time datetime="2016-10-06T15:13:39.000Z" class="entry-date">
-        2016-10-06
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express/">express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/route/">route</a></li></ul>
-
-    </footer>
-</article>
+        <span class="nav-next"><a href="/2016/10/06/express_route/" rel="next">express路由 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
 
 
 
 
 
 
-  
-  
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
