@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   
   
+  <meta name="description" content="一、css回顾
+盒模型
+ 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
+someElement{
+    display: block;
+    margin: 0 auto;
+    border: 1px solid red" />
+  
 
   
   
@@ -11,17 +19,45 @@
   
   
   
-  <title>Tag: vue | 长琴的小窝</title>
+  <title>css进阶及css3培训 | 长琴的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="长琴的小窝">
-<meta property="og:url" content="http://yoursite.com/tags/vue/index.html">
+  <meta name="description" content="一、css回顾
+盒模型
+ 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
+someElement{
+    display: block;
+    margin: 0 auto;
+    border: 1px solid red;
+    padding: 20px;
+}
+ 推荐：尽可能使用盒模型布局，少使用脱离文档流的abs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css进阶及css3培训">
+<meta property="og:url" content="http://yoursite.com/2016/10/10/css进阶及css3培训/index.html">
 <meta property="og:site_name" content="长琴的小窝">
-<meta property="og:description">
+<meta property="og:description" content="一、css回顾
+盒模型
+ 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
+someElement{
+    display: block;
+    margin: 0 auto;
+    border: 1px solid red;
+    padding: 20px;
+}
+ 推荐：尽可能使用盒模型布局，少使用脱离文档流的abs">
+<meta property="og:updated_time" content="2016-10-10T12:24:22.971Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="长琴的小窝">
-<meta name="twitter:description">
+<meta name="twitter:title" content="css进阶及css3培训">
+<meta name="twitter:description" content="一、css回顾
+盒模型
+ 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
+someElement{
+    display: block;
+    margin: 0 auto;
+    border: 1px solid red;
+    padding: 20px;
+}
+ 推荐：尽可能使用盒模型布局，少使用脱离文档流的abs">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -61,46 +97,88 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-css进阶及css3培训" class="post-css进阶及css3培训 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/10/09/vue-day1/">vue-day1</a>
+    <h1 class="entry-title article-title">
+      css进阶及css3培训
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/10/09/vue-day1/">
-    <time datetime="2016-10-09T14:35:40.000Z" class="entry-date">
-        2016-10-09
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2016/10/10/css进阶及css3培训/" data-id="ciu48152a0000zgof1bx8j931" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h1 id="一、css回顾"><a href="#一、css回顾" class="headerlink" title="一、css回顾"></a>一、css回顾</h1><ol>
+<li><p>盒模型</p>
+<p> 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型</p>
+<pre><code>someElement{
+    display: block;
+    margin: 0 auto;
+    border: 1px solid red;
+    padding: 20px;
+}
+</code></pre><p> 推荐：尽可能使用盒模型布局，少使用脱离文档流的absolute，养成良好习惯</p>
+</li>
+<li><p>背景</p>
+<p> css2中的background有五个属性，以下：</p>
+<p> background-color, -image, -repeat, -attachment, -position</p>
+<p> 对后面三个作一点说明：</p>
+<p> background-repeat: repeat-x, repeat-y, no-repeat</p>
+<p> background-attachment: scroll, 默认值。背景图像会随着页面其余部分的滚动而移动。<br> fixed, 当页面的其余部分滚动时，背景图像不会移动。</p>
+<p> background-position: 使用关键字设置的话，第一个是竖直定位，如top，第二个是水平定位。另外有百分比和尺寸设置法，</p>
+</li>
+<li><p>文本，字体，定位</p>
+<p> 文本： text-align, text-decoration</p>
+<p> 字体： 可以用一系列特定字体，最后加上通用字体：</p>
+<pre><code>p {font-family: Times, TimesNR, &apos;New Century Schoolbook&apos;,
+ Georgia, &apos;New York&apos;, serif;}
+</code></pre><p> （不要求）</p>
+<p> 定位： </p>
+</li>
+</ol>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/10/10/css进阶及css3培训/">
+    <time datetime="2016-10-10T08:38:12.000Z" class="entry-date">
+        2016-10-10
     </time>
 </a>
     
     
   <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/培训/">培训</a></li></ul>
 
     </footer>
 </article>
-  
-  
-    </div></section>
-  
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/10/09/vue-day1/" rel="next">vue-day1 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
