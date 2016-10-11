@@ -3,45 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>css进阶及css3培训 | 我们的目标是星辰大海</title>
+  <title>vue-day2 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、css回顾
-盒模型
- 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
-someElement{
-    display: block;
-    margin: 0 auto;
-    border: 1px solid red;
-    padding: 20px;
-}
- 推荐：尽可能使用盒模型布局，少使用脱离文档流的abs">
+  <meta name="description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
+div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+data: {
+  isA: true,
+  isB:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css进阶及css3培训">
-<meta property="og:url" content="http://yoursite.com/2016/10/10/css进阶及css3培训/index.html">
+<meta property="og:title" content="vue-day2">
+<meta property="og:url" content="http://yoursite.com/2016/10/11/vue-day2/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description" content="一、css回顾
-盒模型
- 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
-someElement{
-    display: block;
-    margin: 0 auto;
-    border: 1px solid red;
-    padding: 20px;
-}
- 推荐：尽可能使用盒模型布局，少使用脱离文档流的abs">
-<meta property="og:updated_time" content="2016-10-10T12:24:22.971Z">
+<meta property="og:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
+div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+data: {
+  isA: true,
+  isB:">
+<meta property="og:updated_time" content="2016-10-11T15:49:22.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css进阶及css3培训">
-<meta name="twitter:description" content="一、css回顾
-盒模型
- 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型
-someElement{
-    display: block;
-    margin: 0 auto;
-    border: 1px solid red;
-    padding: 20px;
-}
- 推荐：尽可能使用盒模型布局，少使用脱离文档流的abs">
+<meta name="twitter:title" content="vue-day2">
+<meta name="twitter:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
+div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+data: {
+  isA: true,
+  isB:">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -90,10 +78,10 @@ someElement{
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-css进阶及css3培训" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-vue-day2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/10/css进阶及css3培训/" class="article-date">
-  <time datetime="2016-10-10T08:38:12.000Z" itemprop="datePublished">2016-10-10</time>
+    <a href="/2016/10/11/vue-day2/" class="article-date">
+  <time datetime="2016-10-11T15:48:52.000Z" itemprop="datePublished">2016-10-11</time>
 </a>
     
   </div>
@@ -104,7 +92,7 @@ someElement{
         
   
     <h1 class="article-title" itemprop="name">
-      css进阶及css3培训
+      vue-day2
     </h1>
   
 
@@ -112,42 +100,71 @@ someElement{
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、css回顾"><a href="#一、css回顾" class="headerlink" title="一、css回顾"></a>一、css回顾</h1><ol>
-<li><p>盒模型</p>
-<p> 中心部分为content, 以外分别是padding, border和margin，三者共同构成HTML元素的盒模型</p>
-<pre><code>someElement{
-    display: block;
-    margin: 0 auto;
-    border: 1px solid red;
-    padding: 20px;
+        <h1 id="一、class与style绑定"><a href="#一、class与style绑定" class="headerlink" title="一、class与style绑定"></a>一、class与style绑定</h1><p>v-bind:class接受一个对象用来动态切换class：</p>
+<pre><code>div class=&quot;static&quot; v-bind:class=&quot;{ &apos;class-a&apos;: isA, &apos;class-b&apos;: isB }&quot;&gt;&lt;/div&gt;
+
+data: {
+  isA: true,
+  isB: false
 }
-</code></pre><p> 推荐：尽可能使用盒模型布局，少使用脱离文档流的absolute，养成良好习惯</p>
+</code></pre><p>也可以传入数组来达到同样的效果，最新版本可在数组语法中使用对象语法。</p>
+<p>vue可以自动添加css中一些新属性的前缀！</p>
+<h1 id="二、条件渲染、列表渲染"><a href="#二、条件渲染、列表渲染" class="headerlink" title="二、条件渲染、列表渲染"></a>二、条件渲染、列表渲染</h1><p>template可作为条件渲染的包装元素：</p>
+<pre><code>&lt;template v-if=&quot;ok&quot;&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+  &lt;p&gt;Paragraph 1&lt;/p&gt;
+  &lt;p&gt;Paragraph 2&lt;/p&gt;
+&lt;/template&gt;
+</code></pre><ul>
+<li><p>v-else可紧跟在v-if或v-show块后用来被识别。</p>
 </li>
-<li><p>背景</p>
-<p> css2中的background有五个属性，以下：</p>
-<p> background-color, -image, -repeat, -attachment, -position</p>
-<p> 对后面三个作一点说明：</p>
-<p> background-repeat: repeat-x, repeat-y, no-repeat</p>
-<p> background-attachment: scroll, 默认值。背景图像会随着页面其余部分的滚动而移动。<br> fixed, 当页面的其余部分滚动时，背景图像不会移动。</p>
-<p> background-position: 使用关键字设置的话，第一个是竖直定位，如top，第二个是水平定位。另外有百分比和尺寸设置法，</p>
+<li><p>v-if的首屏渲染时间较短，v-show反之，但后者切换快。</p>
 </li>
-<li><p>文本，字体，定位</p>
-<p> 文本： text-align, text-decoration</p>
-<p> 字体： 可以用一系列特定字体，最后加上通用字体：</p>
-<pre><code>p {font-family: Times, TimesNR, &apos;New Century Schoolbook&apos;,
- Georgia, &apos;New York&apos;, serif;}
-</code></pre><p> （不要求）</p>
-<p> 定位： </p>
+<li><p>vue中包含了数组的变异方法，使其均能触发视图更新。</p>
 </li>
-</ol>
+<li><p>track-by在input等需要存储临时状态的组件中应慎用。</p>
+</li>
+</ul>
+<h1 id="三、方法与事件处理器"><a href="#三、方法与事件处理器" class="headerlink" title="三、方法与事件处理器"></a>三、方法与事件处理器</h1><p>v-on指令用来监听事件：</p>
+<pre><code>&lt;div id=&quot;example&quot;&gt;
+  &lt;button v-on:click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
+&lt;/div&gt;
+
+var vm = new Vue({
+  el: &apos;#example&apos;,
+  data: {
+    name: &apos;Vue.js&apos;
+  },
+  // 在 `methods` 对象中定义方法
+  methods: {
+    greet: function (event) {
+      // 方法内 `this` 指向 vm
+      alert(&apos;Hello &apos; + this.name + &apos;!&apos;)
+      // `event` 是原生 DOM 事件
+      alert(event.target.tagName)
+    }
+  }
+})
+</code></pre><p>也可以内联JavaScript语句来完成此流程。</p>
+<p>事件修饰符：stop, prevent, capture, self。</p>
+<p>key alias:</p>
+<pre><code>&lt;!-- 同上 --&gt;
+&lt;input v-on:keyup.enter=&quot;submit&quot;&gt;
+
+&lt;!-- 缩写语法 --&gt;
+&lt;input @keyup.enter=&quot;submit&quot;&gt;
+</code></pre><h1 id="四、表单控件绑定"><a href="#四、表单控件绑定" class="headerlink" title="四、表单控件绑定"></a>四、表单控件绑定</h1><p>v-model可实现表单数据双向绑定：</p>
+<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
+&lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
+</code></pre><h1 id="五、插件"><a href="#五、插件" class="headerlink" title="五、插件"></a>五、插件</h1><p>未完待续。。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/10/css进阶及css3培训/" data-id="ciu5ny0me0003ykofmxcoh193" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="ciu5ny0ly0000ykofd5jym3ds" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/培训/">培训</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
 
     </footer>
   </div>
@@ -155,19 +172,10 @@ someElement{
     
 <nav id="article-nav">
   
-    <a href="/2016/10/11/vue-day2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          vue-day2
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/09/vue-day1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/10/css进阶及css3培训/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">vue-day1</div>
+      <div class="article-nav-title">css进阶及css3培训</div>
     </a>
   
 </nav>
