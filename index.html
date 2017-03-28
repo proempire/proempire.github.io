@@ -150,9 +150,39 @@ ReactDOM.render({&lt;shakeIt name=&apos;emperor&apos;&gt;, document.get...})
 <li>组件类首字母必须大写，上面这个例子是错的</li>
 </ul>
 </li>
-<li><p>this.props.children获取所有子节点，PropTypes用于验证属性参数类型是否合法</p>
+<li><p>this.props.children获取所有子节点，类型由节点数量决定，PropTypes用于验证属性参数类型是否合法，用法：</p>
+<pre><code>react.createClass({
+    render: function(){
+        return react.propTypes.【类型】.isrequired
+    }
+});
+</code></pre><p> react模板语言中引用变量时用{}包裹</p>
+</li>
+<li><p>react使用dom-diff，可极大提高网页性能，若想获取真实DOM节点，使用this.ref.[refname]，注意，ref属性应给予dom节点。</p>
+<ul>
+<li>虚拟DOM未插入文档时不能获取真实dom节点</li>
+</ul>
+</li>
+<li><p>react支持状态机，getInitialState和setState用于处理状态，注意它与props的区别</p>
+</li>
+<li><p>与表单内容的互动，关键部分如下，备查:</p>
+<pre><code>handleChange: function(event) {
+  this.setState({value: event.target.value});
+},
+render: function () {
+  var value = this.state.value;
+  return (
+    &lt;div&gt;
+      &lt;input type=&quot;text&quot; value={value} onChange={this.handleChange} /&gt;
+      &lt;p&gt;{value}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></li>
+<li><p>组件的生命周期中，有两个特殊状态处理：收到新参数，是否重新渲染</p>
 </li>
 </ol>
+<h1 id="三、更多项目细节"><a href="#三、更多项目细节" class="headerlink" title="三、更多项目细节"></a>三、更多项目细节</h1><p>等我解决了就写！！</p>
 
       
     </div>
