@@ -3,33 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>vue-day2 | 我们的目标是星辰大海</title>
+  <title>前期学习大纲 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-
-data: {
-  isA: true,
-  isB:">
+  <meta name="description" content="一、前端主要语言包括HTML，CSS及JS，简单说一下它们的功能（详细内容可参照w3school）：
+HTML：超文本标记语言，浏览器渲染网页的基础元素，包括了标题，正文，图片，列表，表格等元素
+CSS：层叠样式表，对HTML元素进行外观上的布局和修饰，主要包括定位，边距，文字，颜色，位移等等内容
+JS：全程Javascript，浏览器通用的网页脚本语言，可对网页元素进行动态修饰。也作为项目开发架">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue-day2">
-<meta property="og:url" content="http://yoursite.com/2016/10/11/vue-day2/index.html">
+<meta property="og:title" content="前期学习大纲">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/前期学习大纲/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-
-data: {
-  isA: true,
-  isB:">
-<meta property="og:updated_time" content="2016-10-11T15:49:22.169Z">
+<meta property="og:description" content="一、前端主要语言包括HTML，CSS及JS，简单说一下它们的功能（详细内容可参照w3school）：
+HTML：超文本标记语言，浏览器渲染网页的基础元素，包括了标题，正文，图片，列表，表格等元素
+CSS：层叠样式表，对HTML元素进行外观上的布局和修饰，主要包括定位，边距，文字，颜色，位移等等内容
+JS：全程Javascript，浏览器通用的网页脚本语言，可对网页元素进行动态修饰。也作为项目开发架">
+<meta property="og:updated_time" content="2017-09-15T15:56:21.952Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue-day2">
-<meta name="twitter:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-
-data: {
-  isA: true,
-  isB:">
+<meta name="twitter:title" content="前期学习大纲">
+<meta name="twitter:description" content="一、前端主要语言包括HTML，CSS及JS，简单说一下它们的功能（详细内容可参照w3school）：
+HTML：超文本标记语言，浏览器渲染网页的基础元素，包括了标题，正文，图片，列表，表格等元素
+CSS：层叠样式表，对HTML元素进行外观上的布局和修饰，主要包括定位，边距，文字，颜色，位移等等内容
+JS：全程Javascript，浏览器通用的网页脚本语言，可对网页元素进行动态修饰。也作为项目开发架">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -78,10 +72,10 @@ data: {
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-vue-day2" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-前期学习大纲" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/11/vue-day2/" class="article-date">
-  <time datetime="2016-10-11T15:48:52.000Z" itemprop="datePublished">2016-10-11</time>
+    <a href="/2017/09/15/前期学习大纲/" class="article-date">
+  <time datetime="2017-09-15T15:21:50.000Z" itemprop="datePublished">2017-09-15</time>
 </a>
     
   </div>
@@ -92,7 +86,7 @@ data: {
         
   
     <h1 class="article-title" itemprop="name">
-      vue-day2
+      前期学习大纲
     </h1>
   
 
@@ -100,71 +94,45 @@ data: {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、class与style绑定"><a href="#一、class与style绑定" class="headerlink" title="一、class与style绑定"></a>一、class与style绑定</h1><p>v-bind:class接受一个对象用来动态切换class：</p>
-<pre><code>div class=&quot;static&quot; v-bind:class=&quot;{ &apos;class-a&apos;: isA, &apos;class-b&apos;: isB }&quot;&gt;&lt;/div&gt;
-
-data: {
-  isA: true,
-  isB: false
-}
-</code></pre><p>也可以传入数组来达到同样的效果，最新版本可在数组语法中使用对象语法。</p>
-<p>vue可以自动添加css中一些新属性的前缀！</p>
-<h1 id="二、条件渲染、列表渲染"><a href="#二、条件渲染、列表渲染" class="headerlink" title="二、条件渲染、列表渲染"></a>二、条件渲染、列表渲染</h1><p>template可作为条件渲染的包装元素：</p>
-<pre><code>&lt;template v-if=&quot;ok&quot;&gt;
-  &lt;h1&gt;Title&lt;/h1&gt;
-  &lt;p&gt;Paragraph 1&lt;/p&gt;
-  &lt;p&gt;Paragraph 2&lt;/p&gt;
-&lt;/template&gt;
-</code></pre><ul>
-<li><p>v-else可紧跟在v-if或v-show块后用来被识别。</p>
-</li>
-<li><p>v-if的首屏渲染时间较短，v-show反之，但后者切换快。</p>
-</li>
-<li><p>vue中包含了数组的变异方法，使其均能触发视图更新。</p>
-</li>
-<li><p>track-by在input等需要存储临时状态的组件中应慎用。</p>
-</li>
+        <h1 id="一、前端主要语言"><a href="#一、前端主要语言" class="headerlink" title="一、前端主要语言"></a>一、前端主要语言</h1><p>包括HTML，CSS及JS，简单说一下它们的功能（详细内容可参照w3school）：</p>
+<p>HTML：超文本标记语言，浏览器渲染网页的基础元素，包括了标题，正文，图片，列表，表格等元素</p>
+<p>CSS：层叠样式表，对HTML元素进行外观上的布局和修饰，主要包括定位，边距，文字，颜色，位移等等内容</p>
+<p>JS：全程Javascript，浏览器通用的网页脚本语言，可对网页元素进行动态修饰。也作为项目开发架构或工具的基础语言。</p>
+<h1 id="二、HTML与CSS"><a href="#二、HTML与CSS" class="headerlink" title="二、HTML与CSS"></a>二、HTML与CSS</h1><p>建议第一个月把这两个东西尽可能地熟悉，资料已上传至群里，下周会有第一次统一培训。</p>
+<p>对于HTML，可以先在一个网页文件中将所有元素全部使用一次，对于某些标签如ol与ul的区别，span与p的区别可以注意一下（涉及块级元素与行内元素的区别）</p>
+<p>CSS方面可能比较繁琐，建议重点了解清楚盒模型margin, padding与border的含义及作用，以及float的作用。所有<b>文本</b>、颜色、<b>背景</b>内容请积极查阅手册～</p>
+<p>说了这么多，如何做出来让自己看看呢..一个简化的HTML结构已上传到群文件，请在body部分参照w3school进行尝试～</p>
+<h1 id="三、JS"><a href="#三、JS" class="headerlink" title="三、JS"></a>三、JS</h1><p>参考书籍已先行上传之群文件，此部分内容较多。。这边做一些简单的总结：</p>
+<ul>
+<li>所有JS的数据类型及它们的相互转换、自带的方法</li>
+<li>高阶函数与闭包</li>
+<li>JS在动态操作HTML和CSS上的应用</li>
+<li>事件的冒泡与捕获</li>
+<li>各类人机交互事件，涵盖鼠标与键盘</li>
+<li>ES6标准</li>
 </ul>
-<h1 id="三、方法与事件处理器"><a href="#三、方法与事件处理器" class="headerlink" title="三、方法与事件处理器"></a>三、方法与事件处理器</h1><p>v-on指令用来监听事件：</p>
-<pre><code>&lt;div id=&quot;example&quot;&gt;
-  &lt;button v-on:click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
-&lt;/div&gt;
-
-var vm = new Vue({
-  el: &apos;#example&apos;,
-  data: {
-    name: &apos;Vue.js&apos;
-  },
-  // 在 `methods` 对象中定义方法
-  methods: {
-    greet: function (event) {
-      // 方法内 `this` 指向 vm
-      alert(&apos;Hello &apos; + this.name + &apos;!&apos;)
-      // `event` 是原生 DOM 事件
-      alert(event.target.tagName)
-    }
-  }
-})
-</code></pre><p>也可以内联JavaScript语句来完成此流程。</p>
-<p>事件修饰符：stop, prevent, capture, self。</p>
-<p>key alias:</p>
-<pre><code>&lt;!-- 同上 --&gt;
-&lt;input v-on:keyup.enter=&quot;submit&quot;&gt;
-
-&lt;!-- 缩写语法 --&gt;
-&lt;input @keyup.enter=&quot;submit&quot;&gt;
-</code></pre><h1 id="四、表单控件绑定"><a href="#四、表单控件绑定" class="headerlink" title="四、表单控件绑定"></a>四、表单控件绑定</h1><p>v-model可实现表单数据双向绑定：</p>
-<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
-&lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
-</code></pre><h1 id="五、插件"><a href="#五、插件" class="headerlink" title="五、插件"></a>五、插件</h1><p>未完待续。。</p>
+<p>还有一部分尚未列出。</p>
+<p>对JS有一定了解后看一看eux博客中吕神（吕哲扬）发的jquery应用博客～</p>
+<h1 id="四、近三年前端可能涉及到的工具"><a href="#四、近三年前端可能涉及到的工具" class="headerlink" title="四、近三年前端可能涉及到的工具"></a>四、近三年前端可能涉及到的工具</h1><p>使用以下工具前请事先准备node最新版本环境，这些工具都有相应的官网</p>
+<ul>
+<li>react、vue、angular</li>
+<li>express</li>
+<li>webpack</li>
+</ul>
+<p>这里只列举了五个，还有很多其他的工具～</p>
+<h1 id="五、需要注意的几个点"><a href="#五、需要注意的几个点" class="headerlink" title="五、需要注意的几个点"></a>五、需要注意的几个点</h1><ul>
+<li>HTML请做到标签语义化，不要全是div</li>
+<li>添加必要的注释</li>
+<li>编写脚本文件时，请让你的代码尽可能地优雅，当有余力之后多考虑一下怎么组织代码保证逻辑性和可读性～</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cj7m2h2lz00046sofzvombw4k" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cj7m2h2m300086sof826eh7s6" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习大纲/">学习大纲</a></li></ul>
 
     </footer>
   </div>
@@ -172,19 +140,10 @@ var vm = new Vue({
     
 <nav id="article-nav">
   
-    <a href="/2016/10/16/设计day1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          设计day1
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/10/css进阶及css3培训/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/04/13/php笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">css进阶及css3培训</div>
+      <div class="article-nav-title">php笔记</div>
     </a>
   
 </nav>
