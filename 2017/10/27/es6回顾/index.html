@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>es6回顾 | 我们的目标是星辰大海</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="（此博客内容主要参考自阮一峰老师的es6书籍）
+#一、环境配置和变量声明
+一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
+
+babel提供不同阶段语法提案的转码规则
+babel.cli提供node编译环境
+
+es6的let变量赋值仅在当前块内有效
+在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）
+
+es6的for循环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6回顾">
+<meta property="og:url" content="http://yoursite.com/2017/10/27/es6回顾/index.html">
+<meta property="og:site_name" content="我们的目标是星辰大海">
+<meta property="og:description" content="（此博客内容主要参考自阮一峰老师的es6书籍）
+#一、环境配置和变量声明
+一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
+
+babel提供不同阶段语法提案的转码规则
+babel.cli提供node编译环境
+
+es6的let变量赋值仅在当前块内有效
+在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）
+
+es6的for循环">
+<meta property="og:updated_time" content="2017-10-28T03:16:05.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es6回顾">
+<meta name="twitter:description" content="（此博客内容主要参考自阮一峰老师的es6书籍）
+#一、环境配置和变量声明
+一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
+
+babel提供不同阶段语法提案的转码规则
+babel.cli提供node编译环境
+
+es6的let变量赋值仅在当前块内有效
+在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）
+
+es6的for循环">
+  
+    <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我们的目标是星辰大海</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-es6回顾" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/27/es6回顾/" class="article-date">
+  <time datetime="2017-10-27T10:59:45.000Z" itemprop="datePublished">2017-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      es6回顾
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（此博客内容主要参考自阮一峰老师的es6书籍）</p>
+<p>#一、环境配置和变量声明</p>
+<p>一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：</p>
+<ol>
+<li>babel提供不同阶段语法提案的转码规则</li>
+<li>babel.cli提供node编译环境</li>
+</ol>
+<p>es6的let变量赋值仅在当前块内有效</p>
+<p><strong>在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）</strong></p>
+<ul>
+<li>es6的for循环声明部分和循环体部分是父子作用域关系</li>
+<li>let不允许变量提升</li>
+<li>函数表达式在es6标准下声明会被提升</li>
+<li>const与let特性基本一致，但不变的是变量地址，故声明常量对象可能会有问题</li>
+</ul>
+<p>以下是几个例子：</p>
+<pre><code>var a = [1, 2, 3, 4, 5, 6];
+for (let i = 0; i &lt; 6; i++) {
+    a[i] = function() {
+        console.log(i);
+    }
+}
+a[2]();
+</code></pre><p>这里的a[2]能正常输出2，但es5的var就不行了。</p>
+<p>另外需要注意一下let和const定义引起的死区问题，保证变量声明后使用。</p>
+<p>#二、变量解构赋值</p>
+<p>可类比为模式区配（注意一下对象的解构赋值），几个细节的演示如下：</p>
+<pre><code>let [a, [b, c]] = [1, [5, 3]];
+console.log(a, b, c);
+</code></pre><p>可嵌套赋值</p>
+<p>解构对象可以指定默认值，但必须保证未指定的值严格等于undefined才可。</p>
+<pre><code>let {foo, bar: cat} = {foo: &apos;xyz&apos;, bar: &apos;kkk&apos;};
+console.log(foo, cat);
+
+let {cont: {wrap: {line}}} = {
+    cont: {
+        wrap: {
+            line: &apos;find me?&apos;,
+            payload: &apos;padding&apos;
+        }
+    }
+}
+console.log(line);
+</code></pre><p>对象的解构赋值机制如上，后半部分为多重嵌套。</p>
+<p>在es6中常常有这样的写法：</p>
+<p>let {prop1, prop2, prop3} = someObj;</p>
+<p>其内在机制即为对象的解构赋值，凡是实现了iterator接口的类型都可以进行解构赋值。</p>
+<p>解构赋值实践：</p>
+<p>例如函数返回多值；利用指定默认值方法完成短路运算符的一些功能</p>
+<p>#三、字符串和正则等的扩展</p>
+<ul>
+<li>es6的String类提供了几个新功能，包括对双字节的支持、编解码、查询子串等功能</li>
+<li>为较好地兼容其他语言，可以适当利用标签模板(tag module)的raw属性</li>
+<li>es6的正则添加了u和y修饰符，分别作编码扩展和粘连匹配使用</li>
+<li>组区配使用()，利用具组名区配方便地获得区配结果</li>
+</ul>
+<p>函数扩展：</p>
+<ul>
+<li>箭头函数的实现机制事实上是提前绑定this对象，不允许es5改变上下文的几个方法</li>
+<li>es6标准要求实现尾调用/递归优化，以提高性能</li>
+<li><p>柯里化也可实现尾递归，如下：</p>
+<pre><code>let dproto = function(cb, n) {
+    return function(m) {
+        return cb.apply(this, [m, n]);
+    }
+};
+
+let dtest = function(m, result) {
+    if (m === 0) { return result; }
+    return dtest(m-1, result+m);
+};
+
+let illu = dproto(dtest, 0);
+</code></pre><p>  一个累加器的柯里化</p>
+</li>
+</ul>
+<h1 id="四、proxy代理"><a href="#四、proxy代理" class="headerlink" title="四、proxy代理"></a>四、proxy代理</h1><p>配置handler可拦截默认行为，例如拦截一个默认函数调用：</p>
+<pre><code>let target = function(dprops) {
+    console.log(`This is the ${dprops} message!`);
+}
+
+let handler = {
+    apply: function(target, ctx, args) {
+        Reflect.apply(target, ctx, [&apos;no-&apos; + args[0]]);
+    }
+}
+
+let proxy = new Proxy(target, handler);
+
+proxy(&apos;real&apos;);
+</code></pre><p>修改事件参数，这样就输出了修改后的结果</p>
+<p>proxy还有get, set, defineProperty等方法，在Reflect中均有对应。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9ar9e240005iwof4y4pfae7" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/05/angular4-0初体验/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">angular4.0初体验</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/27/es6回顾/">es6回顾</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/05/angular4-0初体验/">angular4.0初体验</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/15/前期学习大纲/">前期学习大纲</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/27/react基础回顾/">react基础回顾~~</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/vue-day2/">vue-day2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Empire<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

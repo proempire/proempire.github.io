@@ -3,17 +3,40 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | 我们的目标是星辰大海</title>
+  <title>跨域方法总结 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="#一、jsonp
+主要内容在于服务器响应为一个json数据的封装格式callbackFunction(json)
+#二、cors
+除ie10以下不支持外，其余浏览器均已支持。
+
+简单请求将直接添加一个origin字段
+origin字段所指定的源必须在许可范围内
+发送cookie需要打开withCredentials属性，发送cookie不能将Access-Control-Allow-Origin设">
+<meta name="keywords">
 <meta property="og:type" content="website">
-<meta property="og:title" content="我们的目标是星辰大海">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:title" content="跨域方法总结">
+<meta property="og:url" content="http://yoursite.com/back/2017-10-24-跨域方法总结.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description">
+<meta property="og:description" content="#一、jsonp
+主要内容在于服务器响应为一个json数据的封装格式callbackFunction(json)
+#二、cors
+除ie10以下不支持外，其余浏览器均已支持。
+
+简单请求将直接添加一个origin字段
+origin字段所指定的源必须在许可范围内
+发送cookie需要打开withCredentials属性，发送cookie不能将Access-Control-Allow-Origin设">
+<meta property="og:updated_time" content="2017-10-24T13:49:48.551Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我们的目标是星辰大海">
-<meta name="twitter:description">
+<meta name="twitter:title" content="跨域方法总结">
+<meta name="twitter:description" content="#一、jsonp
+主要内容在于服务器响应为一个json数据的封装格式callbackFunction(json)
+#二、cors
+除ie10以下不支持外，其余浏览器均已支持。
+
+简单请求将直接添加一个origin字段
+origin字段所指定的源必须在许可范围内
+发送cookie需要打开withCredentials属性，发送cookie不能将Access-Control-Allow-Origin设">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -62,182 +85,54 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/27/es6回顾/" class="archive-article-date">
-  <time datetime="2017-10-27T10:59:45.000Z" itemprop="datePublished">10月 27</time>
+        <section id="main"><article id="post-undefined" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/back/2017-10-24-跨域方法总结.html" class="article-date">
+  <time datetime="2017-10-24T05:13:46.000Z" itemprop="datePublished">2017-10-24</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/27/es6回顾/">es6回顾</a>
+    <h1 class="article-title" itemprop="name">
+      跨域方法总结
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/05/angular4-0初体验/" class="archive-article-date">
-  <time datetime="2017-10-05T08:26:24.000Z" itemprop="datePublished">10月 5</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/05/angular4-0初体验/">angular4.0初体验</a>
-    </h1>
-  
+        <p>#一、jsonp</p>
+<p>主要内容在于服务器响应为一个json数据的封装格式callbackFunction(json)</p>
+<p>#二、cors</p>
+<p>除ie10以下不支持外，其余浏览器均已支持。</p>
+<ul>
+<li>简单请求将直接添加一个origin字段</li>
+<li>origin字段所指定的源必须在许可范围内</li>
+<li>发送cookie需要打开withCredentials属性，发送cookie不能将Access-Control-Allow-Origin设为通配选择，且cookie遵循同源策略</li>
+</ul>
+<p>#三、xhr2</p>
+<p>在服务端响应头加上Access-Control-Allow-Origin及Access-Control-Allow-Methods字段</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/09/15/前期学习大纲/" class="archive-article-date">
-  <time datetime="2017-09-15T15:21:50.000Z" itemprop="datePublished">9月 15</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/15/前期学习大纲/">前期学习大纲</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/back/2017-10-24-跨域方法总结.html" data-id="cj9ar9e200002iwofu9o0qb5v" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/02/27/react基础回顾/" class="archive-article-date">
-  <time datetime="2017-02-27T13:05:09.000Z" itemprop="datePublished">2月 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/27/react基础回顾/">react基础回顾~~</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/10/11/vue-day2/" class="archive-article-date">
-  <time datetime="2016-10-11T15:48:52.000Z" itemprop="datePublished">10月 11</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/11/vue-day2/">vue-day2</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/10/10/css进阶及css3培训/" class="archive-article-date">
-  <time datetime="2016-10-10T08:38:12.000Z" itemprop="datePublished">10月 10</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/10/css进阶及css3培训/">css进阶及css3培训</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/10/09/vue-day1/" class="archive-article-date">
-  <time datetime="2016-10-09T14:35:40.000Z" itemprop="datePublished">10月 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/09/vue-day1/">vue-day1</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/10/06/express_route/" class="archive-article-date">
-  <time datetime="2016-10-06T15:13:39.000Z" itemprop="datePublished">10月 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/06/express_route/">express路由</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
 </section>
         
