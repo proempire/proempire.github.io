@@ -3,33 +3,38 @@
 <head>
   <meta charset="utf-8">
   
-  <title>react基础回顾~~ | 我们的目标是星辰大海</title>
+  <title>vuex小记 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、配置环境和依赖react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。
-二、基础使用
-基础方法： ReactDOM.render()
-ReactDOM.render(
-  &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;,
-  document.getElementById(&amp;a">
+  <meta name="description" content="#一、状态管理工具的使用动机
+类似于flux、redux，vuex也是一个关于全局里所有组件的状态管理工具，目的是使得通信和状态改变更加优雅和可维护，vuex的状态同样是响应式的。
+是否使用应该考虑该SPA的规模，一般考虑在中大型页面使用。
+参考一下vuex官方文档的示意图：
+
+#二、Store
+定义上级vue元素时可显式指定Store对象使其在子组件中可用，子组件访问方式使用this.$stor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react基础回顾~~">
-<meta property="og:url" content="http://yoursite.com/2017/02/27/react基础回顾/index.html">
+<meta property="og:title" content="vuex小记">
+<meta property="og:url" content="http://yoursite.com/2017/10/29/vuex小记/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description" content="一、配置环境和依赖react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。
-二、基础使用
-基础方法： ReactDOM.render()
-ReactDOM.render(
-  &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;,
-  document.getElementById(&amp;a">
-<meta property="og:updated_time" content="2017-03-28T17:34:14.176Z">
+<meta property="og:description" content="#一、状态管理工具的使用动机
+类似于flux、redux，vuex也是一个关于全局里所有组件的状态管理工具，目的是使得通信和状态改变更加优雅和可维护，vuex的状态同样是响应式的。
+是否使用应该考虑该SPA的规模，一般考虑在中大型页面使用。
+参考一下vuex官方文档的示意图：
+
+#二、Store
+定义上级vue元素时可显式指定Store对象使其在子组件中可用，子组件访问方式使用this.$stor">
+<meta property="og:image" content="http://yoursite.com/../img/vuex.png">
+<meta property="og:updated_time" content="2017-10-29T07:48:38.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react基础回顾~~">
-<meta name="twitter:description" content="一、配置环境和依赖react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。
-二、基础使用
-基础方法： ReactDOM.render()
-ReactDOM.render(
-  &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;,
-  document.getElementById(&amp;a">
+<meta name="twitter:title" content="vuex小记">
+<meta name="twitter:description" content="#一、状态管理工具的使用动机
+类似于flux、redux，vuex也是一个关于全局里所有组件的状态管理工具，目的是使得通信和状态改变更加优雅和可维护，vuex的状态同样是响应式的。
+是否使用应该考虑该SPA的规模，一般考虑在中大型页面使用。
+参考一下vuex官方文档的示意图：
+
+#二、Store
+定义上级vue元素时可显式指定Store对象使其在子组件中可用，子组件访问方式使用this.$stor">
+<meta name="twitter:image" content="http://yoursite.com/../img/vuex.png">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -78,10 +83,10 @@ ReactDOM.render(
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-react基础回顾" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-vuex小记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/27/react基础回顾/" class="article-date">
-  <time datetime="2017-02-27T13:05:09.000Z" itemprop="datePublished">2017-02-27</time>
+    <a href="/2017/10/29/vuex小记/" class="article-date">
+  <time datetime="2017-10-29T02:17:17.000Z" itemprop="datePublished">2017-10-29</time>
 </a>
     
   </div>
@@ -92,7 +97,7 @@ ReactDOM.render(
         
   
     <h1 class="article-title" itemprop="name">
-      react基础回顾~~
+      vuex小记
     </h1>
   
 
@@ -100,68 +105,59 @@ ReactDOM.render(
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、配置环境和依赖"><a href="#一、配置环境和依赖" class="headerlink" title="一、配置环境和依赖"></a>一、配置环境和依赖</h1><p>react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。</p>
-<h1 id="二、基础使用"><a href="#二、基础使用" class="headerlink" title="二、基础使用"></a>二、基础使用</h1><ol>
-<li><p>基础方法： ReactDOM.render()</p>
-<pre><code>ReactDOM.render(
-  &lt;h1&gt;Hello, world!&lt;/h1&gt;,
-  document.getElementById(&apos;example&apos;)
-);
-</code></pre></li>
-<li><p>jsx语法示例：</p>
-<pre><code>&lt;div&gt;{ oarray.map(function(el)) }&lt;/div&gt;
-</code></pre></li>
-<li><p>封装component方法——React.createClass():</p>
-<pre><code>var realwhat = function(){return &lt;h3&gt;{this.props.name}&lt;/h3&gt;}
-var owhat = {render: realwhat}
-var shakeIt = React.createClass(owhat)
-
-ReactDOM.render({&lt;shakeIt name=&apos;emperor&apos;&gt;, document.get...})
-</code></pre><ul>
-<li>组件类首字母必须大写，上面这个例子是错的</li>
-</ul>
-</li>
-<li><p>this.props.children获取所有子节点，类型由节点数量决定，PropTypes用于验证属性参数类型是否合法，用法：</p>
-<pre><code>react.createClass({
-    render: function(){
-        return react.propTypes.【类型】.isrequired
+        <p>#一、状态管理工具的使用动机</p>
+<p>类似于flux、redux，vuex也是一个关于全局里所有组件的状态管理工具，目的是使得通信和状态改变更加优雅和可维护，vuex的状态同样是响应式的。</p>
+<p>是否使用应该考虑该SPA的规模，一般考虑在中大型页面使用。</p>
+<p>参考一下vuex官方文档的示意图：</p>
+<p><img src="../img/vuex.png" alt="vuex功能示意图"></p>
+<p>#二、Store</p>
+<p>定义上级vue元素时可显式指定Store对象使其在子组件中可用，子组件访问方式使用this.$store</p>
+<pre><code>computed: {
+    count: function() {
+        return this.$store.state.count
     }
-});
-</code></pre><p> react模板语言中引用变量时用{}包裹</p>
-</li>
-<li><p>react使用dom-diff，可极大提高网页性能，若想获取真实DOM节点，使用this.ref.[refname]，注意，ref属性应给予dom节点。</p>
-<ul>
-<li>虚拟DOM未插入文档时不能获取真实dom节点</li>
-</ul>
-</li>
-<li><p>react支持状态机，getInitialState和setState用于处理状态，注意它与props的区别</p>
-</li>
-<li><p>与表单内容的互动，关键部分如下，备查:</p>
-<pre><code>handleChange: function(event) {
-  this.setState({value: event.target.value});
-},
-render: function () {
-  var value = this.state.value;
-  return (
-    &lt;div&gt;
-      &lt;input type=&quot;text&quot; value={value} onChange={this.handleChange} /&gt;
-      &lt;p&gt;{value}&lt;/p&gt;
-    &lt;/div&gt;
-  );
 }
+</code></pre><p>关于mapState的补充说明：</p>
+<p>事实上它做的是一个方法的映射，将store文件中的属性映射到一个子组件里的别名上，目的是为了避免诸如this.$store.state…这样冗长的写法。</p>
+<p>#三、Getter和Mutation</p>
+<p>在store的getter方法中完成定义，将暴露为一个属性。</p>
+<pre><code>// ...
+getters: {
+    getTodoById: (state, getters) =&gt; (id) =&gt; {
+        return state.todos.find(todo =&gt; todo.id === id)
+    }
+}
+</code></pre><p>若要传参，可返回一个函数</p>
+<p>设置Mutation与绑定事件写法是类似的，但是触发Mutation必须用commit方法。Mutation与getter类似，第一个参数传入state：</p>
+<pre><code>mutations: {
+    increment (state, n) {
+        state.count += n
+      }
+}
+</code></pre><ul>
+<li>Mutation的改变必须是同步函数，因为异步函数的状态无法追踪，也无法得到快照</li>
+<li>组件中提交mutation同样调用父元素的$store，当然也可以使用mapMutation来做</li>
+</ul>
+<h1 id="四、Action和Module"><a href="#四、Action和Module" class="headerlink" title="四、Action和Module"></a>四、Action和Module</h1><ul>
+<li>相比于Mutation，action支持异步操作，分发指令与redux类似，使用store.dispatch()方法即可</li>
+<li>vuex支持命名空间模块，命名空间要访问global assets可以在提交mutation或分发action时带上第三个参数{root: true}</li>
+<li><p>注册模块可用来绑定其他引入的插件，例如vue-router:</p>
+<pre><code>// 注册模块 `vue-router`
+store.registerModule(&apos;vue-router&apos;, {
+  // ...
+})
 </code></pre></li>
-<li><p>组件的生命周期中，有两个特殊状态处理：收到新参数，是否重新渲染</p>
+<li><p>模块重用应使用函数来声明状态，此处与vue的data返回方式是一致的</p>
 </li>
-</ol>
-<h1 id="三、更多项目细节"><a href="#三、更多项目细节" class="headerlink" title="三、更多项目细节"></a>三、更多项目细节</h1><p>等我解决了就写！！</p>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cj9cgfuty0006lgof3xcxt8ib" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cj9cgfuu3000elgoflqc4y4l5" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
 
     </footer>
   </div>
@@ -169,19 +165,10 @@ render: function () {
     
 <nav id="article-nav">
   
-    <a href="/2017/09/15/前期学习大纲/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          前期学习大纲
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/11/vue-day2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/27/es6回顾/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">vue-day2</div>
+      <div class="article-nav-title">es6回顾</div>
     </a>
   
 </nav>
