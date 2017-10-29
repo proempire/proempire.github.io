@@ -6,8 +6,7 @@
   <title>es6回顾 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="（此博客内容主要参考自阮一峰老师的es6书籍）
-#一、环境配置和变量声明
-一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
+一、环境配置和变量声明一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
 
 babel提供不同阶段语法提案的转码规则
 babel.cli提供node编译环境
@@ -15,14 +14,13 @@ babel.cli提供node编译环境
 es6的let变量赋值仅在当前块内有效
 在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）
 
-es6的for循环">
+es6的for循环声明">
 <meta property="og:type" content="article">
 <meta property="og:title" content="es6回顾">
 <meta property="og:url" content="http://yoursite.com/2017/10/27/es6回顾/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
 <meta property="og:description" content="（此博客内容主要参考自阮一峰老师的es6书籍）
-#一、环境配置和变量声明
-一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
+一、环境配置和变量声明一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
 
 babel提供不同阶段语法提案的转码规则
 babel.cli提供node编译环境
@@ -30,13 +28,12 @@ babel.cli提供node编译环境
 es6的let变量赋值仅在当前块内有效
 在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）
 
-es6的for循环">
-<meta property="og:updated_time" content="2017-10-28T10:27:18.489Z">
+es6的for循环声明">
+<meta property="og:updated_time" content="2017-10-29T07:52:09.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6回顾">
 <meta name="twitter:description" content="（此博客内容主要参考自阮一峰老师的es6书籍）
-#一、环境配置和变量声明
-一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
+一、环境配置和变量声明一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：
 
 babel提供不同阶段语法提案的转码规则
 babel.cli提供node编译环境
@@ -44,7 +41,7 @@ babel.cli提供node编译环境
 es6的let变量赋值仅在当前块内有效
 在与闭包相关的循环变量无效问题下，let操作符可解决问题（基于以上特性）
 
-es6的for循环">
+es6的for循环声明">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -84,7 +81,7 @@ es6的for循环">
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -116,8 +113,7 @@ es6的for循环">
     <div class="article-entry" itemprop="articleBody">
       
         <p>（此博客内容主要参考自阮一峰老师的es6书籍）</p>
-<p>#一、环境配置和变量声明</p>
-<p>一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：</p>
+<h1 id="一、环境配置和变量声明"><a href="#一、环境配置和变量声明" class="headerlink" title="一、环境配置和变量声明"></a>一、环境配置和变量声明</h1><p>一般采用babel工具将es6代码转为es5代码，以保证较好的兼容性，babel配置有两点值得注意一下：</p>
 <ol>
 <li>babel提供不同阶段语法提案的转码规则</li>
 <li>babel.cli提供node编译环境</li>
@@ -140,8 +136,7 @@ for (let i = 0; i &lt; 6; i++) {
 a[2]();
 </code></pre><p>这里的a[2]能正常输出2，但es5的var就不行了。</p>
 <p>另外需要注意一下let和const定义引起的死区问题，保证变量声明后使用。</p>
-<p>#二、变量解构赋值</p>
-<p>可类比为模式区配（注意一下对象的解构赋值），几个细节的演示如下：</p>
+<h1 id="二、变量解构赋值"><a href="#二、变量解构赋值" class="headerlink" title="二、变量解构赋值"></a>二、变量解构赋值</h1><p>可类比为模式区配（注意一下对象的解构赋值），几个细节的演示如下：</p>
 <pre><code>let [a, [b, c]] = [1, [5, 3]];
 console.log(a, b, c);
 </code></pre><p>可嵌套赋值</p>
@@ -164,8 +159,7 @@ console.log(line);
 <p>其内在机制即为对象的解构赋值，凡是实现了iterator接口的类型都可以进行解构赋值。</p>
 <p>解构赋值实践：</p>
 <p>例如函数返回多值；利用指定默认值方法完成短路运算符的一些功能</p>
-<p>#三、字符串和正则等的扩展</p>
-<ul>
+<h1 id="三、字符串和正则等的扩展"><a href="#三、字符串和正则等的扩展" class="headerlink" title="三、字符串和正则等的扩展"></a>三、字符串和正则等的扩展</h1><ul>
 <li>es6的String类提供了几个新功能，包括对双字节的支持、编解码、查询子串等功能</li>
 <li>为较好地兼容其他语言，可以适当利用标签模板(tag module)的raw属性</li>
 <li>es6的正则添加了u和y修饰符，分别作编码扩展和粘连匹配使用</li>
@@ -191,8 +185,7 @@ let illu = dproto(dtest, 0);
 </code></pre><p>  一个累加器的柯里化</p>
 </li>
 </ul>
-<p>#四、proxy代理</p>
-<p>配置handler可拦截默认行为，例如拦截一个默认函数调用：</p>
+<h1 id="四、proxy代理"><a href="#四、proxy代理" class="headerlink" title="四、proxy代理"></a>四、proxy代理</h1><p>配置handler可拦截默认行为，例如拦截一个默认函数调用：</p>
 <pre><code>let target = function(dprops) {
     console.log(`This is the ${dprops} message!`);
 }
@@ -208,8 +201,7 @@ let proxy = new Proxy(target, handler);
 proxy(&apos;real&apos;);
 </code></pre><p>修改事件参数，这样就输出了修改后的结果</p>
 <p>proxy还有get, set, defineProperty等方法，在Reflect中均有对应。</p>
-<p>#五、Promise和Generator小记</p>
-<ul>
+<h1 id="五、Promise和Generator小记"><a href="#五、Promise和Generator小记" class="headerlink" title="五、Promise和Generator小记"></a>五、Promise和Generator小记</h1><ul>
 <li>Promise对象的回调函数默认在本轮事件循环全部结束后，下一轮才执行，但Promise.resolve()返回的Promise在本轮结束时进行</li>
 <li><p>Promise.all执行时优先使用子Promise的处理函数进行处理，如下例：</p>
 <pre><code>const p1 = new Promise((resolve, reject) =&gt; {
@@ -241,7 +233,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9cgfuu2000clgof1f63v5eh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9cgjmca000d0oof3cpz8on2" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
@@ -253,7 +245,7 @@ Promise.all([p1,p2])
 <nav id="article-nav">
   
     <a href="/2017/10/29/vuex小记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           vuex小记
@@ -263,7 +255,7 @@ Promise.all([p1,p2])
   
   
     <a href="/2017/10/05/angular4-0初体验/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">angular4.0初体验</div>
     </a>
   
@@ -281,7 +273,7 @@ Promise.all([p1,p2])
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
     </div>
@@ -300,7 +292,7 @@ Promise.all([p1,p2])
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
     </div>
@@ -310,7 +302,7 @@ Promise.all([p1,p2])
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
