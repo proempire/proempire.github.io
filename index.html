@@ -64,6 +64,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git简要补充" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/08/git简要补充/" class="article-date">
+  <time datetime="2017-11-08T13:20:08.000Z" itemprop="datePublished">2017-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/08/git简要补充/">git简要补充</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、远程操作"><a href="#一、远程操作" class="headerlink" title="一、远程操作"></a>一、远程操作</h1><p>内容借鉴自阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html" target="_blank" rel="external">博客</a></p>
+<p>首先是git clone，加入一个新项目时首先执行的会是这个命令，那么它做了什么呢？简单地说，就是拷贝一份远程仓库的代码到本地。</p>
+<p>然后是对于远程主机与本地之间的一些关系处理：</p>
+<p>如果在本地创建了项目，想部署到github上，可以考虑使用添加主机命令git remote add &lt;主机名&gt;，可以管理多个远程主机。</p>
+<p>接下来有两件事：</p>
+<p>一是同步远程的更新，常用的指令有git pull和git fetch，那么它们有什么差别呢，简单地说，git pull就是git fetch与git merge的整合；</p>
+<ul>
+<li>千万注意git merge后的分支是要被合并过来的分支，千万不要搞反了</li>
+</ul>
+<p>第二件事是确认追踪关系，手动设置指令为–set-upstream，git clone命令拷贝下来的分支自动与远程主机建立追踪关系。</p>
+<h1 id="二、时间线操作"><a href="#二、时间线操作" class="headerlink" title="二、时间线操作"></a>二、时间线操作</h1><p>一些有用的操作：git status查看工作区文件状态，git diff比对修改内容，git log记录操作</p>
+<ul>
+<li>一个小细节：如果git reset回退版本并且加上了–hard参数，还能回退回来吗？答案是肯定的，版本的切换可以直接用修改指针指向来进行，所以关键就在于找到某版本对用的commit id，若找不到，可以用git reflog寻找</li>
+<li>两个小细节：撤销暂存区修改使用git reset HEAD <file>，撤销工作区修改使用git checkout – <file></file></file></li>
+</ul>
+<h1 id="三、分支管理策略"><a href="#三、分支管理策略" class="headerlink" title="三、分支管理策略"></a>三、分支管理策略</h1><p>git log –graph可查看分支合并图</p>
+<p>下面有一小段没有保存。。先这样吧～</p>
+<h1 id="四、Q-amp-A"><a href="#四、Q-amp-A" class="headerlink" title="四、Q&amp;A"></a>四、Q&amp;A</h1><ol>
+<li><p>Q：如何同步两个远程分支？</p>
+<p> A：同样适用git merge，有冲突就解决冲突；或者把其中一个分支拉到本地，执行合并后再推送到远程分支。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/08/git简要补充/" data-id="cj9rs7o41000ds0ofbtbwpb45" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vuex小记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/29/vuex小记/" class="article-date">
@@ -132,7 +192,7 @@ store.registerModule(&apos;vue-router&apos;, {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cj9cgjmca000f0oofbzjrnh1z" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cj9rs7o43000hs0ofti5gssnp" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
@@ -283,11 +343,15 @@ Promise.all([p1,p2])
 <li>next方法可带一个参数作为上一个yield的返回值，故第一个next()不必带参数</li>
 </ul>
 <p><strong>遍历Generator产生的迭代器时，for..of..不会遍历到return后的值，此时需要用yield*来获取</strong>。</p>
+<p>补充：</p>
+<ul>
+<li>回调函数将err放在第一个的理由：异步函数执行分两阶段，第一阶段抛出错误的执行上下文在后面会丢失</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9cgjmca000d0oof3cpz8on2" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9rs7o3z000as0of20uwb7n1" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
@@ -385,7 +449,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/05/angular4-0初体验/" data-id="cj9cgjmca00090oofb1tagjl9" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/10/05/angular4-0初体验/" data-id="cj9rs7o3x0008s0ofv3zq4ttn" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
@@ -454,7 +518,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cj9cgjmca000a0oofi73fm2jz" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cj9rs7o3y0009s0of7ixf4zoj" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习大纲/">学习大纲</a></li></ul>
@@ -546,7 +610,7 @@ render: function () {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cj9cgjmca00080oofn3jymt3z" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cj9rs7o3s0003s0of4obcmghs" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -641,7 +705,7 @@ var vm = new Vue({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cj9cgjmca00050oofar7jhofs" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cj9rs7o3w0006s0ofcwyqwa11" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -798,7 +862,7 @@ animation: myfirst 5s;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/10/css进阶及css3培训/" data-id="cj9cgjmca00060oofy38muzxl" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/10/css进阶及css3培训/" data-id="cj9rs7o42000fs0ofnt7rq1hl" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/培训/">培训</a></li></ul>
@@ -873,7 +937,7 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/09/vue-day1/" data-id="cj9cgjmc000020oofllj5skc6" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/09/vue-day1/" data-id="cj9rs7o3v0005s0ofmgqod2uf" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -959,7 +1023,7 @@ module.exports = router;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/06/express_route/" data-id="cj9cgjmc000000oofz4im0shn" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/10/06/express_route/" data-id="cj9rs7o3j0001s0ofgtlo90cc" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express/">express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/route/">route</a></li></ul>
@@ -983,7 +1047,7 @@ module.exports = router;
   <div class="widget-wrap">
     <h3 class="widget-title">Labels</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
     </div>
   </div>
 
@@ -993,7 +1057,7 @@ module.exports = router;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
     </div>
   </div>
 
@@ -1002,7 +1066,7 @@ module.exports = router;
   <div class="widget-wrap">
     <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
     </div>
   </div>
 
@@ -1013,6 +1077,10 @@ module.exports = router;
     <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/11/08/git简要补充/">git简要补充</a>
+          </li>
         
           <li>
             <a href="/2017/10/29/vuex小记/">vuex小记</a>
@@ -1028,10 +1096,6 @@ module.exports = router;
         
           <li>
             <a href="/2017/09/15/前期学习大纲/">前期学习大纲</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/27/react基础回顾/">react基础回顾~~</a>
           </li>
         
       </ul>
