@@ -5,16 +5,25 @@
   
   <title>koa学习小记 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="一、核心概念
+中间件：采用es6中generator方式来实现一种级联的逻辑，在一系列app.use(function* (next){…})中，一旦在某处遇到了yield next执行语句，那么将会把控制权交给下一个函数，直至执行完毕后返回为止
+context上下文：主要封装了node的request和response两个对象，在每个request请求中被创建，中间件中用this引用
+几个可能用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="koa学习小记">
 <meta property="og:url" content="http://yoursite.com/2017/11/09/koa学习小记/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description">
-<meta property="og:updated_time" content="2017-11-09T02:50:00.076Z">
+<meta property="og:description" content="一、核心概念
+中间件：采用es6中generator方式来实现一种级联的逻辑，在一系列app.use(function* (next){…})中，一旦在某处遇到了yield next执行语句，那么将会把控制权交给下一个函数，直至执行完毕后返回为止
+context上下文：主要封装了node的request和response两个对象，在每个request请求中被创建，中间件中用this引用
+几个可能用">
+<meta property="og:updated_time" content="2017-11-09T10:25:02.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="koa学习小记">
-<meta name="twitter:description">
+<meta name="twitter:description" content="一、核心概念
+中间件：采用es6中generator方式来实现一种级联的逻辑，在一系列app.use(function* (next){…})中，一旦在某处遇到了yield next执行语句，那么将会把控制权交给下一个函数，直至执行完毕后返回为止
+context上下文：主要封装了node的request和response两个对象，在每个request请求中被创建，中间件中用this引用
+几个可能用">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -52,9 +61,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -85,13 +94,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="一、核心概念"><a href="#一、核心概念" class="headerlink" title="一、核心概念"></a>一、核心概念</h1><ul>
+<li>中间件：采用es6中generator方式来实现一种级联的逻辑，在一系列app.use(function* (next){…})中，一旦在某处遇到了yield next执行语句，那么将会把控制权交给下一个函数，直至执行完毕后返回为止</li>
+<li>context上下文：主要封装了node的request和response两个对象，<strong>在每个request请求中被创建</strong>，中间件中用this引用</li>
+<li>几个可能用到的属性，req.query，res.status</li>
+</ul>
+<h1 id="二、koa-router"><a href="#二、koa-router" class="headerlink" title="二、koa-router"></a>二、koa-router</h1><p>觉得形式上和express路由类似，其中router.all()区配所有http方法</p>
+<p>支持嵌套路由，形式如下：</p>
+<pre><code>var forums = new Router();
+var posts = new Router();
+
+posts.get(&apos;/&apos;, function (ctx, next) {...});
+posts.get(&apos;/:pid&apos;, function (ctx, next) {...});
+forums.use(&apos;/forums/:fid/posts&apos;, posts.routes(), posts.allowedMethods());
+
+// responds to &quot;/forums/123/posts&quot; and &quot;/forums/123/posts/123&quot; 
+app.use(forums.routes());
+</code></pre><p>其中forums为外层路由，forums.use()第二个参数传入了内层路由posts，使得路由区配的为两个url的拼接</p>
+<p>也可以指定公共前缀如下：</p>
+<pre><code>var router = new Router({
+  prefix: &apos;/users&apos;
+});
+</code></pre><p>router.route()将返回一个分派路由的中间件</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/09/koa学习小记/" data-id="cj9s9oavw000jqsofeds6h6ab" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/09/koa学习小记/" data-id="cj9sbulbx000fjgofxn49i3kr" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li></ul>
+
     </footer>
   </div>
   
@@ -100,7 +133,7 @@
   
   
     <a href="/2017/11/08/git简要补充/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">git简要补充</div>
     </a>
   
@@ -118,9 +151,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
     </div>
   </div>
 
@@ -128,9 +161,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
     </div>
   </div>
 
@@ -147,7 +180,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -184,7 +217,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Empire<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

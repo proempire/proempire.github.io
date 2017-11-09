@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -86,13 +86,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="一、核心概念"><a href="#一、核心概念" class="headerlink" title="一、核心概念"></a>一、核心概念</h1><ul>
+<li>中间件：采用es6中generator方式来实现一种级联的逻辑，在一系列app.use(function* (next){…})中，一旦在某处遇到了yield next执行语句，那么将会把控制权交给下一个函数，直至执行完毕后返回为止</li>
+<li>context上下文：主要封装了node的request和response两个对象，<strong>在每个request请求中被创建</strong>，中间件中用this引用</li>
+<li>几个可能用到的属性，req.query，res.status</li>
+</ul>
+<h1 id="二、koa-router"><a href="#二、koa-router" class="headerlink" title="二、koa-router"></a>二、koa-router</h1><p>觉得形式上和express路由类似，其中router.all()区配所有http方法</p>
+<p>支持嵌套路由，形式如下：</p>
+<pre><code>var forums = new Router();
+var posts = new Router();
+
+posts.get(&apos;/&apos;, function (ctx, next) {...});
+posts.get(&apos;/:pid&apos;, function (ctx, next) {...});
+forums.use(&apos;/forums/:fid/posts&apos;, posts.routes(), posts.allowedMethods());
+
+// responds to &quot;/forums/123/posts&quot; and &quot;/forums/123/posts/123&quot; 
+app.use(forums.routes());
+</code></pre><p>其中forums为外层路由，forums.use()第二个参数传入了内层路由posts，使得路由区配的为两个url的拼接</p>
+<p>也可以指定公共前缀如下：</p>
+<pre><code>var router = new Router({
+  prefix: &apos;/users&apos;
+});
+</code></pre><p>router.route()将返回一个分派路由的中间件</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/09/koa学习小记/" data-id="cj9s9oavw000jqsofeds6h6ab" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/09/koa学习小记/" data-id="cj9sbulbx000fjgofxn49i3kr" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li></ul>
+
     </footer>
   </div>
   
@@ -154,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/08/git简要补充/" data-id="cj9s9oavv000hqsofigtbxqbj" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/08/git简要补充/" data-id="cj9sbulby000hjgof32b0772m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -234,7 +258,7 @@ store.registerModule(&apos;vue-router&apos;, {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cj9s9oavr000aqsofr1p6tklf" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cj9sbulbw000djgofr3fgu5bi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
@@ -393,7 +417,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9s9oavt000dqsof2zwg6nrl" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cj9sbulbu0009jgofm18i515e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
@@ -491,7 +515,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/05/angular4-0初体验/" data-id="cj9s9oavu000fqsofvol4ul6q" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/05/angular4-0初体验/" data-id="cj9sbulbv000ajgof9xxw0vat" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
@@ -560,7 +584,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cj9s9oavp0008qsofy1j1wcgp" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cj9sbulbz000jjgofza0wafbu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习大纲/">学习大纲</a></li></ul>
@@ -652,7 +676,7 @@ render: function () {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cj9s9oavn0005qsofwi5601kg" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cj9sbulbt0008jgofe54atzkb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -747,7 +771,7 @@ var vm = new Vue({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cj9s9oavo0006qsofsvlnoy87" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cj9sbulbs0006jgofl5a8k3fy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -904,7 +928,7 @@ animation: myfirst 5s;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/10/css进阶及css3培训/" data-id="cj9s9oavq0009qsof3jco3l8u" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/10/css进阶及css3培训/" data-id="cj9sbulbr0005jgofi38wrg2l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/培训/">培训</a></li></ul>
@@ -979,7 +1003,7 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/09/vue-day1/" data-id="cj9s9oavj0002qsofxbqtws4r" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/09/vue-day1/" data-id="cj9sbulbo0002jgofvrgzexr5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -1005,9 +1029,9 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
     </div>
   </div>
 
@@ -1015,9 +1039,9 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
     </div>
   </div>
 
@@ -1034,7 +1058,7 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -1071,7 +1095,7 @@ vm.$watch(&apos;a&apos;, function (newVal, oldVal) {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Empire<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
