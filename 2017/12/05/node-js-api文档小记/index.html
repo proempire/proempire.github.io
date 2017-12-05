@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>node.js api文档小记 | 我们的目标是星辰大海</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、EventEmitter构造与添加监听器该对象由node的event模块提供，扩展它可以获得一个EventEmitter类，实例化后即可添加监听器
+const EventEmitter = require(&amp;apos;events&amp;apos;);
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node.js api文档小记">
+<meta property="og:url" content="http://yoursite.com/2017/12/05/node-js-api文档小记/index.html">
+<meta property="og:site_name" content="我们的目标是星辰大海">
+<meta property="og:description" content="一、EventEmitter构造与添加监听器该对象由node的event模块提供，扩展它可以获得一个EventEmitter类，实例化后即可添加监听器
+const EventEmitter = require(&amp;apos;events&amp;apos;);
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter(">
+<meta property="og:updated_time" content="2017-12-05T07:09:00.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node.js api文档小记">
+<meta name="twitter:description" content="一、EventEmitter构造与添加监听器该对象由node的event模块提供，扩展它可以获得一个EventEmitter类，实例化后即可添加监听器
+const EventEmitter = require(&amp;apos;events&amp;apos;);
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter(">
+  
+    <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我们的目标是星辰大海</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-js-api文档小记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/05/node-js-api文档小记/" class="article-date">
+  <time datetime="2017-12-05T03:20:35.000Z" itemprop="datePublished">2017-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node.js api文档小记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、EventEmitter"><a href="#一、EventEmitter" class="headerlink" title="一、EventEmitter"></a>一、EventEmitter</h2><h3 id="构造与添加监听器"><a href="#构造与添加监听器" class="headerlink" title="构造与添加监听器"></a>构造与添加监听器</h3><p>该对象由node的event模块提供，扩展它可以获得一个EventEmitter类，实例化后即可添加监听器</p>
+<pre><code>const EventEmitter = require(&apos;events&apos;);
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on(&apos;event&apos;, () =&gt; {
+  console.log(&apos;an event occurred!&apos;);
+});
+myEmitter.emit(&apos;event&apos;);
+</code></pre><p>触发事件在最后一行，使用emit方法即可。</p>
+<p>在事件处理器中（若是常规事件被调用），this默认指向事件绑定的EventEmitter，但如果使用了箭头函数，因为它遵循词法作用域，this将会指向一个空对象。</p>
+<h3 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h3><p>EventEmitter在默认情况下会同步执行所有的监听器，若想采用异步模式，使用setImmediate()或process.nextTick()方法</p>
+<h3 id="其他支持的功能"><a href="#其他支持的功能" class="headerlink" title="其他支持的功能"></a>其他支持的功能</h3><ul>
+<li>监听器可以被调用多次，也可以只被调用一次，例如once()接口</li>
+<li>EventEmitter绑定和销毁监听器时会对应地触发newListener和removeListener事件</li>
+<li>此外还有对监听器数量、名称、上限等作操作的各种接口，详情参见<a href="https://nodejs.org/api/events.html" target="_blank" rel="external">node.js官方文档</a></li>
+</ul>
+<h2 id="二、Stream"><a href="#二、Stream" class="headerlink" title="二、Stream"></a>二、Stream</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>Stream包括Readable Stream, Writable Stream, Duplex Stream和Transform Stream，前两种顾名思义，第三种指代既可读又可写的流，第四种则是可以修改或转换的Duplex Stream</li>
+<li>对象模式：流在默认情况下以Buffer, String或Uint8Array形式传输，但可以通过<strong>objectMode</strong>参数修改为对象模式，对象模式接受除null以外的其他数据类型</li>
+</ul>
+<h3 id="缓存及其意义"><a href="#缓存及其意义" class="headerlink" title="缓存及其意义"></a>缓存及其意义</h3><p>缓存容量由highWaterMark标识，避免内存压力过大，同时读和写有各自的缓存区，保证在速度有所差别的情况下，它们能各自独立工作。</p>
+<h3 id="可写流"><a href="#可写流" class="headerlink" title="可写流"></a>可写流</h3><ul>
+<li>HTTP requests, on the client</li>
+<li>HTTP responses, on the server</li>
+<li>fs write streams</li>
+<li>zlib streams</li>
+<li>crypto streams</li>
+<li>TCP sockets</li>
+<li>child process stdin</li>
+<li>process.stdout, process.stderr</li>
+</ul>
+<p>Writable类实现了多个控制读操作的方法，举drain方法为例，它在重新允许将数据写入流时触发（Writable.write()返回值即将由false变为true）：</p>
+<pre><code>function writeOneMillionTimes(writer, data, encoding, callback) {
+  let i = 1000000;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      i--;
+      if (i === 0) {
+        // last time!
+        writer.write(data, encoding, callback);
+      } else {
+        // see if we should continue, or wait
+        // don&apos;t pass the callback, because we&apos;re not done yet.
+        ok = writer.write(data, encoding);
+      }
+    } while (i &gt; 0 &amp;&amp; ok);
+    if (i &gt; 0) {
+      // had to stop early!
+      // write some more once it drains
+      writer.once(&apos;drain&apos;, write);
+    }
+  }
+}
+</code></pre><p>这段官方demo大约是做了这么一件事：将data写出一百万次，若是正常结束就执行callback回调，若是被迫中止（back pressure），则触发drain事件～</p>
+<p>此外还有cork将写入的数据由缓存全部存入内存，直到调用Writable.uncork()时被重新激活</p>
+<h3 id="可读流"><a href="#可读流" class="headerlink" title="可读流"></a>可读流</h3><p>其包含的流类型与可写流类似，需要讨论的是它的两种模式，三个状态～</p>
+<p>两种模式：包含flowing和paused，flow模式下，通过EventEmitter发布的data事件，数据将自动进行读写，速度快；paused模式下，需要显式地调用stream.read()方法来指定读取的数据块。</p>
+<p>三个状态：指的是readable._readableState.flowing的状态，初始为null，没有消费者，因此数据也不会生成，但当模式变为flowing后它的值也会切换为true，启动生成数据-发布data事件的流程。</p>
+<p>node.js的其余部分之后再写～</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/05/node-js-api文档小记/" data-id="cjataatfk00093gofivvglrh2" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/04/关于vue、vuex的一些初步小结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">关于vue、vuex的一些初步小结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-3/">css(3)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/route/">route</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/培训/">培训</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习大纲/">学习大纲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css-3/" style="font-size: 10px;">css(3)</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/route/" style="font-size: 10px;">route</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/培训/" style="font-size: 10px;">培训</a> <a href="/tags/学习大纲/" style="font-size: 10px;">学习大纲</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/05/node-js-api文档小记/">node.js api文档小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/04/关于vue、vuex的一些初步小结/">关于vue、vuex的一些初步小结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/09/koa学习小记/">koa学习小记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/08/git简要补充/">git简要补充</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/29/vuex小记/">vuex小记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Empire<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -3,33 +3,45 @@
 <head>
   <meta charset="utf-8">
   
-  <title>vue-day2 | 我们的目标是星辰大海</title>
+  <title>关于vue、vuex的一些初步小结 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+  <meta name="description" content="一、Vue组件的创建一般语法：
+Vue.component(tagName, options)
 
-data: {
-  isA: true,
-  isB:">
+务必在根组件实例化之前注册组件
+
+组件options说明：
+
+data: 必须是一个函数，目的在于返回独立的对象，保证组件之间的数据不互相影响
+components: 局部注册一个组件，仅在当前组件作用域内可用
+props: 用于父组件向子组件传递数据时使用，可传静态属性，也可传动态的（数据绑定，父组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue-day2">
-<meta property="og:url" content="http://yoursite.com/2016/10/11/vue-day2/index.html">
+<meta property="og:title" content="关于vue、vuex的一些初步小结">
+<meta property="og:url" content="http://yoursite.com/2017/12/04/关于vue、vuex的一些初步小结/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+<meta property="og:description" content="一、Vue组件的创建一般语法：
+Vue.component(tagName, options)
 
-data: {
-  isA: true,
-  isB:">
-<meta property="og:updated_time" content="2016-10-11T15:49:22.169Z">
+务必在根组件实例化之前注册组件
+
+组件options说明：
+
+data: 必须是一个函数，目的在于返回独立的对象，保证组件之间的数据不互相影响
+components: 局部注册一个组件，仅在当前组件作用域内可用
+props: 用于父组件向子组件传递数据时使用，可传静态属性，也可传动态的（数据绑定，父组">
+<meta property="og:updated_time" content="2017-12-04T13:10:56.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue-day2">
-<meta name="twitter:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+<meta name="twitter:title" content="关于vue、vuex的一些初步小结">
+<meta name="twitter:description" content="一、Vue组件的创建一般语法：
+Vue.component(tagName, options)
 
-data: {
-  isA: true,
-  isB:">
+务必在根组件实例化之前注册组件
+
+组件options说明：
+
+data: 必须是一个函数，目的在于返回独立的对象，保证组件之间的数据不互相影响
+components: 局部注册一个组件，仅在当前组件作用域内可用
+props: 用于父组件向子组件传递数据时使用，可传静态属性，也可传动态的（数据绑定，父组">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -78,10 +90,10 @@ data: {
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-vue-day2" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-关于vue、vuex的一些初步小结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/11/vue-day2/" class="article-date">
-  <time datetime="2016-10-11T15:48:52.000Z" itemprop="datePublished">2016-10-11</time>
+    <a href="/2017/12/04/关于vue、vuex的一些初步小结/" class="article-date">
+  <time datetime="2017-12-04T02:31:36.000Z" itemprop="datePublished">2017-12-04</time>
 </a>
     
   </div>
@@ -92,7 +104,7 @@ data: {
         
   
     <h1 class="article-title" itemprop="name">
-      vue-day2
+      关于vue、vuex的一些初步小结
     </h1>
   
 
@@ -100,68 +112,36 @@ data: {
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、class与style绑定"><a href="#一、class与style绑定" class="headerlink" title="一、class与style绑定"></a>一、class与style绑定</h1><p>v-bind:class接受一个对象用来动态切换class：</p>
-<pre><code>div class=&quot;static&quot; v-bind:class=&quot;{ &apos;class-a&apos;: isA, &apos;class-b&apos;: isB }&quot;&gt;&lt;/div&gt;
-
-data: {
-  isA: true,
-  isB: false
-}
-</code></pre><p>也可以传入数组来达到同样的效果，最新版本可在数组语法中使用对象语法。</p>
-<p>vue可以自动添加css中一些新属性的前缀！</p>
-<h1 id="二、条件渲染、列表渲染"><a href="#二、条件渲染、列表渲染" class="headerlink" title="二、条件渲染、列表渲染"></a>二、条件渲染、列表渲染</h1><p>template可作为条件渲染的包装元素：</p>
-<pre><code>&lt;template v-if=&quot;ok&quot;&gt;
-  &lt;h1&gt;Title&lt;/h1&gt;
-  &lt;p&gt;Paragraph 1&lt;/p&gt;
-  &lt;p&gt;Paragraph 2&lt;/p&gt;
-&lt;/template&gt;
+        <h1 id="一、Vue组件的创建"><a href="#一、Vue组件的创建" class="headerlink" title="一、Vue组件的创建"></a>一、Vue组件的创建</h1><p>一般语法：</p>
+<pre><code>Vue.component(tagName, options)
 </code></pre><ul>
-<li><p>v-else可紧跟在v-if或v-show块后用来被识别。</p>
-</li>
-<li><p>v-if的首屏渲染时间较短，v-show反之，但后者切换快。</p>
-</li>
-<li><p>vue中包含了数组的变异方法，使其均能触发视图更新。</p>
-</li>
-<li><p>track-by在input等需要存储临时状态的组件中应慎用。</p>
-</li>
+<li>务必在根组件实例化之前注册组件</li>
 </ul>
-<h1 id="三、方法与事件处理器"><a href="#三、方法与事件处理器" class="headerlink" title="三、方法与事件处理器"></a>三、方法与事件处理器</h1><p>v-on指令用来监听事件：</p>
-<pre><code>&lt;div id=&quot;example&quot;&gt;
-  &lt;button v-on:click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
-&lt;/div&gt;
-
-var vm = new Vue({
-  el: &apos;#example&apos;,
-  data: {
-    name: &apos;Vue.js&apos;
-  },
-  // 在 `methods` 对象中定义方法
-  methods: {
-    greet: function (event) {
-      // 方法内 `this` 指向 vm
-      alert(&apos;Hello &apos; + this.name + &apos;!&apos;)
-      // `event` 是原生 DOM 事件
-      alert(event.target.tagName)
-    }
-  }
-})
-</code></pre><p>也可以内联JavaScript语句来完成此流程。</p>
-<p>事件修饰符：stop, prevent, capture, self。</p>
-<p>key alias:</p>
-<pre><code>&lt;!-- 同上 --&gt;
-&lt;input v-on:keyup.enter=&quot;submit&quot;&gt;
-
-&lt;!-- 缩写语法 --&gt;
-&lt;input @keyup.enter=&quot;submit&quot;&gt;
-</code></pre><h1 id="四、表单控件绑定"><a href="#四、表单控件绑定" class="headerlink" title="四、表单控件绑定"></a>四、表单控件绑定</h1><p>v-model可实现表单数据双向绑定：</p>
-<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
-&lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
-</code></pre><h1 id="五、插件"><a href="#五、插件" class="headerlink" title="五、插件"></a>五、插件</h1><p>未完待续。。</p>
-
+<p>组件options说明：</p>
+<ul>
+<li>data: 必须是一个函数，目的在于返回独立的对象，保证组件之间的数据不互相影响</li>
+<li>components: 局部注册一个组件，仅在当前组件作用域内可用</li>
+<li>props: 用于父组件向子组件传递数据时使用，可传静态属性，也可传动态的（数据绑定，父组件数据变化引起子组件数据相应变化），一次性传递所有属性可采用v-bind指令</li>
+<li>computed: 计算属性，在部分情况下可以代替watch的功能，也可用于:class的动态绑定</li>
+<li>watch: 即属性侦听器，接受参数newData, oldData，含义顾名思义</li>
+<li>methods: 定义组件内的方法</li>
+<li>生命周期函数：beforeCreate, created, beforeMount, mounted, updated, beforeDestroy, destroyed，其具体含义可参照官方文档</li>
+</ul>
+<h1 id="二、组件间数据传递"><a href="#二、组件间数据传递" class="headerlink" title="二、组件间数据传递"></a>二、组件间数据传递</h1><p>来看看文档里一段值得参考的语法（位置：组件-自定义事件-.sync修饰符）：</p>
+<pre><code>&lt;comp :foo=&quot;bar&quot; @update:foo=&quot;val =&gt; bar = val&quot;&gt;&lt;/comp&gt;
+</code></pre><ul>
+<li>:foo=”bar”即父组件向子组件传递属性foo，vue中采用单向数据流，这里是为了让父组件的数据和数据的改动（若有的话）传递到子组件上，供子组件使用</li>
+<li>update为vue生命周期函数，在数据变化前调用</li>
+<li>这里update部分事实上为v-on的缩写，作用是监听子组件中foo的改变并调用对应的处理器</li>
+<li>子组件向父组件发布事件(emit)会触发父组件设置的监听器（如果你设置了的话）</li>
+</ul>
+<p>好了，这里涉及的概念可能比较多，所以再多解释一下吧～为了逻辑上更加清新，vue是不推荐子组件改变父组件的数据的，主要是出于维护成本的考虑，这就是所谓的单向数据流。父组件可以通过改变prop影响子组件数据，而子组件可以通过emit触发父组件方法。</p>
+<p>但是，如果这样的数据传递不仅仅限于父子组件之间，而是祖先与后代组件或是兄弟组件呢？显然这会是一件很麻烦的事，为了处理这种多状态、多通信的情形，我们引入了vuex。</p>
+<h1 id="三、vuex的使用"><a href="#三、vuex的使用" class="headerlink" title="三、vuex的使用"></a>三、vuex的使用</h1>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cjataatfl000a3gofu451qhy7" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/04/关于vue、vuex的一些初步小结/" data-id="cjataatfp000h3gofgaxme7l4" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -172,19 +152,19 @@ var vm = new Vue({
     
 <nav id="article-nav">
   
-    <a href="/2017/02/27/react基础回顾/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/05/node-js-api文档小记/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
-          react基础回顾~~
+          node.js api文档小记
         
       </div>
     </a>
   
   
-    <a href="/2016/10/10/css进阶及css3培训/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/11/09/koa学习小记/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">css进阶及css3培训</div>
+      <div class="article-nav-title">koa学习小记</div>
     </a>
   
 </nav>

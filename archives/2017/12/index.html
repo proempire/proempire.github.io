@@ -3,33 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>vue-day2 | 我们的目标是星辰大海</title>
+  <title>Archives: 2017/12 | 我们的目标是星辰大海</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-
-data: {
-  isA: true,
-  isB:">
-<meta property="og:type" content="article">
-<meta property="og:title" content="vue-day2">
-<meta property="og:url" content="http://yoursite.com/2016/10/11/vue-day2/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="我们的目标是星辰大海">
+<meta property="og:url" content="http://yoursite.com/archives/2017/12/index.html">
 <meta property="og:site_name" content="我们的目标是星辰大海">
-<meta property="og:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-
-data: {
-  isA: true,
-  isB:">
-<meta property="og:updated_time" content="2016-10-11T15:49:22.169Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue-day2">
-<meta name="twitter:description" content="一、class与style绑定v-bind:class接受一个对象用来动态切换class：
-div class=&amp;quot;static&amp;quot; v-bind:class=&amp;quot;{ &amp;apos;class-a&amp;apos;: isA, &amp;apos;class-b&amp;apos;: isB }&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-
-data: {
-  isA: true,
-  isB:">
+<meta name="twitter:title" content="我们的目标是星辰大海">
+<meta name="twitter:description">
   
     <link rel="alternate" href="/atom.xml" title="我们的目标是星辰大海" type="application/atom+xml">
   
@@ -78,119 +62,58 @@ data: {
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-vue-day2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/11/vue-day2/" class="article-date">
-  <time datetime="2016-10-11T15:48:52.000Z" itemprop="datePublished">2016-10-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      vue-day2
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/12/05/node-js-api文档小记/" class="archive-article-date">
+  <time datetime="2017-12-05T03:20:35.000Z" itemprop="datePublished">12月 5</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/05/node-js-api文档小记/">node.js api文档小记</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、class与style绑定"><a href="#一、class与style绑定" class="headerlink" title="一、class与style绑定"></a>一、class与style绑定</h1><p>v-bind:class接受一个对象用来动态切换class：</p>
-<pre><code>div class=&quot;static&quot; v-bind:class=&quot;{ &apos;class-a&apos;: isA, &apos;class-b&apos;: isB }&quot;&gt;&lt;/div&gt;
-
-data: {
-  isA: true,
-  isB: false
-}
-</code></pre><p>也可以传入数组来达到同样的效果，最新版本可在数组语法中使用对象语法。</p>
-<p>vue可以自动添加css中一些新属性的前缀！</p>
-<h1 id="二、条件渲染、列表渲染"><a href="#二、条件渲染、列表渲染" class="headerlink" title="二、条件渲染、列表渲染"></a>二、条件渲染、列表渲染</h1><p>template可作为条件渲染的包装元素：</p>
-<pre><code>&lt;template v-if=&quot;ok&quot;&gt;
-  &lt;h1&gt;Title&lt;/h1&gt;
-  &lt;p&gt;Paragraph 1&lt;/p&gt;
-  &lt;p&gt;Paragraph 2&lt;/p&gt;
-&lt;/template&gt;
-</code></pre><ul>
-<li><p>v-else可紧跟在v-if或v-show块后用来被识别。</p>
-</li>
-<li><p>v-if的首屏渲染时间较短，v-show反之，但后者切换快。</p>
-</li>
-<li><p>vue中包含了数组的变异方法，使其均能触发视图更新。</p>
-</li>
-<li><p>track-by在input等需要存储临时状态的组件中应慎用。</p>
-</li>
-</ul>
-<h1 id="三、方法与事件处理器"><a href="#三、方法与事件处理器" class="headerlink" title="三、方法与事件处理器"></a>三、方法与事件处理器</h1><p>v-on指令用来监听事件：</p>
-<pre><code>&lt;div id=&quot;example&quot;&gt;
-  &lt;button v-on:click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
-&lt;/div&gt;
-
-var vm = new Vue({
-  el: &apos;#example&apos;,
-  data: {
-    name: &apos;Vue.js&apos;
-  },
-  // 在 `methods` 对象中定义方法
-  methods: {
-    greet: function (event) {
-      // 方法内 `this` 指向 vm
-      alert(&apos;Hello &apos; + this.name + &apos;!&apos;)
-      // `event` 是原生 DOM 事件
-      alert(event.target.tagName)
-    }
-  }
-})
-</code></pre><p>也可以内联JavaScript语句来完成此流程。</p>
-<p>事件修饰符：stop, prevent, capture, self。</p>
-<p>key alias:</p>
-<pre><code>&lt;!-- 同上 --&gt;
-&lt;input v-on:keyup.enter=&quot;submit&quot;&gt;
-
-&lt;!-- 缩写语法 --&gt;
-&lt;input @keyup.enter=&quot;submit&quot;&gt;
-</code></pre><h1 id="四、表单控件绑定"><a href="#四、表单控件绑定" class="headerlink" title="四、表单控件绑定"></a>四、表单控件绑定</h1><p>v-model可实现表单数据双向绑定：</p>
-<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
-&lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
-</code></pre><h1 id="五、插件"><a href="#五、插件" class="headerlink" title="五、插件"></a>五、插件</h1><p>未完待续。。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cjataatfl000a3gofu451qhy7" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
-
-    </footer>
+    </header>
   </div>
+</article>
   
     
-<nav id="article-nav">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/12/04/关于vue、vuex的一些初步小结/" class="archive-article-date">
+  <time datetime="2017-12-04T02:31:36.000Z" itemprop="datePublished">12月 4</time>
+</a>
+      
   
-    <a href="/2017/02/27/react基础回顾/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          react基础回顾~~
-        
-      </div>
-    </a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/04/关于vue、vuex的一些初步小结/">关于vue、vuex的一些初步小结</a>
+    </h1>
   
-  
-    <a href="/2016/10/10/css进阶及css3培训/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">css进阶及css3培训</div>
-    </a>
-  
-</nav>
 
-  
+    </header>
+  </div>
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         
