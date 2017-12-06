@@ -153,7 +153,7 @@ myEmitter.emit(&apos;event&apos;);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/05/node-js-api文档小记/" data-id="cjataatfk00093gofivvglrh2" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/05/node-js-api文档小记/" data-id="cjauevjsi000il0of017e89n0" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
@@ -187,7 +187,7 @@ myEmitter.emit(&apos;event&apos;);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、Vue组件的创建"><a href="#一、Vue组件的创建" class="headerlink" title="一、Vue组件的创建"></a>一、Vue组件的创建</h1><p>一般语法：</p>
+        <h2 id="一、Vue组件的创建"><a href="#一、Vue组件的创建" class="headerlink" title="一、Vue组件的创建"></a>一、Vue组件的创建</h2><p>一般语法：</p>
 <pre><code>Vue.component(tagName, options)
 </code></pre><ul>
 <li>务必在根组件实例化之前注册组件</li>
@@ -202,7 +202,7 @@ myEmitter.emit(&apos;event&apos;);
 <li>methods: 定义组件内的方法</li>
 <li>生命周期函数：beforeCreate, created, beforeMount, mounted, updated, beforeDestroy, destroyed，其具体含义可参照官方文档</li>
 </ul>
-<h1 id="二、组件间数据传递"><a href="#二、组件间数据传递" class="headerlink" title="二、组件间数据传递"></a>二、组件间数据传递</h1><p>来看看文档里一段值得参考的语法（位置：组件-自定义事件-.sync修饰符）：</p>
+<h2 id="二、组件间数据传递"><a href="#二、组件间数据传递" class="headerlink" title="二、组件间数据传递"></a>二、组件间数据传递</h2><p>来看看文档里一段值得参考的语法（位置：组件-自定义事件-.sync修饰符）：</p>
 <pre><code>&lt;comp :foo=&quot;bar&quot; @update:foo=&quot;val =&gt; bar = val&quot;&gt;&lt;/comp&gt;
 </code></pre><ul>
 <li>:foo=”bar”即父组件向子组件传递属性foo，vue中采用单向数据流，这里是为了让父组件的数据和数据的改动（若有的话）传递到子组件上，供子组件使用</li>
@@ -212,11 +212,26 @@ myEmitter.emit(&apos;event&apos;);
 </ul>
 <p>好了，这里涉及的概念可能比较多，所以再多解释一下吧～为了逻辑上更加清新，vue是不推荐子组件改变父组件的数据的，主要是出于维护成本的考虑，这就是所谓的单向数据流。父组件可以通过改变prop影响子组件数据，而子组件可以通过emit触发父组件方法。</p>
 <p>但是，如果这样的数据传递不仅仅限于父子组件之间，而是祖先与后代组件或是兄弟组件呢？显然这会是一件很麻烦的事，为了处理这种多状态、多通信的情形，我们引入了vuex。</p>
-<h1 id="三、vuex的使用"><a href="#三、vuex的使用" class="headerlink" title="三、vuex的使用"></a>三、vuex的使用</h1>
+<h2 id="三、vuex的使用"><a href="#三、vuex的使用" class="headerlink" title="三、vuex的使用"></a>三、vuex的使用</h2><p>如果你之前使用过flux、redux等状态状态管理工具的话，那么应该会很容易理解这个工具是要做什么～</p>
+<p>下面依次介绍一下state、mutation和action这三个核心概念：</p>
+<h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><p>是一个持久化存储的状态，不归属于vue的某个特定组件，除非刷新页面，否则数据不会消失～</p>
+<p>在根实例中注册store，下发到所有子组件，使用如下：</p>
+<pre><code>computed: {
+  count () {
+    return this.$store.state.count
+  }
+}
+</code></pre><p>如果想要简化定义，使用mapState辅助函数就可，使用时从vuex引入该方法就可。</p>
+<h3 id="mutation"><a href="#mutation" class="headerlink" title="mutation"></a>mutation</h3><p>state的值不能直接被操作，想要改变它必须通过提交mutation的形式进行，方式为：</p>
+<pre><code>store.commit(&apos;something&apos;, payload)
+</code></pre><p>注意一下第二个参数，这是以载荷形式提交参数，参数最多一个，想传多个参数的话必须以对象的形式提交。</p>
+<p>mutation只能是同步函数，原因是devtool无法捕捉异步函数的快照。</p>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>为了执行异步操作，vuex引入了action来完成这一工作，调用方式是用dispatch方法，简化写法与state和mutation是类似的，值得看看的是将它和es6的promise和es7的async与await结合起来的工作原理：</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/04/关于vue、vuex的一些初步小结/" data-id="cjataatfp000h3gofgaxme7l4" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/04/关于vue、vuex的一些初步小结/" data-id="cjauevjs50008l0ofw5wkm7ut" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
@@ -276,7 +291,7 @@ app.use(forums.routes());
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/09/koa学习小记/" data-id="cjataatfs000o3gofr4mg8vy6" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/09/koa学习小记/" data-id="cjauevjsh000gl0ofixaze8b5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li></ul>
@@ -342,7 +357,7 @@ app.use(forums.routes());
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/08/git简要补充/" data-id="cjataatfr000m3gofe52rb9u2" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/08/git简要补充/" data-id="cjauevjsj000kl0ofexjre8aw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -422,7 +437,7 @@ store.registerModule(&apos;vue-router&apos;, {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cjataatfn000d3gofy2b0onxn" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/29/vuex小记/" data-id="cjauevjs8000dl0ofau3pv1r3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态管理/">状态管理</a></li></ul>
@@ -581,7 +596,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cjataatfo000f3gof7k65uzhx" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/27/es6回顾/" data-id="cjauevjsf000fl0offflhd0fm" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
@@ -679,7 +694,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/05/angular4-0初体验/" data-id="cjataatfh00053gofjz8g5bin" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/10/05/angular4-0初体验/" data-id="cjauevjs7000bl0ofpqcmb48v" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
@@ -748,7 +763,7 @@ Promise.all([p1,p2])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cjataatfq000j3gofq6kq66u2" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/09/15/前期学习大纲/" data-id="cjauevjs40007l0ofd1vqvryt" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习大纲/">学习大纲</a></li></ul>
@@ -840,7 +855,7 @@ render: function () {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cjataatfj00083gofuw811ru0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/27/react基础回顾/" data-id="cjauevjs20004l0of3gll4fmj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -935,7 +950,7 @@ var vm = new Vue({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cjataatfl000a3gofu451qhy7" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/10/11/vue-day2/" data-id="cjauevjs30006l0ofnim1kqrj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
