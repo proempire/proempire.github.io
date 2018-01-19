@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="react," />
+  <meta name="keywords" content="构建工具,gulp," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一、配置环境和依赖react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。 二、基础使用 基础方法： ReactDOM.render() ReactDOM.render(   &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;,   document.getElementById(&amp;a">
-<meta name="keywords" content="react">
+<meta name="description" content="考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～ 一、gulp做什么如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使">
+<meta name="keywords" content="构建工具,gulp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react基础回顾~~">
-<meta property="og:url" content="http://yoursite.com/2017/02/27/react基础回顾/index.html">
+<meta property="og:title" content="gulp初探">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/gulp初探/index.html">
 <meta property="og:site_name" content="金色鸢尾">
-<meta property="og:description" content="一、配置环境和依赖react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。 二、基础使用 基础方法： ReactDOM.render() ReactDOM.render(   &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;,   document.getElementById(&amp;a">
+<meta property="og:description" content="考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～ 一、gulp做什么如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-03-28T17:34:14.176Z">
+<meta property="og:updated_time" content="2018-01-19T08:24:40.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react基础回顾~~">
-<meta name="twitter:description" content="一、配置环境和依赖react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。 二、基础使用 基础方法： ReactDOM.render() ReactDOM.render(   &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;,   document.getElementById(&amp;a">
+<meta name="twitter:title" content="gulp初探">
+<meta name="twitter:description" content="考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～ 一、gulp做什么如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/27/react基础回顾/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/19/gulp初探/"/>
 
 
 
 
 
-  <title>react基础回顾~~ | 金色鸢尾</title>
+  <title>gulp初探 | 金色鸢尾</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/react基础回顾/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/gulp初探/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">react基础回顾~~</h1>
+          <h1 class="post-title" itemprop="name headline">gulp初探</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T21:05:09+08:00">
-                2017-02-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T10:45:38+08:00">
+                2018-01-19
               </time>
             
 
@@ -300,60 +300,54 @@
       
 
       
-        <h1 id="一、配置环境和依赖"><a href="#一、配置环境和依赖" class="headerlink" title="一、配置环境和依赖"></a>一、配置环境和依赖</h1><p>react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。</p>
-<h1 id="二、基础使用"><a href="#二、基础使用" class="headerlink" title="二、基础使用"></a>二、基础使用</h1><ol>
-<li><p>基础方法： ReactDOM.render()</p>
-<pre><code>ReactDOM.render(
-  &lt;h1&gt;Hello, world!&lt;/h1&gt;,
-  document.getElementById(&apos;example&apos;)
-);
-</code></pre></li>
-<li><p>jsx语法示例：</p>
-<pre><code>&lt;div&gt;{ oarray.map(function(el)) }&lt;/div&gt;
-</code></pre></li>
-<li><p>封装component方法——React.createClass():</p>
-<pre><code>var realwhat = function(){return &lt;h3&gt;{this.props.name}&lt;/h3&gt;}
-var owhat = {render: realwhat}
-var shakeIt = React.createClass(owhat)
+        <p>考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～</p>
+<h1 id="一、gulp做什么"><a href="#一、gulp做什么" class="headerlink" title="一、gulp做什么"></a>一、gulp做什么</h1><p>如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使用各种插件，比如压缩啊什么的。</p>
+<h1 id="二、指定流的源和输出"><a href="#二、指定流的源和输出" class="headerlink" title="二、指定流的源和输出"></a>二、指定流的源和输出</h1><h2 id="gulp-src"><a href="#gulp-src" class="headerlink" title="gulp.src"></a>gulp.src</h2><p>gulp.src接收一个url（事实上接收的是一个glob模式），从而输出一个vinyl文件流，用于之后的pipe。</p>
+<p>node-glob与vinyl可查阅相关文档：<a href="https://github.com/isaacs/node-glob" target="_blank" rel="noopener">node-glob</a> <a href="https://github.com/gulpjs/vinyl-fs" target="_blank" rel="noopener">vinyl</a></p>
+<p>vinyl其实是文件的一种描述方式，与我们之前关注的path和content两个属性其实是相通的。</p>
+<h2 id="gulp-dest"><a href="#gulp-dest" class="headerlink" title="gulp.dest"></a>gulp.dest</h2><p>在vinyl的官方文档中有这样的描述：src指令产生vinyl对象而dest指令消耗vinyl对象，这其实就是一个输入-输出的过程。</p>
+<p>在指定输出目录时，一般采用相对路径，举个栗子：</p>
+<pre><code>gulp.src(&apos;./client/templates/*.pug&apos;)
+  .pipe(pug())
+  .pipe(gulp.dest(&apos;./build/templates&apos;))
+  .pipe(minify())
+  .pipe(gulp.dest(&apos;./build/minified_templates&apos;));
+</code></pre><p>此处的输入指定了base，也就是相对地址的基址为./client/templates，那么dest指定的地址里就会将src中基址之后的部分拼接在dest的相对地址之后，得到的会是./build/templates/*.pug</p>
+<h1 id="三、创建工作流"><a href="#三、创建工作流" class="headerlink" title="三、创建工作流"></a>三、创建工作流</h1><p>核心：gulp.task，继承自undertaker，目的在于创建能串行(series)执行也能并行(parallel)执行的任务，gulp.task要求传入的执行函数必须遵循async-done，以标志异步函数何时执行完毕，下面看看这些异步支持是如何做的：</p>
+<p>接收回调</p>
+<pre><code>var del = require(&apos;del&apos;);
 
-ReactDOM.render({&lt;shakeIt name=&apos;emperor&apos;&gt;, document.get...})
-</code></pre><ul>
-<li>组件类首字母必须大写，上面这个例子是错的</li>
-</ul>
-</li>
-<li><p>this.props.children获取所有子节点，类型由节点数量决定，PropTypes用于验证属性参数类型是否合法，用法：</p>
-<pre><code>react.createClass({
-    render: function(){
-        return react.propTypes.【类型】.isrequired
-    }
+gulp.task(&apos;clean&apos;, function(done) {
+  del([&apos;.build/&apos;], done);
 });
-</code></pre><p> react模板语言中引用变量时用{}包裹</p>
-</li>
-<li><p>react使用dom-diff，可极大提高网页性能，若想获取真实DOM节点，使用this.ref.[refname]，注意，ref属性应给予dom节点。</p>
-<ul>
-<li>虚拟DOM未插入文档时不能获取真实dom节点</li>
-</ul>
-</li>
-<li><p>react支持状态机，getInitialState和setState用于处理状态，注意它与props的区别</p>
-</li>
-<li><p>与表单内容的互动，关键部分如下，备查:</p>
-<pre><code>handleChange: function(event) {
-  this.setState({value: event.target.value});
-},
-render: function () {
-  var value = this.state.value;
-  return (
-    &lt;div&gt;
-      &lt;input type=&quot;text&quot; value={value} onChange={this.handleChange} /&gt;
-      &lt;p&gt;{value}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}
-</code></pre></li>
-<li><p>组件的生命周期中，有两个特殊状态处理：收到新参数，是否重新渲染</p>
-</li>
-</ol>
-<h1 id="三、更多项目细节"><a href="#三、更多项目细节" class="headerlink" title="三、更多项目细节"></a>三、更多项目细节</h1><p>等我解决了就写！！</p>
+
+// use an async result in a pipe
+gulp.task(&apos;somename&apos;, function(cb) {
+  getFilesAsync(function(err, res) {
+    if (err) return cb(err);
+    var stream = gulp.src(res)
+      .pipe(minify())
+      .pipe(gulp.dest(&apos;build&apos;))
+      .on(&apos;end&apos;, cb);
+  });
+});
+</code></pre><p>回调cb由是否接受到Error对象来判断任务是否成功～</p>
+<p>返回一个Promise</p>
+<pre><code>var Promise = require(&apos;promise&apos;);
+var del = require(&apos;del&apos;);
+
+gulp.task(&apos;clean&apos;, function() {
+  return new Promise(function (resolve, reject) {
+    del([&apos;.build/&apos;], function(err) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+});
+</code></pre><p>匆匆完结。。有个web push的东西要先搞搞～</p>
 
       
     </div>
@@ -371,7 +365,9 @@ render: function () {
       
         <div class="post-tags">
           
-            <a href="/tags/react/" rel="tag"># react</a>
+            <a href="/tags/构建工具/" rel="tag"># 构建工具</a>
+          
+            <a href="/tags/gulp/" rel="tag"># gulp</a>
           
         </div>
       
@@ -384,8 +380,8 @@ render: function () {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/11/vue-day2/" rel="next" title="vue-day2">
-                <i class="fa fa-chevron-left"></i> vue-day2
+              <a href="/2017/12/05/node-js-api文档小记/" rel="next" title="node.js api文档小记">
+                <i class="fa fa-chevron-left"></i> node.js api文档小记
               </a>
             
           </div>
@@ -393,10 +389,6 @@ render: function () {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/15/前期学习大纲/" rel="prev" title="前期学习大纲">
-                前期学习大纲 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -521,7 +513,7 @@ render: function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、配置环境和依赖"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x548C;&#x4F9D;&#x8D56;" class="headerlink" title="&#x4E00;&#x3001;&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x548C;&#x4F9D;&#x8D56;"></a>&#x4E00;&#x3001;&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x548C;&#x4F9D;&#x8D56;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、基础使用"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x57FA;&#x7840;&#x4F7F;&#x7528;" class="headerlink" title="&#x4E8C;&#x3001;&#x57FA;&#x7840;&#x4F7F;&#x7528;"></a>&#x4E8C;&#x3001;&#x57FA;&#x7840;&#x4F7F;&#x7528;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、更多项目细节"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x66F4;&#x591A;&#x9879;&#x76EE;&#x7EC6;&#x8282;" class="headerlink" title="&#x4E09;&#x3001;&#x66F4;&#x591A;&#x9879;&#x76EE;&#x7EC6;&#x8282;"></a>&#x4E09;&#x3001;&#x66F4;&#x591A;&#x9879;&#x76EE;&#x7EC6;&#x8282;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、gulp做什么"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;" class="headerlink" title="&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;"></a>&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、指定流的源和输出"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;" class="headerlink" title="&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;"></a>&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-src"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#gulp-src" class="headerlink" title="gulp.src"></a>gulp.src</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-dest"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#gulp-dest" class="headerlink" title="gulp.dest"></a>gulp.dest</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、创建工作流"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;" class="headerlink" title="&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;"></a>&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;</span></a></li></ol></div>
             
 
           </div>

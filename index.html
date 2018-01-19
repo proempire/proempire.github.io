@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
@@ -96,9 +96,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Muse',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -232,12 +232,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/05/node-js-api文档小记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/gulp初探/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -249,9 +249,176 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/05/node-js-api文档小记/" itemprop="url">node.js api文档小记</a></h2>
+                <a class="post-title-link" href="/2018/01/19/gulp初探/" itemprop="url">gulp初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T10:45:38+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～</p>
+<h1 id="一、gulp做什么"><a href="#一、gulp做什么" class="headerlink" title="一、gulp做什么"></a>一、gulp做什么</h1><p>如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使用各种插件，比如压缩啊什么的。</p>
+<h1 id="二、指定流的源和输出"><a href="#二、指定流的源和输出" class="headerlink" title="二、指定流的源和输出"></a>二、指定流的源和输出</h1><h2 id="gulp-src"><a href="#gulp-src" class="headerlink" title="gulp.src"></a>gulp.src</h2><p>gulp.src接收一个url（事实上接收的是一个glob模式），从而输出一个vinyl文件流，用于之后的pipe。</p>
+<p>node-glob与vinyl可查阅相关文档：<a href="https://github.com/isaacs/node-glob" target="_blank" rel="noopener">node-glob</a> <a href="https://github.com/gulpjs/vinyl-fs" target="_blank" rel="noopener">vinyl</a></p>
+<p>vinyl其实是文件的一种描述方式，与我们之前关注的path和content两个属性其实是相通的。</p>
+<h2 id="gulp-dest"><a href="#gulp-dest" class="headerlink" title="gulp.dest"></a>gulp.dest</h2><p>在vinyl的官方文档中有这样的描述：src指令产生vinyl对象而dest指令消耗vinyl对象，这其实就是一个输入-输出的过程。</p>
+<p>在指定输出目录时，一般采用相对路径，举个栗子：</p>
+<pre><code>gulp.src(&apos;./client/templates/*.pug&apos;)
+  .pipe(pug())
+  .pipe(gulp.dest(&apos;./build/templates&apos;))
+  .pipe(minify())
+  .pipe(gulp.dest(&apos;./build/minified_templates&apos;));
+</code></pre><p>此处的输入指定了base，也就是相对地址的基址为./client/templates，那么dest指定的地址里就会将src中基址之后的部分拼接在dest的相对地址之后，得到的会是./build/templates/*.pug</p>
+<h1 id="三、创建工作流"><a href="#三、创建工作流" class="headerlink" title="三、创建工作流"></a>三、创建工作流</h1><p>核心：gulp.task，继承自undertaker，目的在于创建能串行(series)执行也能并行(parallel)执行的任务，gulp.task要求传入的执行函数必须遵循async-done，以标志异步函数何时执行完毕，下面看看这些异步支持是如何做的：</p>
+<p>接收回调</p>
+<pre><code>var del = require(&apos;del&apos;);
+
+gulp.task(&apos;clean&apos;, function(done) {
+  del([&apos;.build/&apos;], done);
+});
+
+// use an async result in a pipe
+gulp.task(&apos;somename&apos;, function(cb) {
+  getFilesAsync(function(err, res) {
+    if (err) return cb(err);
+    var stream = gulp.src(res)
+      .pipe(minify())
+      .pipe(gulp.dest(&apos;build&apos;))
+      .on(&apos;end&apos;, cb);
+  });
+});
+</code></pre><p>回调cb由是否接受到Error对象来判断任务是否成功～</p>
+<p>返回一个Promise</p>
+<pre><code>var Promise = require(&apos;promise&apos;);
+var del = require(&apos;del&apos;);
+
+gulp.task(&apos;clean&apos;, function() {
+  return new Promise(function (resolve, reject) {
+    del([&apos;.build/&apos;], function(err) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+});
+</code></pre><p>匆匆完结。。有个web push的东西要先搞搞～</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/05/node-js-api文档小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/05/node-js-api文档小记/" itemprop="url">node.js api文档小记</a></h1>
         
 
         <div class="post-meta">
@@ -319,7 +486,7 @@ myEmitter.emit(&apos;event&apos;);
 <h3 id="其他支持的功能"><a href="#其他支持的功能" class="headerlink" title="其他支持的功能"></a>其他支持的功能</h3><ul>
 <li>监听器可以被调用多次，也可以只被调用一次，例如once()接口</li>
 <li>EventEmitter绑定和销毁监听器时会对应地触发newListener和removeListener事件</li>
-<li>此外还有对监听器数量、名称、上限等作操作的各种接口，详情参见<a href="https://nodejs.org/api/events.html" target="_blank" rel="external">node.js官方文档</a></li>
+<li>此外还有对监听器数量、名称、上限等作操作的各种接口，详情参见<a href="https://nodejs.org/api/events.html" target="_blank" rel="noopener">node.js官方文档</a></li>
 </ul>
 <h2 id="二、Stream"><a href="#二、Stream" class="headerlink" title="二、Stream"></a>二、Stream</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
 <li>Stream包括Readable Stream, Writable Stream, Duplex Stream和Transform Stream，前两种顾名思义，第三种指代既可读又可写的流，第四种则是可以修改或转换的Duplex Stream</li>
@@ -419,7 +586,7 @@ myEmitter.emit(&apos;event&apos;);
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -431,9 +598,9 @@ myEmitter.emit(&apos;event&apos;);
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/04/关于vue、vuex的一些初步小结/" itemprop="url">关于vue、vuex的一些初步小结</a></h2>
+                <a class="post-title-link" href="/2017/12/04/关于vue、vuex的一些初步小结/" itemprop="url">关于vue、vuex的一些初步小结</a></h1>
         
 
         <div class="post-meta">
@@ -591,7 +758,7 @@ myEmitter.emit(&apos;event&apos;);
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -603,9 +770,9 @@ myEmitter.emit(&apos;event&apos;);
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/09/koa学习小记/" itemprop="url">koa学习小记</a></h2>
+                <a class="post-title-link" href="/2017/11/09/koa学习小记/" itemprop="url">koa学习小记</a></h1>
         
 
         <div class="post-meta">
@@ -732,7 +899,7 @@ app.use(forums.routes());
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -744,9 +911,9 @@ app.use(forums.routes());
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/08/git简要补充/" itemprop="url">git简要补充</a></h2>
+                <a class="post-title-link" href="/2017/11/08/git简要补充/" itemprop="url">git简要补充</a></h1>
         
 
         <div class="post-meta">
@@ -798,7 +965,7 @@ app.use(forums.routes());
       
         
           
-            <h1 id="一、远程操作"><a href="#一、远程操作" class="headerlink" title="一、远程操作"></a>一、远程操作</h1><p>内容借鉴自阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html" target="_blank" rel="external">博客</a></p>
+            <h1 id="一、远程操作"><a href="#一、远程操作" class="headerlink" title="一、远程操作"></a>一、远程操作</h1><p>内容借鉴自阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html" target="_blank" rel="noopener">博客</a></p>
 <p>首先是git clone，加入一个新项目时首先执行的会是这个命令，那么它做了什么呢？简单地说，就是拷贝一份远程仓库的代码到本地。</p>
 <p>然后是对于远程主机与本地之间的一些关系处理：</p>
 <p>如果在本地创建了项目，想部署到github上，可以考虑使用添加主机命令git remote add &lt;主机名&gt;，可以管理多个远程主机。</p>
@@ -879,7 +1046,7 @@ app.use(forums.routes());
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -891,9 +1058,9 @@ app.use(forums.routes());
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/29/vuex小记/" itemprop="url">vuex小记</a></h2>
+                <a class="post-title-link" href="/2017/10/29/vuex小记/" itemprop="url">vuex小记</a></h1>
         
 
         <div class="post-meta">
@@ -1040,7 +1207,7 @@ store.registerModule(&apos;vue-router&apos;, {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1052,9 +1219,9 @@ store.registerModule(&apos;vue-router&apos;, {
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/27/es6回顾/" itemprop="url">es6回顾</a></h2>
+                <a class="post-title-link" href="/2017/10/27/es6回顾/" itemprop="url">es6回顾</a></h1>
         
 
         <div class="post-meta">
@@ -1280,7 +1447,7 @@ Promise.all([p1,p2])
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1292,9 +1459,9 @@ Promise.all([p1,p2])
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/05/angular4-0初体验/" itemprop="url">angular4.0初体验</a></h2>
+                <a class="post-title-link" href="/2017/10/05/angular4-0初体验/" itemprop="url">angular4.0初体验</a></h1>
         
 
         <div class="post-meta">
@@ -1459,7 +1626,7 @@ Promise.all([p1,p2])
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1471,9 +1638,9 @@ Promise.all([p1,p2])
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/15/前期学习大纲/" itemprop="url">前期学习大纲</a></h2>
+                <a class="post-title-link" href="/2017/09/15/前期学习大纲/" itemprop="url">前期学习大纲</a></h1>
         
 
         <div class="post-meta">
@@ -1609,7 +1776,7 @@ Promise.all([p1,p2])
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Empire">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1621,9 +1788,9 @@ Promise.all([p1,p2])
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/27/react基础回顾/" itemprop="url">react基础回顾~~</a></h2>
+                <a class="post-title-link" href="/2017/02/27/react基础回顾/" itemprop="url">react基础回顾~~</a></h1>
         
 
         <div class="post-meta">
@@ -1764,182 +1931,6 @@ render: function () {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/11/vue-day2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Empire">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/joke.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="金色鸢尾">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/11/vue-day2/" itemprop="url">vue-day2</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-11T23:48:52+08:00">
-                2016-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一、class与style绑定"><a href="#一、class与style绑定" class="headerlink" title="一、class与style绑定"></a>一、class与style绑定</h1><p>v-bind:class接受一个对象用来动态切换class：</p>
-<pre><code>div class=&quot;static&quot; v-bind:class=&quot;{ &apos;class-a&apos;: isA, &apos;class-b&apos;: isB }&quot;&gt;&lt;/div&gt;
-
-data: {
-  isA: true,
-  isB: false
-}
-</code></pre><p>也可以传入数组来达到同样的效果，最新版本可在数组语法中使用对象语法。</p>
-<p>vue可以自动添加css中一些新属性的前缀！</p>
-<h1 id="二、条件渲染、列表渲染"><a href="#二、条件渲染、列表渲染" class="headerlink" title="二、条件渲染、列表渲染"></a>二、条件渲染、列表渲染</h1><p>template可作为条件渲染的包装元素：</p>
-<pre><code>&lt;template v-if=&quot;ok&quot;&gt;
-  &lt;h1&gt;Title&lt;/h1&gt;
-  &lt;p&gt;Paragraph 1&lt;/p&gt;
-  &lt;p&gt;Paragraph 2&lt;/p&gt;
-&lt;/template&gt;
-</code></pre><ul>
-<li><p>v-else可紧跟在v-if或v-show块后用来被识别。</p>
-</li>
-<li><p>v-if的首屏渲染时间较短，v-show反之，但后者切换快。</p>
-</li>
-<li><p>vue中包含了数组的变异方法，使其均能触发视图更新。</p>
-</li>
-<li><p>track-by在input等需要存储临时状态的组件中应慎用。</p>
-</li>
-</ul>
-<h1 id="三、方法与事件处理器"><a href="#三、方法与事件处理器" class="headerlink" title="三、方法与事件处理器"></a>三、方法与事件处理器</h1><p>v-on指令用来监听事件：</p>
-<pre><code>&lt;div id=&quot;example&quot;&gt;
-  &lt;button v-on:click=&quot;greet&quot;&gt;Greet&lt;/button&gt;
-&lt;/div&gt;
-
-var vm = new Vue({
-  el: &apos;#example&apos;,
-  data: {
-    name: &apos;Vue.js&apos;
-  },
-  // 在 `methods` 对象中定义方法
-  methods: {
-    greet: function (event) {
-      // 方法内 `this` 指向 vm
-      alert(&apos;Hello &apos; + this.name + &apos;!&apos;)
-      // `event` 是原生 DOM 事件
-      alert(event.target.tagName)
-    }
-  }
-})
-</code></pre><p>也可以内联JavaScript语句来完成此流程。</p>
-<p>事件修饰符：stop, prevent, capture, self。</p>
-<p>key alias:</p>
-<pre><code>&lt;!-- 同上 --&gt;
-&lt;input v-on:keyup.enter=&quot;submit&quot;&gt;
-
-&lt;!-- 缩写语法 --&gt;
-&lt;input @keyup.enter=&quot;submit&quot;&gt;
-</code></pre><h1 id="四、表单控件绑定"><a href="#四、表单控件绑定" class="headerlink" title="四、表单控件绑定"></a>四、表单控件绑定</h1><p>v-model可实现表单数据双向绑定：</p>
-<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
-&lt;label for=&quot;checkbox&quot;&gt;{{ checked }}&lt;/label&gt;
-</code></pre><h1 id="五、插件"><a href="#五、插件" class="headerlink" title="五、插件"></a>五、插件</h1><p>未完待续。。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1979,12 +1970,8 @@ var vm = new Vue({
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/joke.jpg"
-                alt="Empire" />
-            
               <p class="site-author-name" itemprop="name">Empire</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">举杯邀月，醉在桃溪春野</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1994,7 +1981,7 @@ var vm = new Vue({
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2007,7 +1994,7 @@ var vm = new Vue({
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -2035,11 +2022,6 @@ var vm = new Vue({
       
 
       
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-        </div>
-      
 
     </div>
   </aside>
@@ -2051,7 +2033,7 @@ var vm = new Vue({
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2069,7 +2051,7 @@ var vm = new Vue({
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
 
 
 
@@ -2085,6 +2067,13 @@ var vm = new Vue({
         
       </div>
     </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
@@ -2120,22 +2109,34 @@ var vm = new Vue({
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
 
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
   
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
 
   
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
 
 
   
@@ -2149,13 +2150,6 @@ var vm = new Vue({
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
 
   
 
@@ -2195,6 +2189,10 @@ var vm = new Vue({
 
 
 
+
+
+
+
   
 
 
@@ -2205,6 +2203,9 @@ var vm = new Vue({
 
   
 
+  
+
+  
   
 
   
