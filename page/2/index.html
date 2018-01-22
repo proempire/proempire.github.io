@@ -232,6 +232,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/react基础回顾/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/27/react基础回顾/" itemprop="url">react基础回顾~~</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-27T21:05:09+08:00">
+                2017-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、配置环境和依赖"><a href="#一、配置环境和依赖" class="headerlink" title="一、配置环境和依赖"></a>一、配置环境和依赖</h1><p>react使用jsx语法，故使用type = ‘ babel ‘ 注明，使用react.js, react-dom.js, browser.js三个库。</p>
+<h1 id="二、基础使用"><a href="#二、基础使用" class="headerlink" title="二、基础使用"></a>二、基础使用</h1><ol>
+<li><p>基础方法： ReactDOM.render()</p>
+<pre><code>ReactDOM.render(
+  &lt;h1&gt;Hello, world!&lt;/h1&gt;,
+  document.getElementById(&apos;example&apos;)
+);
+</code></pre></li>
+<li><p>jsx语法示例：</p>
+<pre><code>&lt;div&gt;{ oarray.map(function(el)) }&lt;/div&gt;
+</code></pre></li>
+<li><p>封装component方法——React.createClass():</p>
+<pre><code>var realwhat = function(){return &lt;h3&gt;{this.props.name}&lt;/h3&gt;}
+var owhat = {render: realwhat}
+var shakeIt = React.createClass(owhat)
+
+ReactDOM.render({&lt;shakeIt name=&apos;emperor&apos;&gt;, document.get...})
+</code></pre><ul>
+<li>组件类首字母必须大写，上面这个例子是错的</li>
+</ul>
+</li>
+<li><p>this.props.children获取所有子节点，类型由节点数量决定，PropTypes用于验证属性参数类型是否合法，用法：</p>
+<pre><code>react.createClass({
+    render: function(){
+        return react.propTypes.【类型】.isrequired
+    }
+});
+</code></pre><p> react模板语言中引用变量时用{}包裹</p>
+</li>
+<li><p>react使用dom-diff，可极大提高网页性能，若想获取真实DOM节点，使用this.ref.[refname]，注意，ref属性应给予dom节点。</p>
+<ul>
+<li>虚拟DOM未插入文档时不能获取真实dom节点</li>
+</ul>
+</li>
+<li><p>react支持状态机，getInitialState和setState用于处理状态，注意它与props的区别</p>
+</li>
+<li><p>与表单内容的互动，关键部分如下，备查:</p>
+<pre><code>handleChange: function(event) {
+  this.setState({value: event.target.value});
+},
+render: function () {
+  var value = this.state.value;
+  return (
+    &lt;div&gt;
+      &lt;input type=&quot;text&quot; value={value} onChange={this.handleChange} /&gt;
+      &lt;p&gt;{value}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></li>
+<li><p>组件的生命周期中，有两个特殊状态处理：收到新参数，是否重新渲染</p>
+</li>
+</ol>
+<h1 id="三、更多项目细节"><a href="#三、更多项目细节" class="headerlink" title="三、更多项目细节"></a>三、更多项目细节</h1><p>等我解决了就写！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/11/vue-day2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1006,7 +1179,7 @@ module.exports = router;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1019,7 +1192,7 @@ module.exports = router;
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

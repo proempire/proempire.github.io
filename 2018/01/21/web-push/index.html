@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web-push," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、web push 使用动机与原理简述相较于移动端本地应用，web站点常常缺少一项常用的功能：推送通知。此处的推送通知一般指由浏览器实现的消息推送，换个说法，就是用户在打开浏览器时，不需要进入特定的网站，就能收到该网站推送而来的消息，例如：新评论，新动态等等。统计表明多出一个这样的消息推送将有效提高网站点击率。 那么web push究竟是怎样的一个流程呢，简单地说，可以分为三个步骤：  客户端完">
+<meta name="keywords" content="web-push">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web-push">
+<meta property="og:url" content="http://yoursite.com/2018/01/21/web-push/index.html">
+<meta property="og:site_name" content="金色鸢尾">
+<meta property="og:description" content="一、web push 使用动机与原理简述相较于移动端本地应用，web站点常常缺少一项常用的功能：推送通知。此处的推送通知一般指由浏览器实现的消息推送，换个说法，就是用户在打开浏览器时，不需要进入特定的网站，就能收到该网站推送而来的消息，例如：新评论，新动态等等。统计表明多出一个这样的消息推送将有效提高网站点击率。 那么web push究竟是怎样的一个流程呢，简单地说，可以分为三个步骤：  客户端完">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/img/web-push-client-side.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/img/server-side.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/21/img/push-event.png">
+<meta property="og:updated_time" content="2018-01-21T16:48:35.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web-push">
+<meta name="twitter:description" content="一、web push 使用动机与原理简述相较于移动端本地应用，web站点常常缺少一项常用的功能：推送通知。此处的推送通知一般指由浏览器实现的消息推送，换个说法，就是用户在打开浏览器时，不需要进入特定的网站，就能收到该网站推送而来的消息，例如：新评论，新动态等等。统计表明多出一个这样的消息推送将有效提高网站点击率。 那么web push究竟是怎样的一个流程呢，简单地说，可以分为三个步骤：  客户端完">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/21/img/web-push-client-side.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/21/web-push/"/>
+
+
+
+
+
+  <title>web-push | 金色鸢尾</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">金色鸢尾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/21/web-push/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">web-push</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T20:52:59+08:00">
+                2018-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、web-push-使用动机与原理简述"><a href="#一、web-push-使用动机与原理简述" class="headerlink" title="一、web push 使用动机与原理简述"></a>一、web push 使用动机与原理简述</h1><p>相较于移动端本地应用，web站点常常缺少一项常用的功能：推送通知。此处的推送通知一般指由浏览器实现的消息推送，换个说法，就是用户在打开浏览器时，不需要进入特定的网站，就能收到该网站推送而来的消息，例如：新评论，新动态等等。统计表明多出一个这样的消息推送将有效提高网站点击率。</p>
+<p>那么web push究竟是怎样的一个流程呢，简单地说，可以分为三个步骤：</p>
+<ol>
+<li>客户端完成请求订阅一个用户的逻辑</li>
+<li>服务端调用遵从web push协议的接口，传送消息推送（push message）到推送服务器（该服务器由浏览器决定，开发者所能做的只有控制发送的数据）</li>
+<li>推送服务器将该消息推送至对应的浏览器，用户收到该推送</li>
+</ol>
+<p>第一步，客户端请求订阅用户，过程如下：</p>
+<p><img src="../img/web-push-client-side.png" alt="Alt 不能显示"></p>
+<p>说明一下这三步，在第一步之前，应用服务器需要生成应用服务器密钥(application server keys)，其作用是标识该服务器，保证每次发消息推送的都是同一个服务器。然后，客户端将会请求用户授权消息推送，一旦用户授权，浏览器就会生成一个PushScription，然后这个PushScription将会被发送至服务器，存入数据库，在后面的消息推送中使用。</p>
+<p>第二步，应用服务器发送web push协议标准的api，触发推送服务器的消息推送，其中headers必须配置正确，且传送的数据必须是比特流。</p>
+<p><img src="../img/server-side.png" alt="Alt 不能显示"></p>
+<p>应用服务器发送消息推送请求（目的是为了将更新推送到用户的浏览器），为了向推送服务器发出请求，需要查看先前获得的PushScription，取出其中的endpoint，即为推送服务器配置给该用户的访问点。</p>
+<p>一个PushScription对象如下：</p>
+<pre><code>{
+  &quot;endpoint&quot;: &quot;https://random-push-service.com/some-kind-of-unique-id-1234/v2/&quot;,
+  &quot;keys&quot;: {
+    &quot;p256dh&quot; :
+&quot;BNcRdreALRFXTkOOUHK1EtK2wtaz5Ry4YfYCA_0QTpQtUbVlUls0VJXg7A8u-Ts1XbjhazAkj7I99e8QcYP7DkM=&quot;,
+    &quot;auth&quot;   : &quot;tBHItJI5svbpez7KI4CCXg==&quot;
+  }
+}
+</code></pre><p>其中的endpoint包含了推送服务器域名，path后面的部分为推送服务器为每个用户分配的一个标识符。</p>
+<p>发送数据时，数据必须编码（出于安全性考虑）。推送服务器在接收到这样一个请求之后，立即开始监听用户浏览器是否处于在线状态，若是，则将消息推送发送至浏览器。</p>
+<p>第三步，浏览器端接收消息推送，触发push事件并展示</p>
+<p><img src="../img/push-event.png" alt="Alt 不能显示"></p>
+<p>浏览器在接收到推送服务器发来的推送后，将其解码并触发一个push事件。Service Worker由于它可以在浏览器页面未打开，浏览器未打开时执行，因此一般选择它完成web push的最后一步，即响应push事件完成展示通知等业务逻辑。</p>
+<h1 id="二、web-push实现细节"><a href="#二、web-push实现细节" class="headerlink" title="二、web push实现细节"></a>二、web push实现细节</h1><p>按照上一部分所说，首先进行用户订阅。</p>
+<p>首先注册一个Service Worker，若注册成功，返回的Promise为resolve状态，如下：</p>
+<pre><code>function registerServiceWorker() {
+  return navigator.serviceWorker.register(&apos;service-worker.js&apos;)
+  .then(function(registration) {
+    console.log(&apos;Service worker successfully registered.&apos;);
+    return registration;
+  })
+  .catch(function(err) {
+    console.error(&apos;Unable to register service worker.&apos;, err);
+  });
+}
+</code></pre><p>随后测试window环境下是否有Notification对象（此处以chrome为例，若使用firefox，uc等浏览器，需要遵循其相应标准，调用对应对象方法或引入JS SDK包），测试成功，调用Notification.requestPermission请求用户授权发送推送，若授权成功，将会返回’granted’。</p>
+<p>接下来要做的就是使用注册好的Service Worker对象，调用pushManager.subscribe方法，从客户端获得刚刚所说的PushScription对象。</p>
+<pre><code>function subscribeUserToPush() {
+  return navigator.serviceWorker.register(&apos;service-worker.js&apos;)
+  .then(function(registration) {
+    const subscribeOptions = {
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(
+        &apos;BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U&apos;
+      )
+    };
+
+    return registration.pushManager.subscribe(subscribeOptions);
+  })
+  .then(function(pushSubscription) {
+    console.log(&apos;Received PushSubscription: &apos;, JSON.stringify(pushSubscription));
+    return pushSubscription;
+  });
+}
+</code></pre><p>userVisibleOnly是为了保证推送对用户可见，application server key则如前文所说，是推送服务器用以识别应用服务器的密钥，这里的密钥包含了公钥和私钥，传输的是公钥。同时，PushScription的endpoint也是在这个过程中生成的，生成公钥和私钥可以使用web-push库。</p>
+<p>这里再次说明一下推送服务器的不可选择性，在调用subscribe生成PushScription时，浏览器会向它指定的中转服务器发送请求来生成endpoint和其余部分，这是没法控制的。</p>
+<p>PushScription中的auth和p256dh是用来控制带载荷的push message的。</p>
+<p>获取到PushScription对象后，将其发往应用服务器，此处简化了存储，使用nedb存下PushScription并返回Promise：</p>
+<pre><code>function saveSubscriptionToDatabase(subscription) {
+  return new Promise(function(resolve, reject) {
+    db.insert(subscription, function(err, newDoc) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve(newDoc._id);
+    });
+  });
+};
+</code></pre><p>存储完毕后，接下来就是开发后台管理逻辑，使得管理员能够</p>
+<pre><code>const vapidKeys = {
+  publicKey:
+&apos;BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U&apos;,
+  privateKey: &apos;UUxI4O8-FbRouAevSmBQ6o18hgE4nSG3qwvJTfKc-ls&apos;
+};
+
+webpush.setVapidDetails(
+  &apos;mailto:web-push-book@gauntface.com&apos;,
+  vapidKeys.publicKey,
+  vapidKeys.privateKey
+);
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web-push/" rel="tag"># web-push</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/19/gulp初探/" rel="next" title="gulp初探">
+                <i class="fa fa-chevron-left"></i> gulp初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Empire</p>
+              <p class="site-description motion-element" itemprop="description">举杯邀月，醉在桃溪春野</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、web-push-使用动机与原理简述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;web-push-&#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;" class="headerlink" title="&#x4E00;&#x3001;web push &#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;"></a>&#x4E00;&#x3001;web push &#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、web-push实现细节"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;web-push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;" class="headerlink" title="&#x4E8C;&#x3001;web push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;"></a>&#x4E8C;&#x3001;web push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
