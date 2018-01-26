@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="金色鸢尾">
 <meta property="og:description" content="考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～ 一、gulp做什么如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-19T08:24:40.370Z">
+<meta property="og:updated_time" content="2018-01-26T08:02:02.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gulp初探">
 <meta name="twitter:description" content="考虑了很久，到底要写总结式的博客呢，还是写探索式的博客呢..然而这次又放纵了一把，来看看gulp吧～ 一、gulp做什么如果你用过webpack的话，应该对文件打包、转义、压缩等过程有了一定的了解，相比于webpack，gulp同样也是对项目进行整合处理的一个工具，但它的侧重点和前面提到的那几个webpack功能不同，它做的主要是“自动化”，也就是把你的工作流整合起来，但是在这个过程中你同样可以使">
@@ -347,7 +347,22 @@ gulp.task(&apos;clean&apos;, function() {
     });
   });
 });
-</code></pre><p>匆匆完结。。有个web push的东西要先搞搞～</p>
+</code></pre><p>要实现串行和并行执行，就使用gulp的parallel和series方法，它们均接收任务（集合）作为参数，区别在于执行的方式不同。</p>
+<h1 id="四、任务监听"><a href="#四、任务监听" class="headerlink" title="四、任务监听"></a>四、任务监听</h1><p>gulp.watch接收三个参数：glob模式（数组），配置参数及回调，如：</p>
+<pre><code>gulp.watch(&apos;js/**/*.js&apos;, gulp.parallel(&apos;concat&apos;, &apos;uglify&apos;));
+</code></pre><p>参数中有几个点值得说一说：</p>
+<p>opts中的queue属性：在处理长任务时，此选项的值应为true，作用是当某个函数（任务）在执行时，将此函数推入队列中。</p>
+<p>fn回调：当监听器发布改变（change），添加（add）或解链（unlink）事件时，在200毫秒的防反跳事件后，就会执行缓存在队列中的子调用（subsequent calls）。这里的回调需要遵循一个上面提到的规则：回调函数必须传入一个callback参数，在回调执行完毕后调用，当然，也可以采用aysnc-done的其他策略，这在上文已经提及。</p>
+<p>watch方法返回一个chokidar（chokidar是一个对node fs模块的监听与事件进行包装的库），通过直接对这个chokidar添加事件监听，可以进行更多的控制：</p>
+<pre><code>var watcher = gulp.watch(&apos;js/**/*.js&apos;, gulp.parallel(&apos;concat&apos;, &apos;uglify&apos;));
+watcher.on(&apos;change&apos;, function(path, stats) {
+  console.log(&apos;File &apos; + path + &apos; was changed&apos;);
+});
+
+watcher.on(&apos;unlink&apos;, function(path) {
+  console.log(&apos;File &apos; + path + &apos; was removed&apos;);
+});
+</code></pre><p>插件部分计划之后单独写一篇～</p>
 
       
     </div>
@@ -517,7 +532,7 @@ gulp.task(&apos;clean&apos;, function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、gulp做什么"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;" class="headerlink" title="&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;"></a>&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、指定流的源和输出"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;" class="headerlink" title="&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;"></a>&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-src"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#gulp-src" class="headerlink" title="gulp.src"></a>gulp.src</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-dest"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#gulp-dest" class="headerlink" title="gulp.dest"></a>gulp.dest</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、创建工作流"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;" class="headerlink" title="&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;"></a>&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、gulp做什么"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;" class="headerlink" title="&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;"></a>&#x4E00;&#x3001;gulp&#x505A;&#x4EC0;&#x4E48;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、指定流的源和输出"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;" class="headerlink" title="&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;"></a>&#x4E8C;&#x3001;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x6E90;&#x548C;&#x8F93;&#x51FA;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-src"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#gulp-src" class="headerlink" title="gulp.src"></a>gulp.src</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-dest"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#gulp-dest" class="headerlink" title="gulp.dest"></a>gulp.dest</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、创建工作流"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;" class="headerlink" title="&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;"></a>&#x4E09;&#x3001;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x6D41;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、任务监听"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x4EFB;&#x52A1;&#x76D1;&#x542C;" class="headerlink" title="&#x56DB;&#x3001;&#x4EFB;&#x52A1;&#x76D1;&#x542C;"></a>&#x56DB;&#x3001;&#x4EFB;&#x52A1;&#x76D1;&#x542C;</span></a></li></ol></div>
             
 
           </div>
