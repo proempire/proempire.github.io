@@ -410,7 +410,41 @@ event.waitUntil(
     })
 );
 </code></pre><p>而展示notification时，除了控制它的视图层以外，也可以控制它的逻辑层，例如点击消息通知后进行某些操作等等，在先前调用showNotification时可以传入一些参数，例如，根据不同的action执行不同的操作：</p>
-<h1 id="三、各大浏览器兼容性"><a href="#三、各大浏览器兼容性" class="headerlink" title="三、各大浏览器兼容性"></a>三、各大浏览器兼容性</h1>
+<pre><code>self.addEventListener(&apos;notificationclick&apos;, function(event) {
+  if (!event.action) {
+    // Was a normal notification click
+    console.log(&apos;Notification Click.&apos;);
+    return;
+  }
+
+  switch (event.action) {
+    case &apos;coffee-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s coffee.&apos;);
+      break;
+    case &apos;doughnut-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s doughnuts.&apos;);
+      break;
+    case &apos;gramophone-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s music.&apos;);
+      break;
+    case &apos;atom-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s science.&apos;);
+      break;
+    default:
+      console.log(`Unknown action clicked: &apos;${event.action}&apos;`);
+      break;
+  }
+});
+</code></pre><h1 id="三、兼容性及其他问题"><a href="#三、兼容性及其他问题" class="headerlink" title="三、兼容性及其他问题"></a>三、兼容性及其他问题</h1><h2 id="与ajax轮询、http长连接、WebSocket的对比"><a href="#与ajax轮询、http长连接、WebSocket的对比" class="headerlink" title="与ajax轮询、http长连接、WebSocket的对比"></a>与ajax轮询、http长连接、WebSocket的对比</h2><ul>
+<li>ajax轮询是通过客户端不断向服务端发送http请求，若有新消息就取回的模式保持数据实时更新，但这种方式需要服务器有很快的处理速度和资源</li>
+<li>http长连接是客户端向服务器发送请求后，若服务器没有新数据要发送，就不返回response，一旦有了新数据返回了response，客户端就立刻再发一个request，周而复始。事实上这是把http协议的不对称性从客户端转移到了服务端</li>
+<li>WebSocket是HTML5中提出的一个新标准（也可视之为协议），客户端在发送请求时在请求头加入额外的字段，以标识这是一个基于WebSocket协议的连接，服务器根据这个请求头生成响应，与客户端建立起WebSocket连接，之后服务端有新消息时，直接向客户端推送即可</li>
+</ul>
+<h2 id="不同浏览器兼容性"><a href="#不同浏览器兼容性" class="headerlink" title="不同浏览器兼容性"></a>不同浏览器兼容性</h2><ul>
+<li>chrome采用的推送服务器为gcm或fcm，firefox也有自己的推送服务器</li>
+<li>uc前些时间构建了自己的推送服务器，引入其官网上的sdk包，申请使用后即可用于开发</li>
+</ul>
+
           
         
       

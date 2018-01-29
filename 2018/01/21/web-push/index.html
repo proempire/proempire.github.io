@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/01/21/img/server-side.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/img/push-event.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/img/default-notice.png">
-<meta property="og:updated_time" content="2018-01-25T09:54:46.516Z">
+<meta property="og:updated_time" content="2018-01-29T07:12:53.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web-push">
 <meta name="twitter:description" content="一、web push 使用动机与原理简述相较于移动端本地应用，web站点常常缺少一项常用的功能：推送通知。此处的推送通知一般指由浏览器实现的消息推送，换个说法，就是用户在打开浏览器时，不需要进入特定的网站，就能收到该网站推送而来的消息，例如：新评论，新动态等等。统计表明多出一个这样的消息推送将有效提高网站点击率。 那么web push究竟是怎样的一个流程呢，简单地说，可以分为三个步骤：  客户端完">
@@ -412,7 +412,41 @@ event.waitUntil(
     })
 );
 </code></pre><p>而展示notification时，除了控制它的视图层以外，也可以控制它的逻辑层，例如点击消息通知后进行某些操作等等，在先前调用showNotification时可以传入一些参数，例如，根据不同的action执行不同的操作：</p>
-<h1 id="三、各大浏览器兼容性"><a href="#三、各大浏览器兼容性" class="headerlink" title="三、各大浏览器兼容性"></a>三、各大浏览器兼容性</h1>
+<pre><code>self.addEventListener(&apos;notificationclick&apos;, function(event) {
+  if (!event.action) {
+    // Was a normal notification click
+    console.log(&apos;Notification Click.&apos;);
+    return;
+  }
+
+  switch (event.action) {
+    case &apos;coffee-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s coffee.&apos;);
+      break;
+    case &apos;doughnut-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s doughnuts.&apos;);
+      break;
+    case &apos;gramophone-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s music.&apos;);
+      break;
+    case &apos;atom-action&apos;:
+      console.log(&apos;User ❤️️\&apos;s science.&apos;);
+      break;
+    default:
+      console.log(`Unknown action clicked: &apos;${event.action}&apos;`);
+      break;
+  }
+});
+</code></pre><h1 id="三、兼容性及其他问题"><a href="#三、兼容性及其他问题" class="headerlink" title="三、兼容性及其他问题"></a>三、兼容性及其他问题</h1><h2 id="与ajax轮询、http长连接、WebSocket的对比"><a href="#与ajax轮询、http长连接、WebSocket的对比" class="headerlink" title="与ajax轮询、http长连接、WebSocket的对比"></a>与ajax轮询、http长连接、WebSocket的对比</h2><ul>
+<li>ajax轮询是通过客户端不断向服务端发送http请求，若有新消息就取回的模式保持数据实时更新，但这种方式需要服务器有很快的处理速度和资源</li>
+<li>http长连接是客户端向服务器发送请求后，若服务器没有新数据要发送，就不返回response，一旦有了新数据返回了response，客户端就立刻再发一个request，周而复始。事实上这是把http协议的不对称性从客户端转移到了服务端</li>
+<li>WebSocket是HTML5中提出的一个新标准（也可视之为协议），客户端在发送请求时在请求头加入额外的字段，以标识这是一个基于WebSocket协议的连接，服务器根据这个请求头生成响应，与客户端建立起WebSocket连接，之后服务端有新消息时，直接向客户端推送即可</li>
+</ul>
+<h2 id="不同浏览器兼容性"><a href="#不同浏览器兼容性" class="headerlink" title="不同浏览器兼容性"></a>不同浏览器兼容性</h2><ul>
+<li>chrome采用的推送服务器为gcm或fcm，firefox也有自己的推送服务器</li>
+<li>uc前些时间构建了自己的推送服务器，引入其官网上的sdk包，申请使用后即可用于开发</li>
+</ul>
+
       
     </div>
     
@@ -575,7 +609,7 @@ event.waitUntil(
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、web-push-使用动机与原理简述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;web-push-&#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;" class="headerlink" title="&#x4E00;&#x3001;web push &#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;"></a>&#x4E00;&#x3001;web push &#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、web-push实现细节"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;web-push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;" class="headerlink" title="&#x4E8C;&#x3001;web push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;"></a>&#x4E8C;&#x3001;web push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、各大浏览器兼容性"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x5404;&#x5927;&#x6D4F;&#x89C8;&#x5668;&#x517C;&#x5BB9;&#x6027;" class="headerlink" title="&#x4E09;&#x3001;&#x5404;&#x5927;&#x6D4F;&#x89C8;&#x5668;&#x517C;&#x5BB9;&#x6027;"></a>&#x4E09;&#x3001;&#x5404;&#x5927;&#x6D4F;&#x89C8;&#x5668;&#x517C;&#x5BB9;&#x6027;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、web-push-使用动机与原理简述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;web-push-&#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;" class="headerlink" title="&#x4E00;&#x3001;web push &#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;"></a>&#x4E00;&#x3001;web push &#x4F7F;&#x7528;&#x52A8;&#x673A;&#x4E0E;&#x539F;&#x7406;&#x7B80;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、web-push实现细节"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;web-push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;" class="headerlink" title="&#x4E8C;&#x3001;web push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;"></a>&#x4E8C;&#x3001;web push&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、兼容性及其他问题"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x517C;&#x5BB9;&#x6027;&#x53CA;&#x5176;&#x4ED6;&#x95EE;&#x9898;" class="headerlink" title="&#x4E09;&#x3001;&#x517C;&#x5BB9;&#x6027;&#x53CA;&#x5176;&#x4ED6;&#x95EE;&#x9898;"></a>&#x4E09;&#x3001;&#x517C;&#x5BB9;&#x6027;&#x53CA;&#x5176;&#x4ED6;&#x95EE;&#x9898;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#与ajax轮询、http长连接、WebSocket的对比"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x4E0E;ajax&#x8F6E;&#x8BE2;&#x3001;http&#x957F;&#x8FDE;&#x63A5;&#x3001;WebSocket&#x7684;&#x5BF9;&#x6BD4;" class="headerlink" title="&#x4E0E;ajax&#x8F6E;&#x8BE2;&#x3001;http&#x957F;&#x8FDE;&#x63A5;&#x3001;WebSocket&#x7684;&#x5BF9;&#x6BD4;"></a>&#x4E0E;ajax&#x8F6E;&#x8BE2;&#x3001;http&#x957F;&#x8FDE;&#x63A5;&#x3001;WebSocket&#x7684;&#x5BF9;&#x6BD4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同浏览器兼容性"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x4E0D;&#x540C;&#x6D4F;&#x89C8;&#x5668;&#x517C;&#x5BB9;&#x6027;" class="headerlink" title="&#x4E0D;&#x540C;&#x6D4F;&#x89C8;&#x5668;&#x517C;&#x5BB9;&#x6027;"></a>&#x4E0D;&#x540C;&#x6D4F;&#x89C8;&#x5668;&#x517C;&#x5BB9;&#x6027;</span></a></li></ol></li></ol></div>
             
 
           </div>
