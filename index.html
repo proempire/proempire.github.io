@@ -232,6 +232,248 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/Javascript设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/30/Javascript设计模式/" itemprop="url">Javascript设计模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T13:55:11+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考书籍<a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank" rel="noopener">Learning Javascript Design Patterns</a></p>
+<h1 id="一、设计模式概述与应用场景"><a href="#一、设计模式概述与应用场景" class="headerlink" title="一、设计模式概述与应用场景"></a>一、设计模式概述与应用场景</h1><p>首先引用原书的一段话：</p>
+<blockquote>
+<p>Patterns are proven solutions: They provide solid approaches to solving issues in software development using proven techniques that reflect the experience and insights the developers that helped define them bring to the pattern.</p>
+<p>Patterns can be easily reused: A pattern usually reflects an out of the box solution that can be adapted to suit our own needs. This feature makes them quite robust.</p>
+<p>Patterns can be expressive: When we look at a pattern there’s generally a set structure and vocabulary to the solution presented that can help express rather large solutions quite elegantly.</p>
+</blockquote>
+<p>这里提到了三点：</p>
+<ol>
+<li>设计模式是开发者定义的</li>
+<li>设计模式必须具有可重用性，必须很好地处理各种异常情况</li>
+<li>设计模式必须有自己的一套完整表述</li>
+</ol>
+<p>光这样写可能既抽象又无趣，因而不妨从几个小点展开说一下。</p>
+<p>设计模式在robustness（鲁棒性，我对这个翻译一直很不满）上的卓越表现，使得开发者可以省去一些花在代码结构组织上的经历，而更专于于业务逻辑开发，同时这也可以省去开发者日后重构代码的不便。</p>
+<p>设计模式的通用性也是它的泛用性，它不局限于特定的使用环境，也不局限于特定的语言，你用C++，C#，Java，Python，JS都能写，语言是可以任选的。</p>
+<p>同时好的设计模式也可以有效减小代码体积。</p>
+<p>设计模式分为三大类：</p>
+<ol>
+<li>创造型设计模式（creational design patterns）</li>
+<li>结构型设计模式（structural design patterns）</li>
+<li>表现型设计模式（behaviorial design patterns）</li>
+</ol>
+<p>以下将主要说说第一类设计模式，之后两类可能会在以后的博客提及。</p>
+<h1 id="二、构造者模式"><a href="#二、构造者模式" class="headerlink" title="二、构造者模式"></a>二、构造者模式</h1><p>考虑一个最基本的JS对象构造函数：</p>
+<pre><code>function Car( model, year, miles ) {
+
+  this.model = model;
+  this.year = year;
+  this.miles = miles;
+
+  this.toString = function () {
+    return this.model + &quot; has done &quot; + this.miles + &quot; miles&quot;;
+  };
+}
+</code></pre><p>当需要使用这个构造函数构造一个对象时，只要在函数调用之前加上new操作符，JS引擎将会识别出这是一个构造函数调用，这样，这个函数会默认返回一个this对象，这个对象的原型就是构造函数的prototype，因此，函数中对model，year等属性的赋值，就是对这个返回的对象进行的各种操作，使得我们能得到我们想要的对象。</p>
+<p>此处的构造函数使用this.<prop\>的形式添加新属性，但实际上新属性的添加有四种方式，除去这一种，还有三种：</prop\></p>
+<ol>
+<li>方括号语法，<code>newObject[&quot;someKey&quot;] = &quot;Hello World&quot;;</code></li>
+<li><p>Object.defineProperty方法</p>
+<pre><code>Object.defineProperty( newObject, &quot;someKey&quot;, {
+    value: &quot;for more control of the property&apos;s behavior&quot;,
+    writable: true,
+    enumerable: true,
+    configurable: true
+});
+</code></pre></li>
+<li><p>Object.defineProperties方法</p>
+<pre><code>Object.defineProperties( newObject, {
+
+  &quot;someKey&quot;: {
+    value: &quot;Hello World&quot;,
+    writable: true
+  },
+
+  &quot;anotherKey&quot;: {
+    value: &quot;Foo bar&quot;,
+    writable: false
+  }
+
+});
+</code></pre></li>
+</ol>
+<p>此处举的是原文中getter的例子，若要使用setter，可参考原文。</p>
+<p>原文此处还提到了在构造函数的原型上定义公有方法的方式，这么做可以使得每次使用构造函数创建对象时不会重新创建一个属于被创建对象的方法，而是全部使用这个公有方法。</p>
+<h1 id="三、模块化模式"><a href="#三、模块化模式" class="headerlink" title="三、模块化模式"></a>三、模块化模式</h1><p>构造者模式的思想非常好，但是在一点上它有所欠缺，即私有变量。在Java中，声明私有变量可以采用private关键字，限制变量只能被一个类使用，它的后代，它实例化出来的对象都不能访问这个变量。</p>
+<p>这是一种非常重要的编程思想，那么如果想用JS去实现应该怎么做呢？原文中举的例子以IIFE（立即执行函数）为主，为了与es6接轨，下面的例子将围绕es6的module展开。</p>
+<p>首先介绍一下es6的module。为了处理日益增长的js文件造成的命名冲突和安全问题，ECMA引入了module，在module中声明的变量不会添加到全局作用域中，这样就可以避免全局污染，同时module可以指定需要输出的变量和方法。这里只举一个简单的导出与导入例子：</p>
+<pre><code>// export data
+export var color = &quot;red&quot;;
+export let name = &quot;Nicholas&quot;;
+export const magicNumber = 7;
+
+// export function
+export function sum(num1, num2) {
+    return num1 + num1;
+}
+
+// export class
+export class Rectangle {
+    constructor(length, width) {
+        this.length = length;
+        this.width = width;
+    }
+}
+
+// this function is private to the module
+function subtract(num1, num2) {
+    return num1 - num2;
+}
+
+// define a function...
+function multiply(num1, num2) {
+    return num1 * num2;
+}
+
+// ...and then export it later
+export { multiply };
+</code></pre><p>代码来自nicolas zakas所著<a href="https://leanpub.com/understandinges6/read/#leanpub-auto-encapsulating-code-with-modules" target="_blank" rel="noopener">understanding es6</a>中“用模块封装代码”一章，若对es6的模块化感兴趣，可阅读相关章节。</p>
+<p>回到我们刚刚说的问题上来，为了实现“私有变量”这个概念，以上的代码中定义了一个substract方法，因为它没有被导出，所以此方法仅在此模块内可用，这样es6就从标准上实现了私有变量。</p>
+<p>原文里详细描述了模块化模式，它主要包装了公有和私有方法，在上面的例子中，被导出的变量、常量、函数、类均可视为公有方法。模块化模式的思想就是导出一部分公有api，而维持在闭包之内的变量私密。</p>
+<p>为了详细地说明这种思想，我们还是举一段原文的代码来做说明（es6的module同样可以实现类似的效果）</p>
+<pre><code>var testModule = (function () {
+
+  var counter = 0;
+
+  return {
+
+    incrementCounter: function () {
+      return counter++;
+    },
+
+    resetCounter: function () {
+      console.log( &quot;counter value prior to reset: &quot; + counter );
+      counter = 0;
+    }
+  };
+
+})();
+</code></pre><p>请关注这里的核心<code>var counter = 0</code>，这个私有变量是在导出的公有方法中进行操作的，用户获得的对象并没有办法直接操作这个私有变量。看到这里你可能会联想到闭包，没错，它们的思想是类似的。</p>
+<p>模块化模式同样允许传入全局变量如$，并对它进行一些操作。</p>
+<p>模块化也是有一些缺点的，最致命的就是私有变量不能被之后添加的方法操作，这对于debug而言绝对是一场噩梦。</p>
+<p>了解模块化更多相关请狠狠戳<a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="noopener">这篇文章</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/21/web-push/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1883,156 +2125,6 @@ Promise.all([p1,p2])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/前期学习大纲/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Empire">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="金色鸢尾">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/15/前期学习大纲/" itemprop="url">前期学习大纲</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T23:21:50+08:00">
-                2017-09-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一、前端主要语言"><a href="#一、前端主要语言" class="headerlink" title="一、前端主要语言"></a>一、前端主要语言</h1><p>包括HTML，CSS及JS，简单说一下它们的功能（详细内容可参照w3school）：</p>
-<p>HTML：超文本标记语言，浏览器渲染网页的基础元素，包括了标题，正文，图片，列表，表格等元素</p>
-<p>CSS：层叠样式表，对HTML元素进行外观上的布局和修饰，主要包括定位，边距，文字，颜色，位移等等内容</p>
-<p>JS：全程Javascript，浏览器通用的网页脚本语言，可对网页元素进行动态修饰。也作为项目开发架构或工具的基础语言。</p>
-<h1 id="二、HTML与CSS"><a href="#二、HTML与CSS" class="headerlink" title="二、HTML与CSS"></a>二、HTML与CSS</h1><p>建议第一个月把这两个东西尽可能地熟悉，资料已上传至群里，下周会有第一次统一培训。</p>
-<p>对于HTML，可以先在一个网页文件中将所有元素全部使用一次，对于某些标签如ol与ul的区别，span与p的区别可以注意一下（涉及块级元素与行内元素的区别）</p>
-<p>CSS方面可能比较繁琐，建议重点了解清楚盒模型margin, padding与border的含义及作用，以及float的作用。所有<b>文本</b>、颜色、<b>背景</b>内容请积极查阅手册～</p>
-<p>说了这么多，如何做出来让自己看看呢..一个简化的HTML结构已上传到群文件，请在body部分参照w3school进行尝试～</p>
-<h1 id="三、JS"><a href="#三、JS" class="headerlink" title="三、JS"></a>三、JS</h1><p>参考书籍已先行上传之群文件，此部分内容较多。。这边做一些简单的总结：</p>
-<ul>
-<li>所有JS的数据类型及它们的相互转换、自带的方法</li>
-<li>高阶函数与闭包</li>
-<li>JS在动态操作HTML和CSS上的应用</li>
-<li>事件的冒泡与捕获</li>
-<li>各类人机交互事件，涵盖鼠标与键盘</li>
-<li>ES6标准</li>
-</ul>
-<p>还有一部分尚未列出。</p>
-<p>对JS有一定了解后看一看eux博客中吕神（吕哲扬）发的jquery应用博客～</p>
-<h1 id="四、近三年前端可能涉及到的工具"><a href="#四、近三年前端可能涉及到的工具" class="headerlink" title="四、近三年前端可能涉及到的工具"></a>四、近三年前端可能涉及到的工具</h1><p>使用以下工具前请事先准备node最新版本环境，这些工具都有相应的官网</p>
-<ul>
-<li>react、vue、angular</li>
-<li>express</li>
-<li>webpack</li>
-</ul>
-<p>这里只列举了五个，还有很多其他的工具～</p>
-<h1 id="五、需要注意的几个点"><a href="#五、需要注意的几个点" class="headerlink" title="五、需要注意的几个点"></a>五、需要注意的几个点</h1><ul>
-<li>HTML请做到标签语义化，不要全是div</li>
-<li>添加必要的注释</li>
-<li>编写脚本文件时，请让你的代码尽可能地优雅，当有余力之后多考虑一下怎么组织代码保证逻辑性和可读性～</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2083,7 +2175,7 @@ Promise.all([p1,p2])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2096,7 +2188,7 @@ Promise.all([p1,p2])
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

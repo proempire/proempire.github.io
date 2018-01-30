@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考书籍Learning Javascript Design Patterns 一、设计模式概述与应用场景首先引用原书的一段话：  Patterns are proven solutions: They provide solid approaches to solving issues in software development using proven techniques that re">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript设计模式">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/Javascript设计模式/index.html">
+<meta property="og:site_name" content="金色鸢尾">
+<meta property="og:description" content="参考书籍Learning Javascript Design Patterns 一、设计模式概述与应用场景首先引用原书的一段话：  Patterns are proven solutions: They provide solid approaches to solving issues in software development using proven techniques that re">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-30T08:29:29.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript设计模式">
+<meta name="twitter:description" content="参考书籍Learning Javascript Design Patterns 一、设计模式概述与应用场景首先引用原书的一段话：  Patterns are proven solutions: They provide solid approaches to solving issues in software development using proven techniques that re">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/30/Javascript设计模式/"/>
+
+
+
+
+
+  <title>Javascript设计模式 | 金色鸢尾</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">金色鸢尾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/Javascript设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T13:55:11+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考书籍<a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/" target="_blank" rel="noopener">Learning Javascript Design Patterns</a></p>
+<h1 id="一、设计模式概述与应用场景"><a href="#一、设计模式概述与应用场景" class="headerlink" title="一、设计模式概述与应用场景"></a>一、设计模式概述与应用场景</h1><p>首先引用原书的一段话：</p>
+<blockquote>
+<p>Patterns are proven solutions: They provide solid approaches to solving issues in software development using proven techniques that reflect the experience and insights the developers that helped define them bring to the pattern.</p>
+<p>Patterns can be easily reused: A pattern usually reflects an out of the box solution that can be adapted to suit our own needs. This feature makes them quite robust.</p>
+<p>Patterns can be expressive: When we look at a pattern there’s generally a set structure and vocabulary to the solution presented that can help express rather large solutions quite elegantly.</p>
+</blockquote>
+<p>这里提到了三点：</p>
+<ol>
+<li>设计模式是开发者定义的</li>
+<li>设计模式必须具有可重用性，必须很好地处理各种异常情况</li>
+<li>设计模式必须有自己的一套完整表述</li>
+</ol>
+<p>光这样写可能既抽象又无趣，因而不妨从几个小点展开说一下。</p>
+<p>设计模式在robustness（鲁棒性，我对这个翻译一直很不满）上的卓越表现，使得开发者可以省去一些花在代码结构组织上的经历，而更专于于业务逻辑开发，同时这也可以省去开发者日后重构代码的不便。</p>
+<p>设计模式的通用性也是它的泛用性，它不局限于特定的使用环境，也不局限于特定的语言，你用C++，C#，Java，Python，JS都能写，语言是可以任选的。</p>
+<p>同时好的设计模式也可以有效减小代码体积。</p>
+<p>设计模式分为三大类：</p>
+<ol>
+<li>创造型设计模式（creational design patterns）</li>
+<li>结构型设计模式（structural design patterns）</li>
+<li>表现型设计模式（behaviorial design patterns）</li>
+</ol>
+<p>以下将主要说说第一类设计模式，之后两类可能会在以后的博客提及。</p>
+<h1 id="二、构造者模式"><a href="#二、构造者模式" class="headerlink" title="二、构造者模式"></a>二、构造者模式</h1><p>考虑一个最基本的JS对象构造函数：</p>
+<pre><code>function Car( model, year, miles ) {
+
+  this.model = model;
+  this.year = year;
+  this.miles = miles;
+
+  this.toString = function () {
+    return this.model + &quot; has done &quot; + this.miles + &quot; miles&quot;;
+  };
+}
+</code></pre><p>当需要使用这个构造函数构造一个对象时，只要在函数调用之前加上new操作符，JS引擎将会识别出这是一个构造函数调用，这样，这个函数会默认返回一个this对象，这个对象的原型就是构造函数的prototype，因此，函数中对model，year等属性的赋值，就是对这个返回的对象进行的各种操作，使得我们能得到我们想要的对象。</p>
+<p>此处的构造函数使用this.<prop\>的形式添加新属性，但实际上新属性的添加有四种方式，除去这一种，还有三种：</prop\></p>
+<ol>
+<li>方括号语法，<code>newObject[&quot;someKey&quot;] = &quot;Hello World&quot;;</code></li>
+<li><p>Object.defineProperty方法</p>
+<pre><code>Object.defineProperty( newObject, &quot;someKey&quot;, {
+    value: &quot;for more control of the property&apos;s behavior&quot;,
+    writable: true,
+    enumerable: true,
+    configurable: true
+});
+</code></pre></li>
+<li><p>Object.defineProperties方法</p>
+<pre><code>Object.defineProperties( newObject, {
+
+  &quot;someKey&quot;: {
+    value: &quot;Hello World&quot;,
+    writable: true
+  },
+
+  &quot;anotherKey&quot;: {
+    value: &quot;Foo bar&quot;,
+    writable: false
+  }
+
+});
+</code></pre></li>
+</ol>
+<p>此处举的是原文中getter的例子，若要使用setter，可参考原文。</p>
+<p>原文此处还提到了在构造函数的原型上定义公有方法的方式，这么做可以使得每次使用构造函数创建对象时不会重新创建一个属于被创建对象的方法，而是全部使用这个公有方法。</p>
+<h1 id="三、模块化模式"><a href="#三、模块化模式" class="headerlink" title="三、模块化模式"></a>三、模块化模式</h1><p>构造者模式的思想非常好，但是在一点上它有所欠缺，即私有变量。在Java中，声明私有变量可以采用private关键字，限制变量只能被一个类使用，它的后代，它实例化出来的对象都不能访问这个变量。</p>
+<p>这是一种非常重要的编程思想，那么如果想用JS去实现应该怎么做呢？原文中举的例子以IIFE（立即执行函数）为主，为了与es6接轨，下面的例子将围绕es6的module展开。</p>
+<p>首先介绍一下es6的module。为了处理日益增长的js文件造成的命名冲突和安全问题，ECMA引入了module，在module中声明的变量不会添加到全局作用域中，这样就可以避免全局污染，同时module可以指定需要输出的变量和方法。这里只举一个简单的导出与导入例子：</p>
+<pre><code>// export data
+export var color = &quot;red&quot;;
+export let name = &quot;Nicholas&quot;;
+export const magicNumber = 7;
+
+// export function
+export function sum(num1, num2) {
+    return num1 + num1;
+}
+
+// export class
+export class Rectangle {
+    constructor(length, width) {
+        this.length = length;
+        this.width = width;
+    }
+}
+
+// this function is private to the module
+function subtract(num1, num2) {
+    return num1 - num2;
+}
+
+// define a function...
+function multiply(num1, num2) {
+    return num1 * num2;
+}
+
+// ...and then export it later
+export { multiply };
+</code></pre><p>代码来自nicolas zakas所著<a href="https://leanpub.com/understandinges6/read/#leanpub-auto-encapsulating-code-with-modules" target="_blank" rel="noopener">understanding es6</a>中“用模块封装代码”一章，若对es6的模块化感兴趣，可阅读相关章节。</p>
+<p>回到我们刚刚说的问题上来，为了实现“私有变量”这个概念，以上的代码中定义了一个substract方法，因为它没有被导出，所以此方法仅在此模块内可用，这样es6就从标准上实现了私有变量。</p>
+<p>原文里详细描述了模块化模式，它主要包装了公有和私有方法，在上面的例子中，被导出的变量、常量、函数、类均可视为公有方法。模块化模式的思想就是导出一部分公有api，而维持在闭包之内的变量私密。</p>
+<p>为了详细地说明这种思想，我们还是举一段原文的代码来做说明（es6的module同样可以实现类似的效果）</p>
+<pre><code>var testModule = (function () {
+
+  var counter = 0;
+
+  return {
+
+    incrementCounter: function () {
+      return counter++;
+    },
+
+    resetCounter: function () {
+      console.log( &quot;counter value prior to reset: &quot; + counter );
+      counter = 0;
+    }
+  };
+
+})();
+</code></pre><p>请关注这里的核心<code>var counter = 0</code>，这个私有变量是在导出的公有方法中进行操作的，用户获得的对象并没有办法直接操作这个私有变量。看到这里你可能会联想到闭包，没错，它们的思想是类似的。</p>
+<p>模块化模式同样允许传入全局变量如$，并对它进行一些操作。</p>
+<p>模块化也是有一些缺点的，最致命的就是私有变量不能被之后添加的方法操作，这对于debug而言绝对是一场噩梦。</p>
+<p>了解模块化更多相关请狠狠戳<a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="noopener">这篇文章</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/21/web-push/" rel="next" title="web-push">
+                <i class="fa fa-chevron-left"></i> web-push
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Empire</p>
+              <p class="site-description motion-element" itemprop="description">举杯邀月，醉在桃溪春野</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、设计模式概述与应用场景"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x6982;&#x8FF0;&#x4E0E;&#x5E94;&#x7528;&#x573A;&#x666F;" class="headerlink" title="&#x4E00;&#x3001;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x6982;&#x8FF0;&#x4E0E;&#x5E94;&#x7528;&#x573A;&#x666F;"></a>&#x4E00;&#x3001;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x6982;&#x8FF0;&#x4E0E;&#x5E94;&#x7528;&#x573A;&#x666F;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、构造者模式"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x6784;&#x9020;&#x8005;&#x6A21;&#x5F0F;" class="headerlink" title="&#x4E8C;&#x3001;&#x6784;&#x9020;&#x8005;&#x6A21;&#x5F0F;"></a>&#x4E8C;&#x3001;&#x6784;&#x9020;&#x8005;&#x6A21;&#x5F0F;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、模块化模式"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x6A21;&#x5757;&#x5316;&#x6A21;&#x5F0F;" class="headerlink" title="&#x4E09;&#x3001;&#x6A21;&#x5757;&#x5316;&#x6A21;&#x5F0F;"></a>&#x4E09;&#x3001;&#x6A21;&#x5757;&#x5316;&#x6A21;&#x5F0F;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
