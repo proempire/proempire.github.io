@@ -232,6 +232,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/webpack常见loader及使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/05/webpack常见loader及使用/" itemprop="url">webpack常见loader、plugin及使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T16:02:28+08:00">
+                2018-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>感觉这部分还是挺适合写个总结的，webpack作为当下最流行的打包工具，（预|后）处理各种文件、生成渲染函数等等都需要这两者的配合。</p>
+<h1 id="一、loader的性质和分类"><a href="#一、loader的性质和分类" class="headerlink" title="一、loader的性质和分类"></a>一、loader的性质和分类</h1><p>一个具体的项目中可能包含css、js、png、ttf等等类型的文件，为了针对不同的文件类型做不同的处理，将它们合并到一个js文件中，我们就需要引入处理不同文件类型的加载器（loader），在引入文件时对它们进行处理。</p>
+<p>不同的loader一般以xxx-loader的形式命名，如css-loader，vue-loader等等，当然你也可以<a href="https://webpack.js.org/contribute/writing-a-loader/" target="_blank" rel="noopener">自己写loader</a></p>
+<p>如果想自己写loader的话，vue官网中的vue-loader中自定义块一节给出了一个简单loader的示例：</p>
+<pre><code>module.exports = function (source, map) {
+  this.callback(null, &apos;module.exports = function(Component) {Component.options.__docs = &apos; +
+    JSON.stringify(source) +
+    &apos;}&apos;, map)
+}
+</code></pre><h1 id="二、loader在webpack中的使用"><a href="#二、loader在webpack中的使用" class="headerlink" title="二、loader在webpack中的使用"></a>二、loader在webpack中的使用</h1><p>webpack2、3的语法与webpack1略有不同，简单地看就是用rules替换了原来的loader，稍微看一下引入的语法：</p>
+<pre><code>rules: [
+  {
+    test: /\.vue$/,
+    loader: &apos;vue-loader&apos;,
+    options: vueLoaderConfig
+  },
+  {
+    test: /\.js$/,
+    loader: &apos;babel-loader&apos;,
+    include: [resolve(&apos;src&apos;), resolve(&apos;test&apos;), resolve(&apos;node_modules/webpack-dev-server/client&apos;)]
+  }
+]
+</code></pre><p>rules数组中定义多个对象，每个对象用正则匹配需要处理的文件，使用对应的loader，可以使用include囊括进需要处理的文件（为了处理node_modules等文件夹中想处理的文件），同时也可以使用options对该loader进行更多扩展，如下：</p>
+<pre><code>{
+    test: /\.vue$/,
+    loader: &apos;vue-loader&apos;,
+    options: {
+      loaders: {
+        js: &apos;coffee-loader&apos;
+      },
+      preLoaders: {
+        js: &apos;/path/to/custom/loader&apos;
+      },
+      postLoaders: {
+        html: &apos;babel-loader&apos;
+      }
+      excludedPreLoaders: /(eslint-loader)/
+    }
+  }
+</code></pre><p>此处举的是vue-loader官方文档的例子，vue-loader支持的选项包括：指定loader覆盖上一级的loader，指定在loader处理之前或之后要使用的其它loader。</p>
+<h1 id="三、第三方plugin及webpack内建的plugin"><a href="#三、第三方plugin及webpack内建的plugin" class="headerlink" title="三、第三方plugin及webpack内建的plugin"></a>三、第三方plugin及webpack内建的plugin</h1><h2 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h2><p>用于构建index.html，不论先前在指定的输出目录（/dist, /build等）是否已经有了index.html，此插件都会执行构建任务，详细文档请查阅<a href="https://github.com/jantimon/html-webpack-plugin" target="_blank" rel="noopener">HtmlWebpackPlugin</a></p>
+<h2 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</h2><p>webpack打包后放在/build文件夹中的文件很容易变得杂乱，无法维护，因为webpack生成这些bundle文件后就不会再去追踪。因此在每次构建之前，最好都先将build文件夹中的文件删除（此处或许也可用bash脚本实现同样的效果），一般使用<a href="https://www.npmjs.com/package/clean-webpack-plugin" target="_blank" rel="noopener">clean-webpack-plugin插件</a></p>
+<h2 id="uglifyjs-webpack-plugin"><a href="#uglifyjs-webpack-plugin" class="headerlink" title="uglifyjs-webpack-plugin"></a>uglifyjs-webpack-plugin</h2><p>用以清除那些在模块中声明后就没有被使用的代码，其核心是tree-shaking技术。这个处理在规模较大的项目中能非常有效地降低bundle体积，但是对于第三方库，uglifyjs不能判断没有导出的代码有没有副作用，那么它就不会去掉这部分代码。</p>
+<p>以上三个插件的用法都是类似的，如下：</p>
+<pre><code>plugins: [
+       new UglifyJSPlugin(options)
+    new ...
+ ]
+</code></pre><p>options视使用的plugin而定。</p>
+<p>接下来介绍一下webpack内建的一些插件，这些插件都可以在<a href="https://webpack.js.org/plugins/" target="_blank" rel="noopener">官方文档</a>上找到更详细的用法。</p>
+<ul>
+<li>BannerPlugin，在打包的chunk上添加标语</li>
+<li>CommonsChunkPlugin，抽取不同模块的公共库或代码，避免重复</li>
+<li>DefinePlugin，添加编译时的全局变量</li>
+<li><p>ExtractTextWebpackPlugin，可用来抽取模块中的css等部分到一个单独的文件中，使用如下：</p>
+<pre><code>rules: [
+  {
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: &quot;style-loader&quot;,
+      use: &quot;css-loader&quot;
+    })
+  }
+]
+</code></pre><p>  在rules的对象中添加use字段，使用extract-text-plugin抽取css到单独的文件中，使用css-loader进行处理，fallback是指定第二套方案。</p>
+</li>
+</ul>
+<h1 id="四、再多说两句plugin"><a href="#四、再多说两句plugin" class="headerlink" title="四、再多说两句plugin"></a>四、再多说两句plugin</h1><p>事实上，整个webpack也工作在plugin系统之上，如果你想自己定义一个plugin，大致过程是这样的：</p>
+<pre><code>function ConsoleLogOnBuildWebpackPlugin() {
+
+};
+
+ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
+  compiler.plugin(&apos;run&apos;, function(compiler, callback) {
+    console.log(&quot;The webpack build process is starting!!!&quot;);
+
+    callback();
+  });
+};
+</code></pre><p>这里复写了自定义plugin函数原型中的apply，使得之后在调用的时候，可以传入自己想要的plugin，即函数参数compiler。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/Javascript设计模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1946,185 +2145,6 @@ Promise.all([p1,p2])
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/05/angular4-0初体验/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Empire">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="金色鸢尾">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/05/angular4-0初体验/" itemprop="url">angular4.0初体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-05T16:26:24+08:00">
-                2017-10-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>上一篇angular回顾不知道什么时候开的坑。。当时还是2.0版本好像，既然现在出了4.0，那就看看它现在是怎样的一种新机制吧～～</p>
-<h1 id="一、基础组件构成"><a href="#一、基础组件构成" class="headerlink" title="一、基础组件构成"></a>一、基础组件构成</h1><p>核心组件为Component，由@angular/core引入，该组件可定义以下属性：</p>
-<ul>
-<li>selector: 选择器，用以辨识template中的html元素</li>
-<li>templateUrl: 用于链接引入的模板</li>
-<li>styleUrl: 链接引入的样式</li>
-<li>provider: 说明创建的服务，否则会报错</li>
-</ul>
-<p>另几个库里的组件包括FormModule, RouterModule等等，前者用于input元素的双向数据绑定，像这样：</p>
-<pre><code>&lt;div&gt;&lt;label&gt;name:&lt;/label&gt;&lt;input [(ngModel)]=&quot;hero.name&quot; placeholder=&quot;name&quot;&gt;&lt;/div&gt;
-</code></pre><p>后者可在module文件里引入并调用其forRoot方法定义路由，类似这样：</p>
-<pre><code>RouterModule.forRoot([
-    {
-        path: &apos;heroes&apos;,
-        component: HeroesComponent
-    }
-])
-</code></pre><h1 id="二、条件渲染与列表渲染"><a href="#二、条件渲染与列表渲染" class="headerlink" title="二、条件渲染与列表渲染"></a>二、条件渲染与列表渲染</h1><p>这两个名词第一次看到是在vue。。拿来用了一下。</p>
-<blockquote>
-<p>条件渲染</p>
-</blockquote>
-<p>angular提供的标识符为 <em>ngIf, 注意 </em> 不能省略，一个例子如下：</p>
-<pre><code>&lt;div *ngIf=&quot;hero&quot;&gt;
-  &lt;h1&gt;{{title}}&lt;/h1&gt;
-  &lt;h2&gt;{{hero.name}}&lt;/h2&gt;
-  &lt;div&gt;&lt;label&gt;id:&lt;/label&gt;{{hero.id}}&lt;/div&gt;
-  &lt;div&gt;&lt;label&gt;name:&lt;/label&gt;&lt;input [(ngModel)]=&quot;hero.name&quot; placeholder=&quot;name&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>这边假如hero为false（或经隐式类型转换后为false）则整个div的内容将不予显示</p>
-<blockquote>
-<p>列表渲染</p>
-</blockquote>
-<p>标识符为 *ngFor, 以下代码对一个数组heroes中的元素迭代处理，其中处理了一个点击事件，并选择性添加selected类</p>
-<pre><code>&lt;ul class=&quot;heroes&quot;&gt;
-  &lt;li *ngFor=&quot;let hero of heroes&quot; 
-  (click)=&quot;onSelect(hero)&quot; 
-  [class.selected]=&quot;hero === selectedHero&quot;&gt;
-    &lt;span class=&quot;badge&quot;&gt;{{hero.id}}&lt;/span&gt;{{hero.name}}
-  &lt;/li&gt;
-&lt;/ul&gt;
-</code></pre><h1 id="三、服务的创建方式及Promise在这里的应用"><a href="#三、服务的创建方式及Promise在这里的应用" class="headerlink" title="三、服务的创建方式及Promise在这里的应用"></a>三、服务的创建方式及Promise在这里的应用</h1><p>创建一个服务需要引入Injectable模块，在服务中提供一系列方法，如下：</p>
-<pre><code>export class HeroService {
-    getHeroes(): Promise&lt;Hero[]&gt; {
-        return Promise.resolve(HEROES);
-    }
-}
-</code></pre><p>考虑到实际处理http请求应采用异步模式，故使用es6的promise完成异步处理（此处语法均为typescript）</p>
-<p>Promise<hero[]>可以理解为类似c++中用模板实例化一个对象，此处返回改造后的promise，resolve函数定义如下：</hero[]></p>
-<pre><code>getHeroes(): void {
-    this.heroService.getHeroes().then(heroes =&gt; this.heroes = heroes);
-};
-</code></pre><p>括号内的箭头函数即为resolve，当请求成功后即执行此函数。</p>
-<h1 id="四、TypeScript语法小记"><a href="#四、TypeScript语法小记" class="headerlink" title="四、TypeScript语法小记"></a>四、TypeScript语法小记</h1><p>官网的angular教程中使用的为typescript语法，它是javascript的一个超集，属强类型语言，这次主要踩了一个坑～</p>
-<p>在导出一个class时，内部的属性如使用property: type这样的格式（关键在冒号），则表示用该类型创建这样一个属性（属性值为未初始化，隐式类型转换结果为false）</p>
-<p>但是！！如果改成=操作符就会报错，主要出现在定义一个对象类型属性时出现，观察一下编辑器的提示，会显示该属性的类性为 type of <em>type</em>（后面这个type为自己定义的类型），如下：</p>
-<pre><code>heroes = Hero;
-</code></pre><p>Hero为定义好的一个类，如果这么些，heroes将会是type of Hero类型</p>
-<p>尝试写成这样：</p>
-<pre><code>heroes = new Hero();
-</code></pre><p>能解除报错，但需要在Hero类中写出constructor，且这样做heroes性质就不一样了</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2175,7 +2195,7 @@ Promise.all([p1,p2])
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2188,7 +2208,7 @@ Promise.all([p1,p2])
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

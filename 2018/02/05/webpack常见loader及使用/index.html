@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="感觉这部分还是挺适合写个总结的，webpack作为当下最流行的打包工具，（预|后）处理各种文件、生成渲染函数等等都需要这两者的配合。 一、loader的性质和分类一个具体的项目中可能包含css、js、png、ttf等等类型的文件，为了针对不同的文件类型做不同的处理，将它们合并到一个js文件中，我们就需要引入处理不同文件类型的加载器（loader），在引入文件时对它们进行处理。 不同的loader一">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack常见loader、plugin及使用">
+<meta property="og:url" content="http://yoursite.com/2018/02/05/webpack常见loader及使用/index.html">
+<meta property="og:site_name" content="金色鸢尾">
+<meta property="og:description" content="感觉这部分还是挺适合写个总结的，webpack作为当下最流行的打包工具，（预|后）处理各种文件、生成渲染函数等等都需要这两者的配合。 一、loader的性质和分类一个具体的项目中可能包含css、js、png、ttf等等类型的文件，为了针对不同的文件类型做不同的处理，将它们合并到一个js文件中，我们就需要引入处理不同文件类型的加载器（loader），在引入文件时对它们进行处理。 不同的loader一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-06T10:39:17.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack常见loader、plugin及使用">
+<meta name="twitter:description" content="感觉这部分还是挺适合写个总结的，webpack作为当下最流行的打包工具，（预|后）处理各种文件、生成渲染函数等等都需要这两者的配合。 一、loader的性质和分类一个具体的项目中可能包含css、js、png、ttf等等类型的文件，为了针对不同的文件类型做不同的处理，将它们合并到一个js文件中，我们就需要引入处理不同文件类型的加载器（loader），在引入文件时对它们进行处理。 不同的loader一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/05/webpack常见loader及使用/"/>
+
+
+
+
+
+  <title>webpack常见loader、plugin及使用 | 金色鸢尾</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">金色鸢尾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/webpack常见loader及使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack常见loader、plugin及使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T16:02:28+08:00">
+                2018-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>感觉这部分还是挺适合写个总结的，webpack作为当下最流行的打包工具，（预|后）处理各种文件、生成渲染函数等等都需要这两者的配合。</p>
+<h1 id="一、loader的性质和分类"><a href="#一、loader的性质和分类" class="headerlink" title="一、loader的性质和分类"></a>一、loader的性质和分类</h1><p>一个具体的项目中可能包含css、js、png、ttf等等类型的文件，为了针对不同的文件类型做不同的处理，将它们合并到一个js文件中，我们就需要引入处理不同文件类型的加载器（loader），在引入文件时对它们进行处理。</p>
+<p>不同的loader一般以xxx-loader的形式命名，如css-loader，vue-loader等等，当然你也可以<a href="https://webpack.js.org/contribute/writing-a-loader/" target="_blank" rel="noopener">自己写loader</a></p>
+<p>如果想自己写loader的话，vue官网中的vue-loader中自定义块一节给出了一个简单loader的示例：</p>
+<pre><code>module.exports = function (source, map) {
+  this.callback(null, &apos;module.exports = function(Component) {Component.options.__docs = &apos; +
+    JSON.stringify(source) +
+    &apos;}&apos;, map)
+}
+</code></pre><h1 id="二、loader在webpack中的使用"><a href="#二、loader在webpack中的使用" class="headerlink" title="二、loader在webpack中的使用"></a>二、loader在webpack中的使用</h1><p>webpack2、3的语法与webpack1略有不同，简单地看就是用rules替换了原来的loader，稍微看一下引入的语法：</p>
+<pre><code>rules: [
+  {
+    test: /\.vue$/,
+    loader: &apos;vue-loader&apos;,
+    options: vueLoaderConfig
+  },
+  {
+    test: /\.js$/,
+    loader: &apos;babel-loader&apos;,
+    include: [resolve(&apos;src&apos;), resolve(&apos;test&apos;), resolve(&apos;node_modules/webpack-dev-server/client&apos;)]
+  }
+]
+</code></pre><p>rules数组中定义多个对象，每个对象用正则匹配需要处理的文件，使用对应的loader，可以使用include囊括进需要处理的文件（为了处理node_modules等文件夹中想处理的文件），同时也可以使用options对该loader进行更多扩展，如下：</p>
+<pre><code>{
+    test: /\.vue$/,
+    loader: &apos;vue-loader&apos;,
+    options: {
+      loaders: {
+        js: &apos;coffee-loader&apos;
+      },
+      preLoaders: {
+        js: &apos;/path/to/custom/loader&apos;
+      },
+      postLoaders: {
+        html: &apos;babel-loader&apos;
+      }
+      excludedPreLoaders: /(eslint-loader)/
+    }
+  }
+</code></pre><p>此处举的是vue-loader官方文档的例子，vue-loader支持的选项包括：指定loader覆盖上一级的loader，指定在loader处理之前或之后要使用的其它loader。</p>
+<h1 id="三、第三方plugin及webpack内建的plugin"><a href="#三、第三方plugin及webpack内建的plugin" class="headerlink" title="三、第三方plugin及webpack内建的plugin"></a>三、第三方plugin及webpack内建的plugin</h1><h2 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h2><p>用于构建index.html，不论先前在指定的输出目录（/dist, /build等）是否已经有了index.html，此插件都会执行构建任务，详细文档请查阅<a href="https://github.com/jantimon/html-webpack-plugin" target="_blank" rel="noopener">HtmlWebpackPlugin</a></p>
+<h2 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</h2><p>webpack打包后放在/build文件夹中的文件很容易变得杂乱，无法维护，因为webpack生成这些bundle文件后就不会再去追踪。因此在每次构建之前，最好都先将build文件夹中的文件删除（此处或许也可用bash脚本实现同样的效果），一般使用<a href="https://www.npmjs.com/package/clean-webpack-plugin" target="_blank" rel="noopener">clean-webpack-plugin插件</a></p>
+<h2 id="uglifyjs-webpack-plugin"><a href="#uglifyjs-webpack-plugin" class="headerlink" title="uglifyjs-webpack-plugin"></a>uglifyjs-webpack-plugin</h2><p>用以清除那些在模块中声明后就没有被使用的代码，其核心是tree-shaking技术。这个处理在规模较大的项目中能非常有效地降低bundle体积，但是对于第三方库，uglifyjs不能判断没有导出的代码有没有副作用，那么它就不会去掉这部分代码。</p>
+<p>以上三个插件的用法都是类似的，如下：</p>
+<pre><code>plugins: [
+       new UglifyJSPlugin(options)
+    new ...
+ ]
+</code></pre><p>options视使用的plugin而定。</p>
+<p>接下来介绍一下webpack内建的一些插件，这些插件都可以在<a href="https://webpack.js.org/plugins/" target="_blank" rel="noopener">官方文档</a>上找到更详细的用法。</p>
+<ul>
+<li>BannerPlugin，在打包的chunk上添加标语</li>
+<li>CommonsChunkPlugin，抽取不同模块的公共库或代码，避免重复</li>
+<li>DefinePlugin，添加编译时的全局变量</li>
+<li><p>ExtractTextWebpackPlugin，可用来抽取模块中的css等部分到一个单独的文件中，使用如下：</p>
+<pre><code>rules: [
+  {
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: &quot;style-loader&quot;,
+      use: &quot;css-loader&quot;
+    })
+  }
+]
+</code></pre><p>  在rules的对象中添加use字段，使用extract-text-plugin抽取css到单独的文件中，使用css-loader进行处理，fallback是指定第二套方案。</p>
+</li>
+</ul>
+<h1 id="四、再多说两句plugin"><a href="#四、再多说两句plugin" class="headerlink" title="四、再多说两句plugin"></a>四、再多说两句plugin</h1><p>事实上，整个webpack也工作在plugin系统之上，如果你想自己定义一个plugin，大致过程是这样的：</p>
+<pre><code>function ConsoleLogOnBuildWebpackPlugin() {
+
+};
+
+ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
+  compiler.plugin(&apos;run&apos;, function(compiler, callback) {
+    console.log(&quot;The webpack build process is starting!!!&quot;);
+
+    callback();
+  });
+};
+</code></pre><p>这里复写了自定义plugin函数原型中的apply，使得之后在调用的时候，可以传入自己想要的plugin，即函数参数compiler。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/30/Javascript设计模式/" rel="next" title="Javascript设计模式">
+                <i class="fa fa-chevron-left"></i> Javascript设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Empire</p>
+              <p class="site-description motion-element" itemprop="description">举杯邀月，醉在桃溪春野</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、loader的性质和分类"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;loader&#x7684;&#x6027;&#x8D28;&#x548C;&#x5206;&#x7C7B;" class="headerlink" title="&#x4E00;&#x3001;loader&#x7684;&#x6027;&#x8D28;&#x548C;&#x5206;&#x7C7B;"></a>&#x4E00;&#x3001;loader&#x7684;&#x6027;&#x8D28;&#x548C;&#x5206;&#x7C7B;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、loader在webpack中的使用"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;loader&#x5728;webpack&#x4E2D;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="&#x4E8C;&#x3001;loader&#x5728;webpack&#x4E2D;&#x7684;&#x4F7F;&#x7528;"></a>&#x4E8C;&#x3001;loader&#x5728;webpack&#x4E2D;&#x7684;&#x4F7F;&#x7528;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、第三方plugin及webpack内建的plugin"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x7B2C;&#x4E09;&#x65B9;plugin&#x53CA;webpack&#x5185;&#x5EFA;&#x7684;plugin" class="headerlink" title="&#x4E09;&#x3001;&#x7B2C;&#x4E09;&#x65B9;plugin&#x53CA;webpack&#x5185;&#x5EFA;&#x7684;plugin"></a>&#x4E09;&#x3001;&#x7B2C;&#x4E09;&#x65B9;plugin&#x53CA;webpack&#x5185;&#x5EFA;&#x7684;plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HtmlWebpackPlugin"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clean-webpack-plugin"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uglifyjs-webpack-plugin"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#uglifyjs-webpack-plugin" class="headerlink" title="uglifyjs-webpack-plugin"></a>uglifyjs-webpack-plugin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、再多说两句plugin"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x518D;&#x591A;&#x8BF4;&#x4E24;&#x53E5;plugin" class="headerlink" title="&#x56DB;&#x3001;&#x518D;&#x591A;&#x8BF4;&#x4E24;&#x53E5;plugin"></a>&#x56DB;&#x3001;&#x518D;&#x591A;&#x8BF4;&#x4E24;&#x53E5;plugin</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
