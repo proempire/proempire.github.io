@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="react-native,hybrid app," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文主要是简述自己对hybrid的认识（参考资料见下方），不足之处请多加指出～ 一、hybrid app和其他跨端解决方案的由来随着Android4.0及以上版本市场占有率的显著上升和对h5支持的提升，将web app和native app结合的开发模式逐渐流行了起来，因为这两者各有优劣（web app开发成本低，但性能方面表现不佳，native app性能方面表现优秀，但在跨平台和版本迭代上则不">
+<meta name="keywords" content="react-native,hybrid app">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native与三端合一">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/React-Native与三端合一/index.html">
+<meta property="og:site_name" content="金色鸢尾">
+<meta property="og:description" content="本文主要是简述自己对hybrid的认识（参考资料见下方），不足之处请多加指出～ 一、hybrid app和其他跨端解决方案的由来随着Android4.0及以上版本市场占有率的显著上升和对h5支持的提升，将web app和native app结合的开发模式逐渐流行了起来，因为这两者各有优劣（web app开发成本低，但性能方面表现不佳，native app性能方面表现优秀，但在跨平台和版本迭代上则不">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-11T01:52:55.726Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native与三端合一">
+<meta name="twitter:description" content="本文主要是简述自己对hybrid的认识（参考资料见下方），不足之处请多加指出～ 一、hybrid app和其他跨端解决方案的由来随着Android4.0及以上版本市场占有率的显著上升和对h5支持的提升，将web app和native app结合的开发模式逐渐流行了起来，因为这两者各有优劣（web app开发成本低，但性能方面表现不佳，native app性能方面表现优秀，但在跨平台和版本迭代上则不">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/10/React-Native与三端合一/"/>
+
+
+
+
+
+  <title>React Native与三端合一 | 金色鸢尾</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">金色鸢尾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/React-Native与三端合一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React Native与三端合一</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T17:46:06+08:00">
+                2018-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要是简述自己对hybrid的认识（参考资料见下方），不足之处请多加指出～</p>
+<h1 id="一、hybrid-app和其他跨端解决方案的由来"><a href="#一、hybrid-app和其他跨端解决方案的由来" class="headerlink" title="一、hybrid app和其他跨端解决方案的由来"></a>一、hybrid app和其他跨端解决方案的由来</h1><p>随着Android4.0及以上版本市场占有率的显著上升和对h5支持的提升，将web app和native app结合的开发模式逐渐流行了起来，因为这两者各有优劣（web app开发成本低，但性能方面表现不佳，native app性能方面表现优秀，但在跨平台和版本迭代上则不是那么尽如人意）</p>
+<p>将web app和native app结合即为hybrid app，它结合了两者的优点。与此相对的则是react-native、微信小程序、weex，它们采取的是用JS语言直接开发跨端应用的方式，而不是类似hybrid app通过JSBridge联通前端与native的方式。</p>
+<h1 id="二、hybrid-app的JSBridge原理及策略"><a href="#二、hybrid-app的JSBridge原理及策略" class="headerlink" title="二、hybrid app的JSBridge原理及策略"></a>二、hybrid app的JSBridge原理及策略</h1><p>##　url scheme策略及直接交互策略</p>
+<p>url scheme是一个实现h5（前端方面）和native交互的策略，大致的思想是h5触发一个url请求，native app根据约定好的协议（如weixin://，该协议即url请求所采用的协议）捕获到这样一个请求，执行相应的原生方法。</p>
+<p>直接交互则根据是h5与Android交互还是h5与iOS交互进行具体的注册调用等步骤，语法在<a href="http://www.cnblogs.com/dailc/p/5931324.html" target="_blank" rel="noopener">参考博客</a>中已详细给出，就不再细述了。</p>
+<p>##　JSBridge原理简述</p>
+<p>设计好交互对象JSBridge并初始化后，就可以在h5调用url scheme（可直接带上参数），native根据具体环境从WebView捕获到这样一个事件，执行对应的api，随后视情况决定是传送回调id和参数给h5执行回调还是直接执行h5注册的函数（后者必须在h5上首先进行注册）</p>
+<p>具体实现原博文同样已给出。这里的关键在于h5调用原生时使用_doSend函数进行处理，获取callbackid，生成url</p>
+<pre><code>function _doSend(message, responseCallback) {
+        if(responseCallback) {
+            //取到一个唯一的callbackid
+            var callbackId = Util.getCallbackId();
+            //回调函数添加到集合中
+            responseCallbacks[callbackId] = responseCallback;
+            //方法的详情添加回调函数的关键标识
+            message[&apos;callbackId&apos;] = callbackId;
+        }
+        var uri;
+        //android中,可以通过onJsPrompt或者截取Url访问都行
+        var ua = navigator.userAgent;
+        if(ua.match(/(iPhone\sOS)\s([\d_]+)/)||ua.match(/(iPad).*OS\s([\d_]+)/)) {
+            //ios中,通过截取客户端url访问
+            //因为ios可以不暴露scheme,而是由原生手动获取
+            //正在调用的方法详情添加进入消息队列中,原生会主动获取
+            sendMessageQueue.push(message);
+            uri = Util.getUri();
+        }else{
+            //android中兼容处理,将所有的参数一起拼接到url中
+            uri = Util.getUri(message);
+        }
+        //获取 触发方法的url scheme
+        //采用iframe跳转scheme的方法
+        messagingIframe.src = uri;
+    }
+</code></pre><p>以上代码为引用，可以看到上述的这样一个流程</p>
+<h1 id="三、实际业务场景中对web和native负责部分的划分"><a href="#三、实际业务场景中对web和native负责部分的划分" class="headerlink" title="三、实际业务场景中对web和native负责部分的划分"></a>三、实际业务场景中对web和native负责部分的划分</h1><p>如文章开头所说，不作处理的话，web部分即h5部分在性能上的表现是不如native的，涉及到I/O密集型任务、多线程任务及动画方面更是如此（动画方面JS的canvas处理好性能也可以达到较好的体验，这部分将会在未来的一篇博客中展开叙述），因此这一部分任务一般交给native去做。</p>
+<p>一部分基础组件，如loading、toast、header，也可以考虑用native去做（在react-native等框架中，header是有一个对应的header组件来完成的，可以实现不同平台的定制展示）。由于考虑到运营商及网络延迟问题，想要在各种网络环境下都顺利执行只有采取这种方式（也可以考虑加载时间过长出loading，但这是另外一种解决思路了）</p>
+<h1 id="四、hybrid-app以外的解决方案如react-native简述"><a href="#四、hybrid-app以外的解决方案如react-native简述" class="headerlink" title="四、hybrid app以外的解决方案如react-native简述"></a>四、hybrid app以外的解决方案如react-native简述</h1><p>react-native是使用JS进行跨平台开发的开发框架，开发完的代码经过打包后能较好地在各平台上运行，此处主要举了它的几个例子来加以说明：</p>
+<p>##　不同页面间的导航</p>
+<pre><code>class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: &apos;Welcome&apos;,
+  };
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      &lt;Button
+        title=&quot;Go to Jane&apos;s profile&quot;
+        onPress={() =&gt;
+          navigate(&apos;Profile&apos;, { name: &apos;Jane&apos; })
+        }
+      /&gt;
+    );
+  }
+}
+</code></pre><p>此处事实上引用了react-navigation组件，注意渲染函数中的this.props.navigation，这是每次组件构造时固定会传入的参数；onPress事件处理函数中则是进行了一次导航（路由切换）并传入了对应的参数。</p>
+<p>##　动画</p>
+<p>这里的动画与大多数动画库一样，可以控制渐变函数，同时执行多个动画，追踪参数，这里主要就手势追踪和本地驱动两方面展开介绍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+            <a href="/tags/hybrid-app/" rel="tag"># hybrid app</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/05/webpack常见loader及使用/" rel="next" title="webpack常见loader、plugin及使用">
+                <i class="fa fa-chevron-left"></i> webpack常见loader、plugin及使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Empire</p>
+              <p class="site-description motion-element" itemprop="description">举杯邀月，醉在桃溪春野</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、hybrid-app和其他跨端解决方案的由来"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;hybrid-app&#x548C;&#x5176;&#x4ED6;&#x8DE8;&#x7AEF;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x7684;&#x7531;&#x6765;" class="headerlink" title="&#x4E00;&#x3001;hybrid app&#x548C;&#x5176;&#x4ED6;&#x8DE8;&#x7AEF;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x7684;&#x7531;&#x6765;"></a>&#x4E00;&#x3001;hybrid app&#x548C;&#x5176;&#x4ED6;&#x8DE8;&#x7AEF;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x7684;&#x7531;&#x6765;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、hybrid-app的JSBridge原理及策略"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;hybrid-app&#x7684;JSBridge&#x539F;&#x7406;&#x53CA;&#x7B56;&#x7565;" class="headerlink" title="&#x4E8C;&#x3001;hybrid app&#x7684;JSBridge&#x539F;&#x7406;&#x53CA;&#x7B56;&#x7565;"></a>&#x4E8C;&#x3001;hybrid app&#x7684;JSBridge&#x539F;&#x7406;&#x53CA;&#x7B56;&#x7565;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、实际业务场景中对web和native负责部分的划分"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x5B9E;&#x9645;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x4E2D;&#x5BF9;web&#x548C;native&#x8D1F;&#x8D23;&#x90E8;&#x5206;&#x7684;&#x5212;&#x5206;" class="headerlink" title="&#x4E09;&#x3001;&#x5B9E;&#x9645;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x4E2D;&#x5BF9;web&#x548C;native&#x8D1F;&#x8D23;&#x90E8;&#x5206;&#x7684;&#x5212;&#x5206;"></a>&#x4E09;&#x3001;&#x5B9E;&#x9645;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x4E2D;&#x5BF9;web&#x548C;native&#x8D1F;&#x8D23;&#x90E8;&#x5206;&#x7684;&#x5212;&#x5206;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、hybrid-app以外的解决方案如react-native简述"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;hybrid-app&#x4EE5;&#x5916;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5982;react-native&#x7B80;&#x8FF0;" class="headerlink" title="&#x56DB;&#x3001;hybrid app&#x4EE5;&#x5916;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5982;react-native&#x7B80;&#x8FF0;"></a>&#x56DB;&#x3001;hybrid app&#x4EE5;&#x5916;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5982;react-native&#x7B80;&#x8FF0;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Empire</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
