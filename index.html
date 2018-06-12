@@ -306,11 +306,9 @@
             <p>本文主要是简述自己对hybrid的认识（参考资料见下方），不足之处请多加指出～</p>
 <h1 id="一、hybrid-app和其他跨端解决方案的由来"><a href="#一、hybrid-app和其他跨端解决方案的由来" class="headerlink" title="一、hybrid app和其他跨端解决方案的由来"></a>一、hybrid app和其他跨端解决方案的由来</h1><p>随着Android4.0及以上版本市场占有率的显著上升和对h5支持的提升，将web app和native app结合的开发模式逐渐流行了起来，因为这两者各有优劣（web app开发成本低，但性能方面表现不佳，native app性能方面表现优秀，但在跨平台和版本迭代上则不是那么尽如人意）</p>
 <p>将web app和native app结合即为hybrid app，它结合了两者的优点。与此相对的则是react-native、微信小程序、weex，它们采取的是用JS语言直接开发跨端应用的方式，而不是类似hybrid app通过JSBridge联通前端与native的方式。</p>
-<h1 id="二、hybrid-app的JSBridge原理及策略"><a href="#二、hybrid-app的JSBridge原理及策略" class="headerlink" title="二、hybrid app的JSBridge原理及策略"></a>二、hybrid app的JSBridge原理及策略</h1><p>##　url scheme策略及直接交互策略</p>
-<p>url scheme是一个实现h5（前端方面）和native交互的策略，大致的思想是h5触发一个url请求，native app根据约定好的协议（如weixin://，该协议即url请求所采用的协议）捕获到这样一个请求，执行相应的原生方法。</p>
+<h1 id="二、hybrid-app的JSBridge原理及策略"><a href="#二、hybrid-app的JSBridge原理及策略" class="headerlink" title="二、hybrid app的JSBridge原理及策略"></a>二、hybrid app的JSBridge原理及策略</h1><h2 id="url-scheme策略及直接交互策略"><a href="#url-scheme策略及直接交互策略" class="headerlink" title="url scheme策略及直接交互策略"></a>url scheme策略及直接交互策略</h2><p>url scheme是一个实现h5（前端方面）和native交互的策略，大致的思想是h5触发一个url请求，native app根据约定好的协议（如weixin://，该协议即url请求所采用的协议）捕获到这样一个请求，执行相应的原生方法。</p>
 <p>直接交互则根据是h5与Android交互还是h5与iOS交互进行具体的注册调用等步骤，语法在<a href="http://www.cnblogs.com/dailc/p/5931324.html" target="_blank" rel="noopener">参考博客</a>中已详细给出，就不再细述了。</p>
-<p>##　JSBridge原理简述</p>
-<p>设计好交互对象JSBridge并初始化后，就可以在h5调用url scheme（可直接带上参数），native根据具体环境从WebView捕获到这样一个事件，执行对应的api，随后视情况决定是传送回调id和参数给h5执行回调还是直接执行h5注册的函数（后者必须在h5上首先进行注册）</p>
+<h2 id="JSBridge原理简述"><a href="#JSBridge原理简述" class="headerlink" title="JSBridge原理简述"></a>JSBridge原理简述</h2><p>设计好交互对象JSBridge并初始化后，就可以在h5调用url scheme（可直接带上参数），native根据具体环境从WebView捕获到这样一个事件，执行对应的api，随后视情况决定是传送回调id和参数给h5执行回调还是直接执行h5注册的函数（后者必须在h5上首先进行注册）</p>
 <p>具体实现原博文同样已给出。这里的关键在于h5调用原生时使用_doSend函数进行处理，获取callbackid，生成url</p>
 <pre><code>function _doSend(message, responseCallback) {
         if(responseCallback) {
@@ -342,8 +340,7 @@
 <h1 id="三、实际业务场景中对web和native负责部分的划分"><a href="#三、实际业务场景中对web和native负责部分的划分" class="headerlink" title="三、实际业务场景中对web和native负责部分的划分"></a>三、实际业务场景中对web和native负责部分的划分</h1><p>如文章开头所说，不作处理的话，web部分即h5部分在性能上的表现是不如native的，涉及到I/O密集型任务、多线程任务及动画方面更是如此（动画方面JS的canvas处理好性能也可以达到较好的体验，这部分将会在未来的一篇博客中展开叙述），因此这一部分任务一般交给native去做。</p>
 <p>一部分基础组件，如loading、toast、header，也可以考虑用native去做（在react-native等框架中，header是有一个对应的header组件来完成的，可以实现不同平台的定制展示）。由于考虑到运营商及网络延迟问题，想要在各种网络环境下都顺利执行只有采取这种方式（也可以考虑加载时间过长出loading，但这是另外一种解决思路了）</p>
 <h1 id="四、hybrid-app以外的解决方案如react-native简述"><a href="#四、hybrid-app以外的解决方案如react-native简述" class="headerlink" title="四、hybrid app以外的解决方案如react-native简述"></a>四、hybrid app以外的解决方案如react-native简述</h1><p>react-native是使用JS进行跨平台开发的开发框架，开发完的代码经过打包后能较好地在各平台上运行，此处主要举了它的几个例子来加以说明：</p>
-<p>##　不同页面间的导航</p>
-<pre><code>class HomeScreen extends React.Component {
+<h2 id="不同页面间的导航"><a href="#不同页面间的导航" class="headerlink" title="不同页面间的导航"></a>不同页面间的导航</h2><pre><code>class HomeScreen extends React.Component {
   static navigationOptions = {
     title: &apos;Welcome&apos;,
   };
@@ -360,8 +357,28 @@
   }
 }
 </code></pre><p>此处事实上引用了react-navigation组件，注意渲染函数中的this.props.navigation，这是每次组件构造时固定会传入的参数；onPress事件处理函数中则是进行了一次导航（路由切换）并传入了对应的参数。</p>
-<p>##　动画</p>
-<p>这里的动画与大多数动画库一样，可以控制渐变函数，同时执行多个动画，追踪参数，这里主要就手势追踪和本地驱动两方面展开介绍</p>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p>这里的动画与大多数动画库一样，可以控制渐变函数，同时执行多个动画，追踪参数，这里主要就手势追踪和本地驱动两方面展开介绍</p>
+<h3 id="手势追踪"><a href="#手势追踪" class="headerlink" title="手势追踪"></a>手势追踪</h3><p>对于手势追踪，如滑动或摇动，可以在RN中做出相应的时间处理：</p>
+<p>滑动处理由nativeEvent抽取偏移量x或y</p>
+<pre><code>onScroll={Animated.event(
+   // scrollX = e.nativeEvent.contentOffset.x
+   [{ nativeEvent: {
+        contentOffset: {
+          x: scrollX
+        }
+      }
+    }]
+ )}
+</code></pre><p>此处nativeEvent作为第一个参数传入，如果要略过nativeEvent，将第一个参数手动传null值就可，对panning（摇动）的处理也是这么做的：</p>
+<pre><code>onPanResponderMove={Animated.event(
+  [null, // ignore the native event
+  // extract dx and dy from gestureState
+  // like &apos;pan.x = gestureState.dx, pan.y = gestureState.dy&apos;
+  {dx: pan.x, dy: pan.y}
+])}
+</code></pre><p>代码均来自RN官方文档。</p>
+<h3 id="本地驱动"><a href="#本地驱动" class="headerlink" title="本地驱动"></a>本地驱动</h3><p>为了保证动画的渲染过程不因为JS线程阻塞而暂停，可以考虑借用Animated接口的串行特性将所有动画信息传到native，信息传输完毕后native就可以在UI线程上跑动画，可以保证流畅。实现时配置useNativeDriver为true即可。</p>
+<p>native驱动只能运行非布局属性，flexbox和position等属性是无法使用的。</p>
 
           
         
