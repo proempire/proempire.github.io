@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="（1）（2）..等标注在该部分末尾有补充说明 一、引子深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。 比较快想到的方法一般是做这么一个递归拷贝： function deepCopy(obj) {     // 键名一般为字符串，值类型暂时无法确定     let result = {}，         keys = O">
+<meta name="description" content="参考文章https://segmentfault.com/a/1190000015042902本文旨在尽可能地剖析解决问题的思想并对原文章作一些建议，十分感谢原作者Jchemy～ （1）（2）..等标注在该部分末尾有补充说明 一、引子深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。 比较快想到的方法一般是做这么一个递归拷贝">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由深拷贝的循环引用引出的一些讨论">
 <meta property="og:url" content="http://yoursite.com/2018/06/12/由深拷贝的循环引用引出的一些讨论/index.html">
 <meta property="og:site_name" content="金色鸢尾">
-<meta property="og:description" content="（1）（2）..等标注在该部分末尾有补充说明 一、引子深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。 比较快想到的方法一般是做这么一个递归拷贝： function deepCopy(obj) {     // 键名一般为字符串，值类型暂时无法确定     let result = {}，         keys = O">
+<meta property="og:description" content="参考文章https://segmentfault.com/a/1190000015042902本文旨在尽可能地剖析解决问题的思想并对原文章作一些建议，十分感谢原作者Jchemy～ （1）（2）..等标注在该部分末尾有补充说明 一、引子深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。 比较快想到的方法一般是做这么一个递归拷贝">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-12T16:14:37.481Z">
+<meta property="og:updated_time" content="2018-06-12T16:18:50.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由深拷贝的循环引用引出的一些讨论">
-<meta name="twitter:description" content="（1）（2）..等标注在该部分末尾有补充说明 一、引子深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。 比较快想到的方法一般是做这么一个递归拷贝： function deepCopy(obj) {     // 键名一般为字符串，值类型暂时无法确定     let result = {}，         keys = O">
+<meta name="twitter:description" content="参考文章https://segmentfault.com/a/1190000015042902本文旨在尽可能地剖析解决问题的思想并对原文章作一些建议，十分感谢原作者Jchemy～ （1）（2）..等标注在该部分末尾有补充说明 一、引子深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。 比较快想到的方法一般是做这么一个递归拷贝">
 
 
 
@@ -299,7 +299,8 @@
       
 
       
-        <p>（1）（2）..等标注在该部分末尾有补充说明</p>
+        <p>参考文章<a href="https://segmentfault.com/a/1190000015042902" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015042902</a><br>本文旨在尽可能地剖析解决问题的思想并对原文章作一些建议，十分感谢原作者Jchemy～</p>
+<p>（1）（2）..等标注在该部分末尾有补充说明</p>
 <h1 id="一、引子"><a href="#一、引子" class="headerlink" title="一、引子"></a>一、引子</h1><p>深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。</p>
 <p>比较快想到的方法一般是做这么一个递归拷贝：</p>
 <pre><code>function deepCopy(obj) {

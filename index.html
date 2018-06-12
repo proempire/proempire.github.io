@@ -303,7 +303,8 @@
       
         
           
-            <p>（1）（2）..等标注在该部分末尾有补充说明</p>
+            <p>参考文章<a href="https://segmentfault.com/a/1190000015042902" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015042902</a><br>本文旨在尽可能地剖析解决问题的思想并对原文章作一些建议，十分感谢原作者Jchemy～</p>
+<p>（1）（2）..等标注在该部分末尾有补充说明</p>
 <h1 id="一、引子"><a href="#一、引子" class="headerlink" title="一、引子"></a>一、引子</h1><p>深拷贝起先的目的是为了防止对象中嵌套对象属性，导致拷贝时拷贝了引用，当更改拷贝出的对象的属性时，原对象的属性也会一并被修改。</p>
 <p>比较快想到的方法一般是做这么一个递归拷贝：</p>
 <pre><code>function deepCopy(obj) {
