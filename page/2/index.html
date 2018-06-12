@@ -232,6 +232,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/29/vuex小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Empire">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金色鸢尾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/29/vuex小记/" itemprop="url">vuex小记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T10:17:17+08:00">
+                2017-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、状态管理工具的使用动机"><a href="#一、状态管理工具的使用动机" class="headerlink" title="一、状态管理工具的使用动机"></a>一、状态管理工具的使用动机</h1><p>类似于flux、redux，vuex也是一个关于全局里所有组件的状态管理工具，目的是使得通信和状态改变更加优雅和可维护，vuex的状态同样是响应式的。</p>
+<p>是否使用应该考虑该SPA的规模，一般考虑在中大型页面使用。</p>
+<p>参考一下vuex官方文档的示意图：</p>
+<p><img src="../img/vuex.png" alt="vuex功能示意图"></p>
+<h1 id="二、Store"><a href="#二、Store" class="headerlink" title="二、Store"></a>二、Store</h1><p>定义上级vue元素时可显式指定Store对象使其在子组件中可用，子组件访问方式使用this.$store</p>
+<pre><code>computed: {
+    count: function() {
+        return this.$store.state.count
+    }
+}
+</code></pre><p>关于mapState的补充说明：</p>
+<p>事实上它做的是一个方法的映射，将store文件中的属性映射到一个子组件里的别名上，目的是为了避免诸如this.$store.state…这样冗长的写法。</p>
+<h1 id="三、Getter和Mutation"><a href="#三、Getter和Mutation" class="headerlink" title="三、Getter和Mutation"></a>三、Getter和Mutation</h1><p>在store的getter方法中完成定义，将暴露为一个属性。</p>
+<pre><code>// ...
+getters: {
+    getTodoById: (state, getters) =&gt; (id) =&gt; {
+        return state.todos.find(todo =&gt; todo.id === id)
+    }
+}
+</code></pre><p>若要传参，可返回一个函数</p>
+<p>设置Mutation与绑定事件写法是类似的，但是触发Mutation必须用commit方法。Mutation与getter类似，第一个参数传入state：</p>
+<pre><code>mutations: {
+    increment (state, n) {
+        state.count += n
+      }
+}
+</code></pre><ul>
+<li>Mutation的改变必须是同步函数，因为异步函数的状态无法追踪，也无法得到快照</li>
+<li>组件中提交mutation同样调用父元素的$store，当然也可以使用mapMutation来做</li>
+</ul>
+<h1 id="四、Action和Module"><a href="#四、Action和Module" class="headerlink" title="四、Action和Module"></a>四、Action和Module</h1><ul>
+<li>相比于Mutation，action支持异步操作，分发指令与redux类似，使用store.dispatch()方法即可</li>
+<li>vuex支持命名空间模块，命名空间要访问global assets可以在提交mutation或分发action时带上第三个参数{root: true}</li>
+<li><p>注册模块可用来绑定其他引入的插件，例如vue-router:</p>
+<pre><code>// 注册模块 `vue-router`
+store.registerModule(&apos;vue-router&apos;, {
+  // ...
+})
+</code></pre></li>
+<li><p>模块重用应使用函数来声明状态，此处与vue的data返回方式是一致的</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/es6回顾/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1748,7 +1909,7 @@ module.exports = router;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
