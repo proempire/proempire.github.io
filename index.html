@@ -373,7 +373,7 @@
         }
     }
 } 
-</code></pre><p>数据模型中，第一个元素包含isFirst: false即可（这里可能还要深究一下，isFirst如何设置才能真正解决原来的问题，或者说需要别的判断方式）</p>
+</code></pre><p>数据模型中，第一个元素包含isFirst: true即可（这里可能还要深究一下，isFirst如何设置才能真正解决原来的问题，或者说需要别的判断方式）</p>
 <h2 id="三、node-js在BFF层能做的事情"><a href="#三、node-js在BFF层能做的事情" class="headerlink" title="三、node.js在BFF层能做的事情"></a>三、node.js在BFF层能做的事情</h2><p>node.js可以做一部分在BFF层的数据加密（放BFF层合适吗？）、请求转发（需要和nginx做一下对比）</p>
 <p>也可以做一些高并发负载均衡的工作（依然要对比以往服务端的解决方案）</p>
 <h3 id="高并发及负载均衡"><a href="#高并发及负载均衡" class="headerlink" title="高并发及负载均衡"></a>高并发及负载均衡</h3><p>常见的情况下，高并发的性能制约包括了大量的I/O操作时CPU利用率较低，而node.js在处理I/O密集型操作时有自己的优势…</p>
