@@ -304,13 +304,80 @@
         
           
             <p>本文暂时处于草稿阶段，每日都会补充</p>
-<h2 id="一、当前开发遇到的常见“痛点”"><a href="#一、当前开发遇到的常见“痛点”" class="headerlink" title="一、当前开发遇到的常见“痛点”"></a>一、当前开发遇到的常见“痛点”</h2><p>在前后端联调时，有些麻烦出现的频率不低而且可能会较大程度影响开发效率，其中就包括前后端对接口数据格式设计的差异。两者一是基于领域模型，一是基于用户交互，因此设计出来的数据结构经常有差异，使得前端从接口取到数据后还需要多做一层“数据规格化”（我自己的称呼…）的工作。举个例子：</p>
-<p>// 例子正在总结…</p>
+<h2 id="一、当前开发遇到的常见“痛点”"><a href="#一、当前开发遇到的常见“痛点”" class="headerlink" title="一、当前开发遇到的常见“痛点”"></a>一、当前开发遇到的常见“痛点”</h2><p>在前后端联调时，有些麻烦出现的频率不低而且可能会较大程度影响开发效率，其中就包括前后端对接口数据格式设计的差异。两者一是基于领域模型，一是基于用户交互，因此设计出来的数据结构经常有差异，使得前端从接口取到数据后还需要多做一层“数据规格化”（我自己的称呼…）的工作。举两个例子：</p>
+<ol>
+<li><p>命名习惯不一致，例如有这样的一个列表数组ranks：</p>
+<pre><code>[
+    {
+        id: 1,
+        value: &apos;DUCHY&apos;
+    },
+    {
+        id: 2,
+        value: &apos;KINGDOM&apos;
+    },
+    {
+        id: 3,
+        value: &apos;EMPIRE&apos;
+    }
+]
+</code></pre><p> 页面的渲染组件需要value这一属性名，但接口数据使用的是name，那么就需要做一个遍历，手动修改属性名。</p>
+<p> 类似的情况还有（null、’’）/（[]、{}）的转换等等，这都是为了数据格式所做的额外操作，与业务逻辑并没有太大关联。</p>
+</li>
+<li><p>为复用某些接口，需要做一些接口数据额外处理：</p>
+<p> 数据对象info：</p>
+<pre><code>{
+    countries: [
+        {
+            name: &apos;Austria&apos;,
+            cities: [
+                &apos;Vienna&apos;,
+                &apos;Tirol&apos;
+            ]
+        },
+        {
+            name: &apos;Persia&apos;,
+            cities: [
+                &apos;Isfahan&apos;,
+                &apos;Shiraz&apos;
+            ]
+        },
+        {
+            name: &apos;United States&apos;,
+            cities: [
+                &apos;San Francisco&apos;,
+                &apos;Mountain View&apos;
+            ]
+        }
+    ]
+}
+</code></pre><p> 现在有一个场景，我只想要countries数组的第一项（或者说，在特定场景下只有第一项是有意义的），那么我如果复用这一接口拿到的数据，每次就都要做一个let specifiedCountry = countries[0]的默认赋值，在更复杂的场景下这种赋值可能嵌套更深、重复次数更多。</p>
+</li>
+</ol>
 <p>显然，处理数据格式与处理交互时的数据变化应该分离，这样前端会有更多精力去处理交互的业务逻辑。</p>
 <h2 id="二、对GraphQL的探索及其应用"><a href="#二、对GraphQL的探索及其应用" class="headerlink" title="二、对GraphQL的探索及其应用"></a>二、对GraphQL的探索及其应用</h2><p>要应对这一需求，当下的GraphQL是一个不错的方案，用它可以做到指定一个请求格式，然后获取所需的数据，同时它也支持一些逻辑判断和抽象，如directive、Fragment、Variable等等，以下取这三个作为例子，演示一下对于上述例子的解决方案：</p>
-<p>// 等待（一）中例子…</p>
+<p>对于（一）中的第一个例子：</p>
+<p>考虑GraphQL的alias解决方案：GraphQL的别名alias设计目的是在同一个Type下可以返回多个对象而不发生命名冲突，不过我们也可以用它做一下name -&gt; value 的重命名：</p>
+<pre><code>ranks {
+    id
+    value: name
+}
+</code></pre><p>*嵌套的别名是否可行未知，还需要做一下验证</p>
+<p>对于（一）中的第二个例子：</p>
+<p>使用variable和directive做一些逻辑处理：</p>
+<pre><code>query Country($isFirst: Boolean!) {
+    info(episode: $episode) {
+        countries @include(if: $isFirst) {
+            name
+            cities
+        }
+    }
+} 
+</code></pre><p>数据模型中，第一个元素包含isFirst: false即可（这里可能还要深究一下，isFirst如何设置才能真正解决原来的问题，或者说需要别的判断方式）</p>
 <h2 id="三、node-js在BFF层能做的事情"><a href="#三、node-js在BFF层能做的事情" class="headerlink" title="三、node.js在BFF层能做的事情"></a>三、node.js在BFF层能做的事情</h2><p>node.js可以做一部分在BFF层的数据加密（放BFF层合适吗？）、请求转发（需要和nginx做一下对比）</p>
 <p>也可以做一些高并发负载均衡的工作（依然要对比以往服务端的解决方案）</p>
+<h3 id="高并发及负载均衡"><a href="#高并发及负载均衡" class="headerlink" title="高并发及负载均衡"></a>高并发及负载均衡</h3><p>常见的情况下，高并发的性能制约包括了大量的I/O操作时CPU利用率较低，而node.js在处理I/O密集型操作时有自己的优势…</p>
+<p>nginx采用的方式较多地涉及了事件…</p>
 <p>// 未完待续…</p>
 
           
