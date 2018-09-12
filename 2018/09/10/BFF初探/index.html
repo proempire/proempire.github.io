@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="金色鸢尾">
 <meta property="og:description" content="本文暂时处于草稿阶段，每日都会补充 一、当前开发遇到的常见“痛点”在前后端联调时，有些麻烦出现的频率不低而且可能会较大程度影响开发效率，其中就包括前后端对接口数据格式设计的差异。两者一是基于领域模型，一是基于用户交互，因此设计出来的数据结构经常有差异，使得前端从接口取到数据后还需要多做一层“数据规格化”（我自己的称呼…）的工作。举两个例子：  命名习惯不一致，例如有这样的一个列表数组ranks：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-11T15:25:44.567Z">
+<meta property="og:updated_time" content="2018-09-12T16:08:17.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BFF初探">
 <meta name="twitter:description" content="本文暂时处于草稿阶段，每日都会补充 一、当前开发遇到的常见“痛点”在前后端联调时，有些麻烦出现的频率不低而且可能会较大程度影响开发效率，其中就包括前后端对接口数据格式设计的差异。两者一是基于领域模型，一是基于用户交互，因此设计出来的数据结构经常有差异，使得前端从接口取到数据后还需要多做一层“数据规格化”（我自己的称呼…）的工作。举两个例子：  命名习惯不一致，例如有这样的一个列表数组ranks：">
@@ -370,10 +370,13 @@
     }
 } 
 </code></pre><p>数据模型中，第一个元素包含isFirst: true即可（这里可能还要深究一下，isFirst如何设置才能真正解决原来的问题，或者说需要别的判断方式）</p>
-<h2 id="三、node-js在BFF层能做的事情"><a href="#三、node-js在BFF层能做的事情" class="headerlink" title="三、node.js在BFF层能做的事情"></a>三、node.js在BFF层能做的事情</h2><p>node.js可以做一部分在BFF层的数据加密（放BFF层合适吗？）、请求转发（需要和nginx做一下对比）</p>
-<p>也可以做一些高并发负载均衡的工作（依然要对比以往服务端的解决方案）</p>
-<h3 id="高并发及负载均衡"><a href="#高并发及负载均衡" class="headerlink" title="高并发及负载均衡"></a>高并发及负载均衡</h3><p>常见的情况下，高并发的性能制约包括了大量的I/O操作时CPU利用率较低，而node.js在处理I/O密集型操作时有自己的优势…</p>
-<p>nginx采用的方式较多地涉及了事件…</p>
+<h2 id="三、BFF的定位及node-js在BFF层能做的事情"><a href="#三、BFF的定位及node-js在BFF层能做的事情" class="headerlink" title="三、BFF的定位及node.js在BFF层能做的事情"></a>三、BFF的定位及node.js在BFF层能做的事情</h2><p>BFF的应用场景有很多，<strong>聚合后端接口，提供给第三方api</strong>都是它可以负责的工作。聚合后端接口在上文已经有了类似的操作，不过做的不是聚合几个接口而是对某个接口做了额外处理。</p>
+<p>BFF层的设计一般来说可以更好地满足<strong>产品快速迭代</strong>的需求，因为它将UI交互与部分服务都交给了一个team（可以是Frontend）负责，这样可以大大减少不同team的<strong>沟通协调成本</strong>。</p>
+<p>node.js也可以做一部分在BFF层的数据加密（放BFF层合适吗？）、请求转发（需要和nginx做一下对比）</p>
+<p>也可以做一些性能优化的工作（依然要对比以往服务端的解决方案）</p>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><p>高并发与负载均衡：常见的情况下，高并发的性能制约包括了大量的I/O操作时CPU利用率较低，而node.js在处理I/O密集型操作时有自己的优势。</p>
+<p>在负载均衡方面，nginx有几套常用的请求分配方案，也有shared memory的解决方案，并且在保证会话一致性上有较好的表现。</p>
+<p>node.js的clientRequest对象也会维护一个header queue，可以对请求的流程做一定的控制。</p>
 <p>// 未完待续…</p>
 
       
@@ -532,7 +535,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、当前开发遇到的常见“痛点”"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x5F53;&#x524D;&#x5F00;&#x53D1;&#x9047;&#x5230;&#x7684;&#x5E38;&#x89C1;&#x201C;&#x75DB;&#x70B9;&#x201D;" class="headerlink" title="&#x4E00;&#x3001;&#x5F53;&#x524D;&#x5F00;&#x53D1;&#x9047;&#x5230;&#x7684;&#x5E38;&#x89C1;&#x201C;&#x75DB;&#x70B9;&#x201D;"></a>&#x4E00;&#x3001;&#x5F53;&#x524D;&#x5F00;&#x53D1;&#x9047;&#x5230;&#x7684;&#x5E38;&#x89C1;&#x201C;&#x75DB;&#x70B9;&#x201D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、对GraphQL的探索及其应用"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5BF9;GraphQL&#x7684;&#x63A2;&#x7D22;&#x53CA;&#x5176;&#x5E94;&#x7528;" class="headerlink" title="&#x4E8C;&#x3001;&#x5BF9;GraphQL&#x7684;&#x63A2;&#x7D22;&#x53CA;&#x5176;&#x5E94;&#x7528;"></a>&#x4E8C;&#x3001;&#x5BF9;GraphQL&#x7684;&#x63A2;&#x7D22;&#x53CA;&#x5176;&#x5E94;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、node-js在BFF层能做的事情"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;node-js&#x5728;BFF&#x5C42;&#x80FD;&#x505A;&#x7684;&#x4E8B;&#x60C5;" class="headerlink" title="&#x4E09;&#x3001;node.js&#x5728;BFF&#x5C42;&#x80FD;&#x505A;&#x7684;&#x4E8B;&#x60C5;"></a>&#x4E09;&#x3001;node.js&#x5728;BFF&#x5C42;&#x80FD;&#x505A;&#x7684;&#x4E8B;&#x60C5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发及负载均衡"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x9AD8;&#x5E76;&#x53D1;&#x53CA;&#x8D1F;&#x8F7D;&#x5747;&#x8861;" class="headerlink" title="&#x9AD8;&#x5E76;&#x53D1;&#x53CA;&#x8D1F;&#x8F7D;&#x5747;&#x8861;"></a>&#x9AD8;&#x5E76;&#x53D1;&#x53CA;&#x8D1F;&#x8F7D;&#x5747;&#x8861;</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、当前开发遇到的常见“痛点”"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x5F53;&#x524D;&#x5F00;&#x53D1;&#x9047;&#x5230;&#x7684;&#x5E38;&#x89C1;&#x201C;&#x75DB;&#x70B9;&#x201D;" class="headerlink" title="&#x4E00;&#x3001;&#x5F53;&#x524D;&#x5F00;&#x53D1;&#x9047;&#x5230;&#x7684;&#x5E38;&#x89C1;&#x201C;&#x75DB;&#x70B9;&#x201D;"></a>&#x4E00;&#x3001;&#x5F53;&#x524D;&#x5F00;&#x53D1;&#x9047;&#x5230;&#x7684;&#x5E38;&#x89C1;&#x201C;&#x75DB;&#x70B9;&#x201D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、对GraphQL的探索及其应用"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5BF9;GraphQL&#x7684;&#x63A2;&#x7D22;&#x53CA;&#x5176;&#x5E94;&#x7528;" class="headerlink" title="&#x4E8C;&#x3001;&#x5BF9;GraphQL&#x7684;&#x63A2;&#x7D22;&#x53CA;&#x5176;&#x5E94;&#x7528;"></a>&#x4E8C;&#x3001;&#x5BF9;GraphQL&#x7684;&#x63A2;&#x7D22;&#x53CA;&#x5176;&#x5E94;&#x7528;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、BFF的定位及node-js在BFF层能做的事情"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;BFF&#x7684;&#x5B9A;&#x4F4D;&#x53CA;node-js&#x5728;BFF&#x5C42;&#x80FD;&#x505A;&#x7684;&#x4E8B;&#x60C5;" class="headerlink" title="&#x4E09;&#x3001;BFF&#x7684;&#x5B9A;&#x4F4D;&#x53CA;node.js&#x5728;BFF&#x5C42;&#x80FD;&#x505A;&#x7684;&#x4E8B;&#x60C5;"></a>&#x4E09;&#x3001;BFF&#x7684;&#x5B9A;&#x4F4D;&#x53CA;node.js&#x5728;BFF&#x5C42;&#x80FD;&#x505A;&#x7684;&#x4E8B;&#x60C5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性能优化"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x6027;&#x80FD;&#x4F18;&#x5316;" class="headerlink" title="&#x6027;&#x80FD;&#x4F18;&#x5316;"></a>&#x6027;&#x80FD;&#x4F18;&#x5316;</span></a></li></ol></li></ol></div>
             
 
           </div>
